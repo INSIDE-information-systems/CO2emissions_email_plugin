@@ -1,0 +1,19 @@
+#afb-send-button, [place="palette"] > #afb-send-button {
+    list-style-image: url("chrome://estimate-your-CO2/skin/send-icon.png") !important;
+  }
+
+#afb-validator-button, [place="palette"] > #afb-validator-button {
+    list-style-image: url("chrome://estimate-your-CO2/skin/leaf-icon.png") !important;
+  }
+
+#afb-button-dashboard, [place="palette"] > #afb-button-dashboard {
+  list-style-image: url("chrome://estimate-your-CO2/skin/dashboard-icon.png") !important;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: bold;
+}

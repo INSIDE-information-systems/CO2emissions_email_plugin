@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css"?>
+<prefwindow type="prefwindow" id="AFBPreferences" windowtype="Browser:Preferences" title="Les options AFB" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" style="">
+	 <script type="application/x-javascript" src="globals.js"/>
+    
+    <prefpane id="main-options" label="Principale">
+		<preferences>
+			<preference id="pref-editValueWh" name="extensions.estimate-your-CO2.valueWh" type="int" />
+			<preference id="pref-editValueCO2" name="extensions.estimate-your-CO2.valueCO2" type="int" />
+			<preference id="pref-editValueOil" name="extensions.estimate-your-CO2.valueOil" type="int" />
+			<preference id="pref-editValueCar" name="extensions.estimate-your-CO2.valueCar" type="int" />
+			<preference id="pref-editValueBulb" name="extensions.estimate-your-CO2.valueBulb" type="int" />
+			<preference id="pref-autosignature" name="extensions.estimate-your-CO2.autosignature" type="bool" />
+		</preferences>
+		<groupbox>
+			<caption label="Variables définies pour 1Mo" />
+			<hbox>
+				<label value="Consomation en Wh" style="padding-top:5px" />
+				<spacer flex="1" />
+				<textbox id="tb-editValueWh" type="number" decimalplaces="3" min="0" preference="pref-editValueWh" />
+			</hbox>
+			<hbox>
+				<label value="Consomation en CO2" style="padding-top:5px" />
+				<spacer flex="1" />
+				<textbox id="tb-editValueCO2" type="number" decimalplaces="3" min="0" preference="pref-editValueCO2" />
+			</hbox>
+			<hbox>
+				<label value="Consomation en gramme de pétrole" style="padding-top:5px" />
+				<spacer flex="1" />
+				<textbox id="tb-editValueOil" type="number" decimalplaces="3" min="0" preference="pref-editValueOil" />
+			</hbox>
+			<hbox>
+				<label value="Mètres parcourus en voiture" style="padding-top:5px" />
+				<spacer flex="1" />
+				<textbox id="tb-editValueCar" type="number" min="0" preference="pref-editValueCar" />
+			</hbox>
+			<hbox>
+				<label value="Temps allumé d'une ampoule 10Wh(en ms)" style="padding-top:5px" />
+				<spacer flex="1" />
+				<textbox id="tb-editValueBulb" type="number" min="0" preference="pref-editValueBulb" />
+			</hbox>
+		</groupbox>
+		<checkbox id="cb-autosignature" label="Mettre automatiquement l'estimation en signature" preference="pref-autosignature" checked="true" />
+		<hbox>
+        <spacer flex="1" />
+			<button id="btnShowDashBoard" label="Tableau de bord" oncommand="AFBGlobals.cm_btnShowDashBoard()" />
+		</hbox>
+	</prefpane>
+</prefwindow>

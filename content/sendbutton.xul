@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://estimate-your-CO2/skin/style.css" type="text/css"?>
+<overlay id="afb-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://estimate-your-CO2/content/storagecontroller.js" />
+	<script type="application/x-javascript" src="chrome://estimate-your-CO2/content/globals.js" />
+	<script type="application/x-javascript" src="chrome://estimate-your-CO2/content/sendbutton.js" />
+	<commandset id="composeCommands">
+		<command id="cmd_sendAndAfb" oncommand="goDoCommand('cmd_sendAndAfb')" />
+		<command id="cmd_confirmAfb" oncommand="goDoCommand('cmd_confirmAfb')" />
+	</commandset>
+	<toolbarpalette id="MsgComposeToolbarPalette">
+		<toolbarbutton id="afb-send-button" class="demo-button toolbarbutton-1" label="Envoyer" type="button" command="cmd_sendAndAfb" />
+		<toolbarbutton id="afb-validator-button" class="demo-button toolbarbutton-1" type="button" label="Estimation C02" command="cmd_confirmAfb" />
+	</toolbarpalette>
+</overlay>

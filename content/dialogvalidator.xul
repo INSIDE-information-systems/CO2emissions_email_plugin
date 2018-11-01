@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://estimate-your-CO2/skin/style.css" type="text/css"?>
+<dialog id="afbconfirmdialog" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" buttons="accept,cancel" buttonlabelcancel="J'annule l'envoi" buttonlabelaccept="OK, J'envoie le message" ondialogaccept="return doOK();" ondialogcancel="return doCancel();" onload="onLoad();">
+	<script src="chrome://estimate-your-CO2/content/dialogvalidator.js" />
+	<dialogheader title="Estimation de l'impact environnemental de l'envoi de cet email" style="font-size:85%;background-color:#007C21" />
+	<rows>
+		<row align="left">
+			<label id="label-size">
+				Taille globale
+			</label>
+			<spacer flex="1" />
+			<label class="bold" id="label-size-value">
+			</label>
+		</row>
+		<row align="left">
+			<label id="label-co2">
+				Émission de CO2
+			</label>
+			<spacer flex="1" />
+			<label class="bold" id="label-co2-value">
+			</label>
+		</row>
+		<row align="left">
+			<label id="label-oil">
+				Consommation de pétrole
+			</label>
+			<spacer flex="1" />
+			<label class="bold" id="label-oil-value">
+			</label>
+		</row>
+		<row align="left">
+			<label id="label-wh">
+				Watt heure (Wh)
+			</label>
+			<spacer flex="1" />
+			<label class="bold" id="label-wh-value">
+			</label>
+		</row>
+		<row align="left">
+			<label id="label-car">
+				Distance parcourue en voiture
+			</label>
+			<spacer flex="1" />
+			<label class="bold" id="label-car-value">
+			</label>
+		</row>
+		<row align="left">
+			<label id="label-bulb">
+				Une ampoule de 10W allumée pendant
+			</label>
+			<spacer flex="1" />
+			<label class="bold" id="label-bulb-value">
+			</label>
+		</row>
+	</rows>
+</dialog>
