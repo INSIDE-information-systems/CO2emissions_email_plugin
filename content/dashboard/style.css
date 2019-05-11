@@ -1,0 +1,37 @@
+.handsontable th {
+  background-color: #c9daf8;
+}
+
+/* Row headers */
+.ht_clone_left th {
+  background-color: #c9daf8;
+}
+
+/* Column headers */
+.ht_clone_top th {
+  background-color: #c9daf8;
+}
+
+.wtHider {
+  margin: auto;
+}
+
+#content-main .row #grid {
+  margin-top: 64px;
+}
+
+body {
+  background-color: #eee;
+}
+
+.container-sync {
+  position: fixed;
+  top: 15px;
+  left: 25px;
+  width: 100px;
+  text-align: center;
+}
+
+.label-sync {
+  color: #333333;
+}

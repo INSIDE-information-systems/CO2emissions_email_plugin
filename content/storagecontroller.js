@@ -22,7 +22,25 @@ afbDb.add = function (size) {
 
 afbDb.getAll = function () {
     var dbConn = afbDb.init();
-    return dbConn.createStatement("SELECT senddate, SUM(size) as size FROM afb_storage GROUP BY senddate ORDER BY senddate ASC;");
+    return dbConn.createStatement("SELECT (\
+        SELECT SUM(size)\
+            FROM afb_storage\
+                WHERE senddate >= date(DATETIME('now'), '-1 day') AND senddate < DATETIME('now')\
+    ) AS sizeday, (\
+        SELECT SUM(size)\
+            FROM afb_storage\
+                WHERE senddate >= date(DATETIME('now'), '-7 day') AND senddate < DATETIME('now')\
+    ) AS sizeweek, (\
+        SELECT SUM(size)\
+            FROM afb_storage\
+                WHERE senddate >= date(DATETIME('now'), '-1 month') AND senddate < DATETIME('now')\
+    ) AS sizemonth, (\
+        SELECT SUM(size)\
+            FROM afb_storage\
+                WHERE senddate >= date(DATETIME('now'), '-1 year') AND senddate < DATETIME('now')\
+    ) AS sizeyear\
+    FROM afb_storage\
+    LIMIT 1;");
 }
 
 

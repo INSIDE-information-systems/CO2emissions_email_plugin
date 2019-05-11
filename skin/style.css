@@ -1,4 +1,4 @@
-#afb-send-button, [place="palette"] > #afb-send-button {
+/* #afb-send-button, [place="palette"] > #afb-send-button {
     list-style-image: url("chrome://estimate-your-CO2/skin/send-icon.png") !important;
   }
 
@@ -8,6 +8,18 @@
 
 #afb-button-dashboard, [place="palette"] > #afb-button-dashboard {
   list-style-image: url("chrome://estimate-your-CO2/skin/dashboard-icon.png") !important;
+} */
+
+#afb-send-button {
+  list-style-image: url("chrome://estimate-your-CO2/skin/send-icon.png");
+}
+
+#afb-validator-button {
+  list-style-image: url("chrome://estimate-your-CO2/skin/leaf-icon.png");
+}
+
+#afb-button-dashboard {
+  list-style-image: url("chrome://estimate-your-CO2/skin/dashboard-icon.png");
 }
 
 .italic {

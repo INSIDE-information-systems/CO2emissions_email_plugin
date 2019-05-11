@@ -1,0 +1,23 @@
+{
+    "applications": {
+      "gecko": {
+        "id": "estimate-your-CO2@afb.fr",
+        "strict_min_version": "60.0"
+      }
+    },
+    "manifest_version": 2,
+    "name": "Estimate Your CO2",
+    "version": "0.10",
+    "author": "Mathéo MSA",
+    "icons": {
+      "32": "./skin/afb-logo.png"
+    },
+    "legacy": {
+      "options": {
+        "page": "chrome://estimate-your-CO2/content/preferences.xul",
+        "open_in_tab": false
+      }
+    }
+    
+  }
+  

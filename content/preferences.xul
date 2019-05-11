@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://global/skin/global.css"?>
-<prefwindow type="prefwindow" id="AFBPreferences" windowtype="Browser:Preferences" title="Les options AFB" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" style="">
-	 <script type="application/x-javascript" src="globals.js"/>
-    
-    <prefpane id="main-options" label="Principale">
+<?xml-stylesheet type="text/css" href="chrome://messenger/skin/preferences/preferences.css"?>
+<?xml-stylesheet type="text/css" href="chrome://messenger/content/bindings.css"?>
+<?xml-stylesheet type="text/css" href="chrome://global/skin/"?>
+<prefwindow type="prefwindow" id="AFBPreferences" windowtype="Browser:Preferences" title="Paramètrage des valeurs" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" style="">
+	<script type="application/x-javascript" src="globals.js" />
+	<prefpane id="main-options" label="Principale">
 		<preferences>
 			<preference id="pref-editValueWh" name="extensions.estimate-your-CO2.valueWh" type="int" />
 			<preference id="pref-editValueCO2" name="extensions.estimate-your-CO2.valueCO2" type="int" />
@@ -12,37 +13,78 @@
 			<preference id="pref-editValueBulb" name="extensions.estimate-your-CO2.valueBulb" type="int" />
 			<preference id="pref-autosignature" name="extensions.estimate-your-CO2.autosignature" type="bool" />
 		</preferences>
+		<label value="Valeurs par défaut d'estimation de CO2" />
+		<label>
+			<p style="font-size:90%;color:#757575;font-weight: bold;">
+				Les valeurs par défaut sont celles basées sur les connaissances du moment.
+			</p>
+		</label>
+		<label>
+			<p style="font-size:90%;color:#757575;font-weight: bold;">
+				Nous vous recommandons de ne pas les modifier.
+			</p>
+		</label>
+		<label>
+			<p style="font-size:90%;color:#757575;font-weight: bold;">
+				Cependant, vous avez la possibilité de le faire si vous avez en votre possessions des valeurs plus précises.
+			</p>
+		</label>
+		<label value=" " />
 		<groupbox>
-			<caption label="Variables définies pour 1Mo" />
+			<caption label="Variables définies pour 1Mo envoyé" />
 			<hbox>
-				<label value="Consomation en Wh" style="padding-top:5px" />
+				<label style="padding-top:5px; width:250px">
+					<p>
+						Consommation en Wh
+					</p>
+				</label>
 				<spacer flex="1" />
 				<textbox id="tb-editValueWh" type="number" decimalplaces="3" min="0" preference="pref-editValueWh" />
+				<spacer flex="10" />
 			</hbox>
 			<hbox>
-				<label value="Consomation en CO2" style="padding-top:5px" />
+				<label style="padding-top:5px; width:250px">
+					<p>
+						Estimation de CO2
+					</p>
+				</label>
 				<spacer flex="1" />
 				<textbox id="tb-editValueCO2" type="number" decimalplaces="3" min="0" preference="pref-editValueCO2" />
+				<spacer flex="10" />
 			</hbox>
 			<hbox>
-				<label value="Consomation en gramme de pétrole" style="padding-top:5px" />
+				<label style="padding-top:5px; width:250px">
+					<p>
+						Consommation en gramme de pétrole
+					</p>
+				</label>
 				<spacer flex="1" />
 				<textbox id="tb-editValueOil" type="number" decimalplaces="3" min="0" preference="pref-editValueOil" />
+				<spacer flex="10" />
 			</hbox>
 			<hbox>
-				<label value="Mètres parcourus en voiture" style="padding-top:5px" />
+				<label style="padding-top:5px; width:250px">
+					<p>
+						Mètres parcourus en voiture
+					</p>
+				</label>
 				<spacer flex="1" />
 				<textbox id="tb-editValueCar" type="number" min="0" preference="pref-editValueCar" />
+				<spacer flex="10" />
 			</hbox>
 			<hbox>
-				<label value="Temps allumé d'une ampoule 10Wh(en ms)" style="padding-top:5px" />
+				<label style="padding-top:5px; width:250px">
+					<p>
+						Temps allumé d'une ampoule 10Wh(en min)
+					</p>
+				</label>
 				<spacer flex="1" />
 				<textbox id="tb-editValueBulb" type="number" min="0" preference="pref-editValueBulb" />
+				<spacer flex="10" />
 			</hbox>
 		</groupbox>
 		<checkbox id="cb-autosignature" label="Mettre automatiquement l'estimation en signature" preference="pref-autosignature" checked="true" />
-		<hbox>
-        <spacer flex="1" />
+		<hbox style="margin-top:40px;"> 
 			<button id="btnShowDashBoard" label="Tableau de bord" oncommand="AFBGlobals.cm_btnShowDashBoard()" />
 		</hbox>
 	</prefpane>

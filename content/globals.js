@@ -56,7 +56,6 @@ var AFBGlobals = {
     }
   },
 
-
   cm_btnShowDashBoard() {
     mail3Pane = Components.classes["@mozilla.org/appshell/window-mediator;1"]
       .getService(Components.interfaces.nsIWindowMediator)
@@ -74,15 +73,16 @@ var AFBGlobals = {
       gOil: "g de pétrole",
       gCO2: "g de CO2",
       mCar: "mètres parcourue en voiture",
-      tBulb: "ms"
+      tBulb: "minutes"
     };
 
     var extensionValidator = {
       gOil: "g",
       gCO2: "g",
-      mCar: "mètres ",
-      tBulb: "ms"
+      mCar: "mètres",
+      tBulb: "min"
     };
+
     AFBGlobals.init();
     var sizes = {
       size: datasize,
@@ -101,30 +101,34 @@ var AFBGlobals = {
         extension.size = "Mo";
       }
     }
-    if (sizes.tBulb > 1000) {
-      sizes.tBulb /= 1000;
-      extension.tBulb = "sec";
-      extensionValidator.tBulb = "secondes";
-      if (sizes.tBulb > 60) {
-        sizes.tBulb /= 60
-        extension.tBulb = "min";
-        extensionValidator.tBulb = "minutes";
-        if (sizes.tBulb > 60) {
-          sizes.tBulb /= 60;
-          extension.tBulb = "h";
-          extensionValidator.tBulb = "heures";
-        }
-      }
+    
+    if (sizes.tBulb > 60) {
+      sizes.tBulb /= 60;
+      extension.tBulb = "h";
+      extensionValidator.tBulb = "heures";
     }
+
     if (sizes.mCar > 1000) {
       sizes.mCar /= 1000;
       extension.mCar = "kilomètres parcourue en voiture"
       extensionValidator.mCar = "kilomètres";
     }
 
+    if (sizes.gCO2 > 1000) {
+      sizes.gCO2 /= 1000;
+      extension.gCO2 = "kg de pétrole"
+      extensionValidator.gCO2 = "kg";
+    }
+
+    if (sizes.gOil > 1000) {
+      sizes.gOil /= 1000;
+      extension.gOil = "kg de CO2"
+      extensionValidator.gOil = "kg";
+    }
+
     return {
       sizes,
-      extension, 
+      extension,
       extensionValidator
     }
   }
