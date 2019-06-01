@@ -32,14 +32,12 @@ function getDataFromDB() {
       pSize.innerHTML =
         "<span style='color:green;font-weight: bold;'>Aujourd'hui</span>,\
          vous avez envoyé un total de <span style='font-weight: bold;'>" + infosInterval.day.sizes.size.toFixed(1) + " " + infosInterval.day.extension.size + "</span>" +
-        " de données, équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.day.sizes.gOil.toFixed(0) + " " + infosInterval.day.extension.gOil + "</span>" +
-        ", ou <span style='font-weight: bold;'>" + infosInterval.day.sizes.wh.toFixed(0) + " " + infosInterval.day.extension.wh + "</span>" +
-        ", l'émission de <span style='font-weight: bold;'>" + infosInterval.day.sizes.gCO2.toFixed(0) + " " + infosInterval.day.extension.gCO2 + "</span>" +
-        ", une distance de <span style='font-weight: bold;'>" + 
-          (infosInterval.day.extension.mCar === "mètres parcourue en voiture" ? infosInterval.day.sizes.mCar.toFixed(0) : infosInterval.day.sizes.mCar.toFixed(1)) + 
-        " " + infosInterval.day.extension.mCar + "</span>" +
+        " de données, équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.day.sizes.gOil.toFixed(1) + " " + infosInterval.day.extension.gOil + "</span>" +
+        ", ou <span style='font-weight: bold;'>" + infosInterval.day.sizes.wh.toFixed(1) + " " + infosInterval.day.extension.wh + "</span>" +
+        ", l'émission de <span style='font-weight: bold;'>" + infosInterval.day.sizes.gCO2.toFixed(1) + " " + infosInterval.day.extension.gCO2 + "</span>" +
+        ", une distance de <span style='font-weight: bold;'>" + infosInterval.day.sizes.mCar.toFixed(1) + " " + infosInterval.day.extension.mCar + "</span>" +
         " et une ampoule de <span style='font-weight: bold;'>10W</span> allumée pendant <span style='font-weight: bold;'>" +
-        infosInterval.day.sizes.tBulb.toFixed(0) + infosInterval.day.extension.tBulb + "</span>.";
+        infosInterval.day.sizes.tBulb.toFixed(1) + infosInterval.day.extension.tBulb + "</span>.";
     },
     handleError: function (aError) {
       console.error("Error: " + aError.message);
@@ -60,14 +58,12 @@ function getDataFromDB() {
       pSize.innerHTML =
         "<span style='color:green;font-weight: bold;'>Le cumul hebdomadaire</span>\
         est de <span style='font-weight: bold;'>" + infosInterval.week.sizes.size.toFixed(1) + " " + infosInterval.week.extension.size + "</span>" +
-        ", équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.week.sizes.gOil.toFixed(0) + " " + infosInterval.week.extension.gOil + "</span>" +
-        ", ou <span style='font-weight: bold;'>" + infosInterval.week.sizes.wh.toFixed(0) + " " + infosInterval.week.extension.wh + "</span>" +
-        ", l'émission de <span style='font-weight: bold;'>" + infosInterval.week.sizes.gCO2.toFixed(0) + " " + infosInterval.week.extension.gCO2 + "</span>" +
-        ", une distance de <span style='font-weight: bold;'>" + 
-          (infosInterval.week.extension.mCar === "mètres parcourue en voiture" ? infosInterval.week.sizes.mCar.toFixed(0) : infosInterval.week.sizes.mCar.toFixed(1)) + 
-        " " + infosInterval.week.extension.mCar + "</span>" +
+        ", équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.week.sizes.gOil.toFixed(1) + " " + infosInterval.week.extension.gOil + "</span>" +
+        ", ou <span style='font-weight: bold;'>" + infosInterval.week.sizes.wh.toFixed(1) + " " + infosInterval.week.extension.wh + "</span>" +
+        ", l'émission de <span style='font-weight: bold;'>" + infosInterval.week.sizes.gCO2.toFixed(1) + " " + infosInterval.week.extension.gCO2 + "</span>" +
+        ", une distance de <span style='font-weight: bold;'>" + infosInterval.week.sizes.mCar.toFixed(1) + " " + infosInterval.week.extension.mCar + "</span>" +
         " et une ampoule de <span style='font-weight: bold;'>10W</span> allumée pendant <span style='font-weight: bold;'>" +
-        infosInterval.week.sizes.tBulb.toFixed(0) + " " + infosInterval.week.extension.tBulb + "</span>.";
+        infosInterval.week.sizes.tBulb.toFixed(1) + " " + infosInterval.week.extension.tBulb + "</span>.";
     },
     handleError: function (aError) {
       console.error("Error: " + aError.message);
@@ -88,14 +84,12 @@ function getDataFromDB() {
       pSize.innerHTML =
         "<span style='color:green;font-weight: bold;'>Le cumul mensuel</span> \
         est de <span style='font-weight: bold;'>" + infosInterval.month.sizes.size.toFixed(1) + " " + infosInterval.month.extension.size + "</span>" +
-        ", équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.month.sizes.gOil.toFixed(0) + " " + infosInterval.month.extension.gOil + "</span>" +
-        ", ou <span style='font-weight: bold;'>" + infosInterval.month.sizes.wh.toFixed(0) + " " + infosInterval.month.extension.wh + "</span>" +
-        ", l'émission de <span style='font-weight: bold;'>" + infosInterval.month.sizes.gCO2.toFixed(0) + " " + infosInterval.month.extension.gCO2 + "</span>" +
-        ", une distance de <span style='font-weight: bold;'>" + 
-          (infosInterval.month.extension.mCar === "mètres parcourue en voiture" ? infosInterval.month.sizes.mCar.toFixed(0) : infosInterval.month.sizes.mCar.toFixed(1)) + 
-        " " + infosInterval.month.extension.mCar + "</span>" +
+        ", équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.month.sizes.gOil.toFixed(1) + " " + infosInterval.month.extension.gOil + "</span>" +
+        ", ou <span style='font-weight: bold;'>" + infosInterval.month.sizes.wh.toFixed(1) + " " + infosInterval.month.extension.wh + "</span>" +
+        ", l'émission de <span style='font-weight: bold;'>" + infosInterval.month.sizes.gCO2.toFixed(1) + " " + infosInterval.month.extension.gCO2 + "</span>" +
+        ", une distance de <span style='font-weight: bold;'>" + infosInterval.month.sizes.mCar.toFixed(1) + " " + infosInterval.month.extension.mCar + "</span>" +
         " et une ampoule de <span style='font-weight: bold;'>10W</span> allumée pendant <span style='font-weight: bold;'>" +
-        infosInterval.month.sizes.tBulb.toFixed(0) + " " + infosInterval.month.extension.tBulb + "</span>.";
+        infosInterval.month.sizes.tBulb.toFixed(1) + " " + infosInterval.month.extension.tBulb + "</span>.";
     },
     handleError: function (aError) {
       console.error("Error: " + aError.message);
@@ -117,14 +111,12 @@ function getDataFromDB() {
         "<span style='color:green;font-weight: bold;'>Le cumul annuel</span> est de \
           est de <span style='font-weight: bold;'>" + infosInterval.year.sizes.size.toFixed(1) + " " + infosInterval.year.extension.size + "</span>" +
 
-        ", équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.year.sizes.gOil.toFixed(0) + " " + infosInterval.year.extension.gOil + "</span>" +
-        ", ou <span style='font-weight: bold;'>" + infosInterval.year.sizes.wh.toFixed(0) + " " + infosInterval.year.extension.wh + "</span>" +
-        ", l'émission de <span style='font-weight: bold;'>" + infosInterval.year.sizes.gCO2.toFixed(0) + " " + infosInterval.year.extension.gCO2 + "</span>" +
-        ", une distance de <span style='font-weight: bold;'>" + 
-          (infosInterval.year.extension.mCar === "mètres parcourue en voiture" ? infosInterval.year.sizes.mCar.toFixed(0) : infosInterval.year.sizes.mCar.toFixed(1)) + 
-        " " + infosInterval.year.extension.mCar + "</span>" +
+        ", équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.year.sizes.gOil.toFixed(1) + " " + infosInterval.year.extension.gOil + "</span>" +
+        ", ou <span style='font-weight: bold;'>" + infosInterval.year.sizes.wh.toFixed(1) + " " + infosInterval.year.extension.wh + "</span>" +
+        ", l'émission de <span style='font-weight: bold;'>" + infosInterval.year.sizes.gCO2.toFixed(1) + " " + infosInterval.year.extension.gCO2 + "</span>" +
+        ", une distance de <span style='font-weight: bold;'>" + infosInterval.year.sizes.mCar.toFixed(1) + " " + infosInterval.year.extension.mCar + "</span>" +
         " et une ampoule de <span style='font-weight: bold;'>10W</span> allumée pendant <span style='font-weight: bold;'>" +
-        infosInterval.year.sizes.tBulb.toFixed(0) + " " + infosInterval.year.extension.tBulb + "</span>.";
+        infosInterval.year.sizes.tBulb.toFixed(1) + " " + infosInterval.year.extension.tBulb + "</span>.";
     },
     handleError: function (aError) {
       console.error("Error: " + aError.message);
