@@ -108,9 +108,8 @@ function getDataFromDB() {
       infosInterval.year = AFBGlobals.calc_conso(size);
       var pSize = document.getElementById('year-value');
       pSize.innerHTML =
-        "<span style='color:green;font-weight: bold;'>Le cumul annuel</span> est de \
+        "<span style='color:green;font-weight: bold;'>Le cumul annuel</span> \
           est de <span style='font-weight: bold;'>" + infosInterval.year.sizes.size.toFixed(1) + " " + infosInterval.year.extension.size + "</span>" +
-
         ", équivalant à la consommation de <span style='font-weight: bold;'>" + infosInterval.year.sizes.gOil.toFixed(1) + " " + infosInterval.year.extension.gOil + "</span>" +
         ", ou <span style='font-weight: bold;'>" + infosInterval.year.sizes.wh.toFixed(1) + " " + infosInterval.year.extension.wh + "</span>" +
         ", l'émission de <span style='font-weight: bold;'>" + infosInterval.year.sizes.gCO2.toFixed(1) + " " + infosInterval.year.extension.gCO2 + "</span>" +

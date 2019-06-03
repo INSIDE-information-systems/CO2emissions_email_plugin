@@ -2,7 +2,7 @@
     "applications": {
       "gecko": {
         "id": "estimate-your-CO2@afb.fr",
-        "strict_min_version": "60.0"
+        "strict_min_version": "59.0"
       }
     },
     "manifest_version": 2,
