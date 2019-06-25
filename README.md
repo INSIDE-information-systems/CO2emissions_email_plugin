@@ -2,7 +2,7 @@
 
 This plugin is developed by following the guide line of [Thunderbird Extensions](https://developer.mozilla.org/en-US/docs/Mozilla/Thunderbird/Thunderbird_extensions/).
 
-This plugin is only working on the version of thundebird between 45.0 and 57.*. You can download thunderbird on [this website](https://archive.mozilla.org/pub/thunderbird/releases/).
+This plugin is only working on the version of thundebird between 59.* and 67.*. You can download thunderbird on [this website](https://archive.mozilla.org/pub/thunderbird/releases/).
 
 You can edit the default value inside the folder `/defaults/preferences/sendbutton.js`.
 
