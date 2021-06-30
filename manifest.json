@@ -20,7 +20,7 @@
     "tabs"
   ],
   "compose_action": {
-    "default_title": "Estimation CO2",
+    "default_title": "Estimation CO₂",
     "default_icon" : "images/leaf-icon.png",
     "default_popup": "popup.html"
   }
