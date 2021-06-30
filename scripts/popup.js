@@ -81,7 +81,11 @@ docReady(function () {
 
     gettingCurrent.then(calculate, onError);
 
+    // Bouton switch par destinataire ou global
     document.getElementById("check_values").addEventListener('change', () => {
         calculate(tab);
     });
+
+    // Bouton ajout signature
+    // document.getElementById("addTo").addEventListener('click', e => { })
 });

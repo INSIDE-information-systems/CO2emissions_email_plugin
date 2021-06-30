@@ -55,3 +55,9 @@ table {
     visibility: visible;
     opacity: 1;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
