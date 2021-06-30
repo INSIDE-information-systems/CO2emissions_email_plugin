@@ -1,14 +1,15 @@
 {
   "manifest_version": 2,
-  "name": "Estimez votre CO2",
-  "description": "Estimez votre CO2 quand vous rédigez un mail",
+  "name": "Estimez votre CO₂",
+  "short_name": "Mail CO₂",
+  "description": "Estimez votre CO₂ quand vous rédigez un mail",
   "version": "2.0",
-  "author": "Maxime Chourré",
+  "author": "Maxime Chourré & Mathéo MSA",
+  "homepage_url": "https://github.com/Harfeur/CO2emissions_email_plugin",
   "applications": {
     "gecko": {
       "id": "estimate-your-CO2@harfeur.fr",
-      "strict_min_version": "78.0",
-      "strict_max_version": "78.*"
+      "strict_min_version": "74.0"
     }
   },
   "icons": {
@@ -16,8 +17,7 @@
   },
   "permissions": [
     "storage",
-    "compose",
-    "tabs"
+    "compose"
   ],
   "compose_action": {
     "default_title": "Estimation CO₂",
