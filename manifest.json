@@ -13,7 +13,10 @@
     }
   },
   "icons": {
-    "32": "images/afb-logo.png"
+    "48": "images/ofb_48.png",
+    "96": "images/ofb_96.png",
+    "256": "images/ofb_256.png",
+    "512": "images/ofb_512.png"
   },
   "permissions": [
     "storage",
