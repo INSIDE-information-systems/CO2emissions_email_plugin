@@ -22,7 +22,7 @@ docReady(function () {
 
     function formatBytes(bytes, decimals = 2) {
         if (bytes === 0) return "0 octet";
-        if (bytes < 2) return bytes.toFixed(decimals) + ' octet';
+        if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + ' octet';
 
         const k = 1024;
         const dm = decimals < 0 ? 0 : decimals;
@@ -30,11 +30,11 @@ docReady(function () {
 
         const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        return (parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
     }
 
     function formatGrammes(size, decimals = 2) {
-        if (size < 2) return size.toFixed(decimals) + " g";
+        if (size < 2) return parseFloat(size.toFixed(decimals)).toString().replace(".", ",") + " g";
 
         const k = 1000;
         const dm = decimals < 0 ? 0 : decimals;
@@ -42,7 +42,7 @@ docReady(function () {
 
         const i = Math.floor(Math.log(size) / Math.log(k));
 
-        return parseFloat((size / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        return (parseFloat((size / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
     }
 
     let gettingCurrent = browser.tabs.query({currentWindow: true});
