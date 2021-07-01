@@ -9,6 +9,11 @@ tr :last-child {
 .border_top td {
     border-top: 1px solid #333333;
 }
+
+td {
+    padding: 2px 3px;
+}
+
 table {
     border-collapse: collapse;
 }
