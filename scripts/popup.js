@@ -60,7 +60,7 @@ docReady(function () {
         let bcc = data.bcc;
         let subject = data.subject;
         let recipentsCount = to.length + cc.length + bcc.length;
-        let headerSize = HEADER_SIZE + lengthInUtf8Bytes(to.join(",") + cc.join(",") + bcc.join(",") + subject);
+        let headerSize = HEADER_SIZE + lengthInUtf8Bytes(to.join(",") + cc.join(",") + subject);
         let attachmentsSize = attachments.reduce((acc, val) => acc + val.size, 0);
 
         document.getElementById("header-size").innerText = formatBytes(headerSize);
