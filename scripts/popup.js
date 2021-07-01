@@ -7,7 +7,7 @@ docReady(function () {
     // Pour 1 Mo
     const CO2 = 20;
     const OIL = 6;
-    const CAR = 150;
+    const CAR = 182;
     const MO = 1048576;
 
     let tab;
@@ -45,6 +45,18 @@ docReady(function () {
         return (parseFloat((size / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
     }
 
+    function formatDistance(distance, decimals = 2) {
+        if (distance < 2) return parseFloat(distance.toFixed(decimals)).toString().replace(".", ",") + " mètre";
+
+        const k = 1000;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['mètres', 'km'];
+
+        const i = Math.floor(Math.log(distance) / Math.log(k));
+
+        return (parseFloat((distance / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
+    }
+
     let gettingCurrent = browser.tabs.query({currentWindow: true});
 
     async function calculate(tabInfo) {
@@ -76,7 +88,7 @@ docReady(function () {
         document.getElementById("size").innerText = formatBytes(totalSize);
         document.getElementById("co2").innerText = formatGrammes(co2);
         document.getElementById("oil").innerText = formatGrammes(petrole);
-        document.getElementById("car").innerText = voiture.toFixed(0) + " km";
+        document.getElementById("car").innerText = formatDistance(voiture);
     }
 
     gettingCurrent.then(calculate, onError);
