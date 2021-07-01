@@ -66,7 +66,7 @@ docReady(function () {
         var data = await messenger.compose.getComposeDetails(tabInfo[0].id);
         var attachments = await messenger.compose.listAttachments(tabInfo[0].id);
 
-        let messageBodySize = lengthInUtf8Bytes(data.body);
+        let messageBodySize = lengthInUtf8Bytes(data.isPlainText ? data.plainTextBody : data.body);
         let to = data.to;
         let cc = data.cc;
         let bcc = data.bcc;
