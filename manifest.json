@@ -3,7 +3,7 @@
   "name": "Estimez votre CO₂",
   "short_name": "Mail CO₂",
   "description": "Estimez votre CO₂ quand vous rédigez un mail",
-  "version": "2.0",
+  "version": "2.1",
   "author": "Maxime Chourré & Mathéo MSA",
   "homepage_url": "https://github.com/Harfeur/CO2emissions_email_plugin",
   "applications": {
