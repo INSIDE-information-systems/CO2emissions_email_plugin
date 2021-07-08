@@ -21,12 +21,12 @@ docReady(function () {
     }
 
     function formatBytes(bytes, decimals = 2) {
-        if (bytes === 0) return "0 o";
-        if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + ' o';
+        if (bytes === 0) return "0 <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>";
+        if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + " <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>";
 
         const k = 1024;
         const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['o', 'ko', 'Mo', 'Go'];
+        const sizes = ["<div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octets</span></div>", 'ko', 'Mo', 'Go'];
 
         const i = Math.floor(Math.log(bytes) / Math.log(k));
 
@@ -75,28 +75,23 @@ docReady(function () {
         let headerSize = HEADER_SIZE + lengthInUtf8Bytes(to.join(",") + cc.join(",") + subject);
         let attachmentsSize = attachments.reduce((acc, val) => acc + val.size, 0);
 
-        document.getElementById("header-size").innerText = formatBytes(headerSize);
-        document.getElementById("body-size").innerText = formatBytes(messageBodySize)
-        document.getElementById("attachments-size").innerText = formatBytes(attachmentsSize);
+        document.getElementById("header-size").innerHTML = formatBytes(headerSize);
+        document.getElementById("body-size").innerHTML = formatBytes(messageBodySize)
+        document.getElementById("attachments-size").innerHTML = formatBytes(attachmentsSize);
 
         let totalSize = headerSize + messageBodySize + attachmentsSize;
-        let sizeTimesRecipents = document.getElementById("check_values").checked ? totalSize * recipentsCount : totalSize;
+        let sizeTimesRecipents = recipentsCount === 0 ? totalSize : totalSize * recipentsCount;
         let co2 = (sizeTimesRecipents * CO2) / MO;
         let petrole = (sizeTimesRecipents * OIL) / MO;
         let voiture = (sizeTimesRecipents * CAR) / MO;
 
-        document.getElementById("size").innerText = formatBytes(totalSize);
-        document.getElementById("co2").innerText = formatGrammes(co2);
-        document.getElementById("oil").innerText = formatGrammes(petrole);
-        document.getElementById("car").innerText = formatDistance(voiture);
+        document.getElementById("size").innerHTML = formatBytes(totalSize);
+        document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("oil").innerHTML = formatGrammes(petrole) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("car").innerHTML = formatDistance(voiture) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
     }
 
     gettingCurrent.then(calculate, onError);
-
-    // Bouton switch par destinataire ou global
-    document.getElementById("check_values").addEventListener('change', () => {
-        calculate(tab);
-    });
 
     // Bouton ajout signature
     // document.getElementById("addTo").addEventListener('click', e => { })
