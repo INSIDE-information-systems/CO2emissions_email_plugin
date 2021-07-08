@@ -21,12 +21,12 @@ docReady(function () {
     }
 
     function formatBytes(bytes, decimals = 2) {
-        if (bytes === 0) return "0 octet";
-        if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + ' octet';
+        if (bytes === 0) return "0 o";
+        if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + ' o';
 
         const k = 1024;
         const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['octets', 'ko', 'Mo', 'Go'];
+        const sizes = ['o', 'ko', 'Mo', 'Go'];
 
         const i = Math.floor(Math.log(bytes) / Math.log(k));
 
@@ -46,11 +46,11 @@ docReady(function () {
     }
 
     function formatDistance(distance, decimals = 2) {
-        if (distance < 2) return parseFloat(distance.toFixed(decimals)).toString().replace(".", ",") + " mètre";
+        if (distance < 2) return parseFloat(distance.toFixed(decimals)).toString().replace(".", ",") + " m";
 
         const k = 1000;
         const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['mètres', 'km'];
+        const sizes = ['m', 'km'];
 
         const i = Math.floor(Math.log(distance) / Math.log(k));
 
