@@ -1,0 +1,25 @@
+.popup-title {
+    text-align: center;
+}
+
+tr :last-child {
+    text-align: right;
+}
+
+.border_top td {
+    border-top: 1px solid #333333;
+}
+
+td {
+    padding: 2px 3px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
