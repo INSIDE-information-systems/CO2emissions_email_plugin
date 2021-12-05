@@ -5,7 +5,7 @@ function docReady(fn) {
 docReady(function () {
     const HEADER_SIZE = 800;
     // Pour 1 Mo
-    const CO2 = 20;
+    const CO2 = 19;
     const OIL = 6;
     const CAR = 182;
     const MO = 1048576;
