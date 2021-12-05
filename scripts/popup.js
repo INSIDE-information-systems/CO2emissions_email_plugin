@@ -7,7 +7,7 @@ docReady(function () {
     // Pour 1 Mo
     const CO2 = 19;
     const OIL = 6;
-    const CAR = 182;
+    const CAR = 99; // en m/Mo
     const BULB = 25; // en min/Mo
     const MO = 1048576;
 
