@@ -36,7 +36,7 @@ docReady(function () {
         return (parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
     }
 
-    function formatGrammes(size, decimals = 2) {
+    function formatGrammes(size, decimals = 1) {
         if (size < 2) return parseFloat(size.toFixed(decimals)).toString().replace(".", ",") + " g";
 
         const k = 1000;
@@ -48,7 +48,7 @@ docReady(function () {
         return (parseFloat((size / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
     }
 
-    function formatDistance(distance, decimals = 2) {
+    function formatDistance(distance, decimals = 1) {
         if (distance < 2) return parseFloat(distance.toFixed(decimals)).toString().replace(".", ",") + " m";
 
         const k = 1000;
@@ -60,7 +60,7 @@ docReady(function () {
         return (parseFloat((distance / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
     }
     
-    function formatTime(time, decimals = 2) {
+    function formatTime(time, decimals = 1) {
         if (time < 2) return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " min";
 
         const k = 60;
