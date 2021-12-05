@@ -8,6 +8,7 @@ docReady(function () {
     const CO2 = 19;
     const OIL = 6;
     const CAR = 182;
+    const BULB = 25; // en min/Mo
     const MO = 1048576;
 
     let tab;
@@ -56,6 +57,18 @@ docReady(function () {
 
         return (parseFloat((distance / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
     }
+    
+    function formatTime(time, decimals = 2) {
+        if (time < 2) return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " min";
+
+        const k = 60;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['min', 'h'];
+
+        const i = Math.floor(Math.log(time) / Math.log(k));
+
+        return (parseFloat((time / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
+    }
 
     let gettingCurrent = browser.tabs.query({currentWindow: true});
 
@@ -84,11 +97,13 @@ docReady(function () {
         let co2 = (sizeTimesRecipents * CO2) / MO;
         let petrole = (sizeTimesRecipents * OIL) / MO;
         let voiture = (sizeTimesRecipents * CAR) / MO;
+        let ampoule = (sizeTimesRecipents * BULB) / MO;
 
         document.getElementById("size").innerHTML = formatBytes(totalSize);
         document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("oil").innerHTML = formatGrammes(petrole) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("car").innerHTML = formatDistance(voiture) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("bulb").innerHTML = formatTime(ampoule) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
     }
 
     gettingCurrent.then(calculate, onError);
