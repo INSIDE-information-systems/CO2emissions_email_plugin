@@ -6,6 +6,7 @@
 .table-subtitle {
     text-align: center !important;
     font-weight: bold;
+    padding-top: 5px;
 }
 
 tr :last-child {
@@ -22,10 +23,19 @@ td {
 
 table {
     border-collapse: collapse;
+    margin-top: 5px;
 }
 
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.gray {
+    color: rgb(80, 80, 80);
+}
+
+body {
+    font-size: 11pt;
 }
