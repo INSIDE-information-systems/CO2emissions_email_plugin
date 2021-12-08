@@ -5,12 +5,15 @@ function docReady(fn) {
 docReady(function () {
     const HEADER_SIZE = 800;
     // Pour 1 Mo
-    const CO2 = 19; // en g/Mo
-    const OIL = 6;
-    const CAR = 99; // en m/Mo
-    const TGV = 10982.659; // en m/Mo
-    const BULB = 25; // en min/Mo
-    const BREATHING = 16.799; // en min/Mo
+    const CO2 = 13; // en g/Mo
+    const CO2u = 6; // en g/Mo
+
+    const OIL = 3.34; // en g CO2e/g de pétrole
+    const CAR = 0.192; // en g CO2e/m
+    const TGV = 1.73e-3; // en g CO2e/m
+    const BULB = 0.0599 / 60; // en g CO2e/(W.min) (électricité)
+    const BULBW = 40; // en W
+    const BREATHING = 1.131; // en g CO2/min
     const MO = 1048576;
 
     let tab;
@@ -95,19 +98,19 @@ docReady(function () {
         document.getElementById("attachments-size").innerHTML = formatBytes(attachmentsSize);
 
         let totalSize = headerSize + messageBodySize + attachmentsSize;
-        let sizeTimesRecipents = recipentsCount === 0 ? totalSize : totalSize * recipentsCount;
-        let co2 = (sizeTimesRecipents * CO2) / MO;
-        let petrole = (sizeTimesRecipents * OIL) / MO;
-        let voiture = (sizeTimesRecipents * CAR) / MO;
-        let tgv = (sizeTimesRecipents * TGV) / MO;
-        let ampoule = (sizeTimesRecipents * BULB) / MO;
-        let respiration = (sizeTimesRecipents * BREATHING) / MO;
+        let co2 = recipentsCount === 0 ? totalSize * (CO2 + CO2u) / MO : totalSize * (CO2 + recipentsCount * CO2u) / MO;
+        let petrole = co2 / OIL;
+        let voiture = co2 / CAR;
+        let tgv = co2 / TGV;
+        let ampoule = co2 / (BULBW * BULB);
+        let respiration = co2 / BREATHING;
 
         document.getElementById("size").innerHTML = formatBytes(totalSize);
         document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("oil").innerHTML = formatGrammes(petrole) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("car").innerHTML = formatDistance(voiture) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("tgv").innerHTML = formatDistance(tgv) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("bulbw").insertAdjacentHTML('beforeend', BULBW + " W");
         document.getElementById("bulb").innerHTML = formatTime(ampoule) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("breathing").innerHTML = formatTime(respiration) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
     }
