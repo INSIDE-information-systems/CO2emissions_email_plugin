@@ -44,7 +44,7 @@ docReady(function () {
 
         const k = 1000;
         const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['g', 'kg', 't'];
+        const sizes = ['g', 'kg', 't', 'Gg', 'Tg'];
 
         const i = Math.floor(Math.log(size) / Math.log(k));
 
@@ -56,7 +56,7 @@ docReady(function () {
 
         const k = 1000;
         const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['m', 'km'];
+        const sizes = ['m', 'km', 'Mm', 'Gm', 'Tm'];
 
         const i = Math.floor(Math.log(distance) / Math.log(k));
 
@@ -66,13 +66,20 @@ docReady(function () {
     function formatTime(time, decimals = 1) {
         if (time < 2) return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " min";
 
-        const k = 60;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['min', 'h'];
+        if (time < 1440) { // base 60
+            const k = 60;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['min', 'h'];
 
-        const i = Math.floor(Math.log(time) / Math.log(k));
+            const i = Math.floor(Math.log(time) / Math.log(k));
 
-        return (parseFloat((time / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
+            return (parseFloat((time / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
+        }
+
+        if (time >= 1440) { // base 24
+            time = time/(60 * 24);
+            return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " j";
+        }
     }
 
     let gettingCurrent = browser.tabs.query({currentWindow: true});
