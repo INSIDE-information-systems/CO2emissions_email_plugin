@@ -40,6 +40,7 @@ docReady(function () {
     }
 
     function formatGrammes(size, decimals = 1) {
+        if (0.1 > size >= 0.001) return parseFloat(size.toFixed(Math.abs(Math.floor(Math.log10(size))))).toString().replace(".", ",") + " g";
         if (size < 2) return parseFloat(size.toFixed(decimals)).toString().replace(".", ",") + " g";
 
         const k = 1000;
@@ -52,6 +53,7 @@ docReady(function () {
     }
 
     function formatDistance(distance, decimals = 1) {
+        if (0.1 > distance >= 0.001) return parseFloat(distance.toFixed(Math.abs(Math.floor(Math.log10(distance))))).toString().replace(".", ",") + " m";
         if (distance < 2) return parseFloat(distance.toFixed(decimals)).toString().replace(".", ",") + " m";
 
         const k = 1000;
@@ -64,6 +66,7 @@ docReady(function () {
     }
     
     function formatTime(time, decimals = 1) {
+        if (0.1 > time >= 0.001) return parseFloat(time.toFixed(Math.abs(Math.floor(Math.log10(time))))).toString().replace(".", ",") + " min";
         if (time < 2) return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " min";
 
         if (time < 1440) { // base 60
@@ -77,7 +80,7 @@ docReady(function () {
         }
 
         if (time >= 1440) { // base 24
-            time = time/(60 * 24);
+            time = time / (60 * 24);
             return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " j";
         }
     }
