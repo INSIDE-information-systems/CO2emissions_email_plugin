@@ -13,10 +13,10 @@
     }
   },
   "icons": {
-    "48": "images/ofb_48.png",
-    "96": "images/ofb_96.png",
-    "256": "images/ofb_256.png",
-    "512": "images/ofb_512.png"
+    "48": "images/estimate_your_co2_logo_trans_48.png",
+    "96": "images/estimate_your_co2_logo_trans_96.png",
+    "256": "images/estimate_your_co2_logo_trans_256.png",
+    "512": "images/estimate_your_co2_logo_trans_512.png"
   },
   "permissions": [
     "storage",
