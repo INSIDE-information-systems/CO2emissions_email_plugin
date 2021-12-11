@@ -156,7 +156,4 @@ docReady(function () {
             }
         });
     }
-
-    // Bouton ajout signature
-    // document.getElementById("addTo").addEventListener('click', e => { })
 });
