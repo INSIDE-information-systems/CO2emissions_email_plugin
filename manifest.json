@@ -3,13 +3,13 @@
   "name": "Estimez votre CO₂",
   "short_name": "Mail CO₂",
   "description": "Estimez votre CO₂ quand vous rédigez un mail",
-  "version": "2.3",
+  "version": "2.4",
   "author": "Maxime Chourré & Alexandre Couvez",
   "homepage_url": "https://github.com/Harfeur/CO2emissions_email_plugin",
   "applications": {
     "gecko": {
       "id": "estimate-your-CO2@harfeur.fr",
-      "strict_min_version": "74.0"
+      "strict_min_version": "78.0"
     }
   },
   "icons": {
