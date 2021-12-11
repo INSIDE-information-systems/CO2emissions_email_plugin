@@ -18,6 +18,8 @@ docReady(function () {
 
     let tab;
 
+    let recipentsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration; // variables globales
+
     function onError(error) {
         console.log(`Error: ${error}`);
     }
@@ -90,7 +92,8 @@ docReady(function () {
     async function calculate(tabInfo) {
         tab = tabInfo;
 
-        // console.log(tabInfo);
+        document.getElementById("demo").onclick = () => {addEquivalences(tabInfo[0].id)};
+
         var data = await messenger.compose.getComposeDetails(tabInfo[0].id);
         var attachments = await messenger.compose.listAttachments(tabInfo[0].id);
 
@@ -99,7 +102,7 @@ docReady(function () {
         let cc = data.cc;
         let bcc = data.bcc;
         let subject = data.subject;
-        let recipentsCount = to.length + cc.length + bcc.length;
+        recipentsCount = to.length + cc.length + bcc.length;
         let headerSize = HEADER_SIZE + lengthInUtf8Bytes(to.join(",") + cc.join(",") + subject);
         let attachmentsSize = attachments.reduce((acc, val) => acc + val.size, 0);
 
@@ -107,13 +110,13 @@ docReady(function () {
         document.getElementById("body-size").innerHTML = formatBytes(messageBodySize)
         document.getElementById("attachments-size").innerHTML = formatBytes(attachmentsSize);
 
-        let totalSize = headerSize + messageBodySize + attachmentsSize;
-        let co2 = recipentsCount === 0 ? totalSize * (CO2 + CO2u) / MO : totalSize * (CO2 + recipentsCount * CO2u) / MO;
-        let petrole = co2 / OIL;
-        let voiture = co2 / CAR;
-        let tgv = co2 / TGV;
-        let ampoule = co2 / (BULBW * BULB);
-        let respiration = co2 / BREATHING;
+        totalSize = headerSize + messageBodySize + attachmentsSize;
+        co2 = recipentsCount === 0 ? totalSize * (CO2 + CO2u) / MO : totalSize * (CO2 + recipentsCount * CO2u) / MO;
+        petrole = co2 / OIL;
+        voiture = co2 / CAR;
+        tgv = co2 / TGV;
+        ampoule = co2 / (BULBW * BULB);
+        respiration = co2 / BREATHING;
 
         document.getElementById("size").innerHTML = formatBytes(totalSize);
         document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
@@ -126,6 +129,33 @@ docReady(function () {
     }
 
     gettingCurrent.then(calculate, onError);
+
+    function addEquivalences(tab) {
+        // Get the existing message.
+        browser.compose.getComposeDetails(tab).then(details => {
+            if (details.isPlainText) {
+                // The message is being composed in plain text mode.
+                let body = details.plainTextBody;
+                details.body = null;
+            
+                // Make direct modifications to the message text, and send it back to the editor.
+                body += "\n\nD'après l'extension Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/), l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + recipentsCount + (recipentsCount===0 || recipentsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO₂e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".\nSources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).";
+
+                details.plainTextBody = body;
+                browser.compose.setComposeDetails(tab, details);
+            } else {
+                // The message is being composed in HTML mode.
+                let body = details.body;
+                details.plainTextBody = null;
+                
+                // Make direct modifications to the message text, and send it back to the editor.
+                body += "<br><br><small>D'après l'extension <a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>, l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + (recipentsCount===0 ? 1 : recipentsCount) + (recipentsCount===0 || recipentsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO<sub>2</sub>e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".<br>Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).</small>";
+            
+                details.body = body;
+                browser.compose.setComposeDetails(tab, details);
+            }
+        });
+    }
 
     // Bouton ajout signature
     // document.getElementById("addTo").addEventListener('click', e => { })
