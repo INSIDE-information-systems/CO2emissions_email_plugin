@@ -18,7 +18,7 @@ docReady(function () {
 
     let tab;
 
-    let recipentsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration; // variables globales
+    let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration; // variables globales
 
     function onError(error) {
         console.log(`Error: ${error}`);
@@ -102,7 +102,7 @@ docReady(function () {
         let cc = data.cc;
         let bcc = data.bcc;
         let subject = data.subject;
-        recipentsCount = to.length + cc.length + bcc.length;
+        recipientsCount = to.length + cc.length + bcc.length;
         let headerSize = HEADER_SIZE + lengthInUtf8Bytes(to.join(",") + cc.join(",") + subject);
         let attachmentsSize = attachments.reduce((acc, val) => acc + val.size, 0);
 
@@ -111,7 +111,7 @@ docReady(function () {
         document.getElementById("attachments-size").innerHTML = formatBytes(attachmentsSize);
 
         totalSize = headerSize + messageBodySize + attachmentsSize;
-        co2 = recipentsCount === 0 ? totalSize * (CO2 + CO2u) / MO : totalSize * (CO2 + recipentsCount * CO2u) / MO;
+        co2 = recipientsCount === 0 ? totalSize * (CO2 + CO2u) / MO : totalSize * (CO2 + recipientsCount * CO2u) / MO;
         petrole = co2 / OIL;
         voiture = co2 / CAR;
         tgv = co2 / TGV;
@@ -119,13 +119,13 @@ docReady(function () {
         respiration = co2 / BREATHING;
 
         document.getElementById("size").innerHTML = formatBytes(totalSize);
-        document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-        document.getElementById("oil").innerHTML = formatGrammes(petrole) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-        document.getElementById("car").innerHTML = formatDistance(voiture) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-        document.getElementById("tgv").innerHTML = formatDistance(tgv) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("oil").innerHTML = formatGrammes(petrole) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("car").innerHTML = formatDistance(voiture) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("tgv").innerHTML = formatDistance(tgv) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("bulbw").insertAdjacentHTML('beforeend', BULBW + " W");
-        document.getElementById("bulb").innerHTML = formatTime(ampoule) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-        document.getElementById("breathing").innerHTML = formatTime(respiration) + (recipentsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("bulb").innerHTML = formatTime(ampoule) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+        document.getElementById("breathing").innerHTML = formatTime(respiration) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
     }
 
     gettingCurrent.then(calculate, onError);
@@ -139,7 +139,7 @@ docReady(function () {
                 details.body = null;
             
                 // Make direct modifications to the message text, and send it back to the editor.
-                body += "\n\nD'après l'extension Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/), l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + recipentsCount + (recipentsCount===0 || recipentsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO₂e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".\nSources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).";
+                body += "\n\nD'après l'extension Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/), l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + recipientsCount + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO₂e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".\nSources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).";
 
                 details.plainTextBody = body;
                 browser.compose.setComposeDetails(tab, details);
@@ -149,7 +149,7 @@ docReady(function () {
                 details.plainTextBody = null;
                 
                 // Make direct modifications to the message text, and send it back to the editor.
-                body += "<br><br><small>D'après l'extension <a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>, l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + (recipentsCount===0 ? 1 : recipentsCount) + (recipentsCount===0 || recipentsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO<sub>2</sub>e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".<br>Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).</small>";
+                body += "<br><br><small>D'après l'extension <a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>, l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + (recipientsCount===0 ? 1 : recipientsCount) + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO<sub>2</sub>e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".<br>Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).</small>";
             
                 details.body = body;
                 browser.compose.setComposeDetails(tab, details);
