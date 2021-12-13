@@ -92,7 +92,8 @@ docReady(function () {
     async function calculate(tabInfo) {
         tab = tabInfo;
 
-        document.getElementById("demo").onclick = () => {addEquivalences(tabInfo[0].id)};
+        document.getElementById("addEqui").onclick = () => {addEquivalences(tabInfo[0].id)};
+        document.getElementById("removeEqui").onclick = () => {removeEquivalences(tabInfo[0].id)};
 
         var data = await messenger.compose.getComposeDetails(tabInfo[0].id);
         var attachments = await messenger.compose.listAttachments(tabInfo[0].id);
@@ -151,6 +152,35 @@ docReady(function () {
                 // Make direct modifications to the message text, and send it back to the editor.
                 body += "<br><br><small>D'après l'extension <a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>, l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + (recipientsCount===0 ? 1 : recipientsCount) + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO<sub>2</sub>e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".<br>Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).</small>";
             
+                details.body = body;
+                browser.compose.setComposeDetails(tab, details);
+            }
+        });
+    }
+
+    function removeEquivalences(tab){
+        // Get the existing message.
+        browser.compose.getComposeDetails(tab).then(details => {
+            if (details.isPlainText) {
+                // The message is being composed in plain text mode.
+                let body = details.plainTextBody;
+                details.body = null;
+            
+                // Make direct modifications to the message text, and send it back to the editor.
+                str = "\n\nD'après l'extension Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/), l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + recipientsCount + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO₂e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".\nSources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).";
+                body = body.substring(0, body.length - str.length);
+                
+                details.plainTextBody = body;
+                browser.compose.setComposeDetails(tab, details);
+            } else {
+                // The message is being composed in HTML mode.
+                let body = details.body;
+                details.plainTextBody = null;
+                
+                // Make direct modifications to the message text, and send it back to the editor.
+                str = "<br><br><small>D'après l'extension <a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>, l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + (recipientsCount===0 ? 1 : recipientsCount) + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO<sub>2</sub>e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".<br>Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).</small>";
+                body = body.substring(0, body.length - (str.length + 15));
+
                 details.body = body;
                 browser.compose.setComposeDetails(tab, details);
             }
