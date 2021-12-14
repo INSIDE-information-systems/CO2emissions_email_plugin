@@ -24,12 +24,8 @@ td {
 table {
     border-collapse: collapse;
     margin-top: 5px;
-}
-
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .gray {
@@ -38,4 +34,18 @@ table {
 
 body {
     font-size: 11pt;
+}
+
+#addEqui, #removeEqui {
+    font-weight: bold;
+    color: rgb(65, 65, 65);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 2px solid gray;
+    transition-duration: 0.4s;
+}
+
+#addEqui:hover, #removeEqui:hover {
+    background-color: gray;
+    color: white;
 }
