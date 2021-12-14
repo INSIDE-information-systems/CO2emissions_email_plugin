@@ -3,6 +3,12 @@
     font-weight: bold;
 }
 
+#infoButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
 .table-subtitle {
     text-align: center !important;
     font-weight: bold;
@@ -48,4 +54,8 @@ body {
 #addEqui:hover, #removeEqui:hover {
     background-color: gray;
     color: white;
+}
+
+a {
+    color: #00f9f9;
 }
