@@ -2,6 +2,12 @@ function docReady(fn) {
     document.addEventListener("DOMContentLoaded", fn);
 }
 
+String.prototype.format = function () {
+    var a = this;
+    for (var k in arguments) a = a.replace(new RegExp("\\{" + k + "\\}", 'g'), arguments[k]);
+    return a
+}
+
 docReady(function () {
     const HEADER_SIZE = 800;
     // Pour 1 Mo
@@ -28,13 +34,13 @@ docReady(function () {
         return (new TextEncoder().encode(str)).length;
     }
 
-    function formatBytes(bytes, decimals = 2) {
-        if (bytes === 0) return "0 <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>";
-        if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + " <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>";
+    function formatBytes(bytes, tooltip = true, decimals = 2) {
+        if (bytes === 0) return tooltip ? "0 <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : "0 octet";
+        if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + tooltip ? " <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : " octet";
 
         const k = 1024;
         const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ["<div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octets</span></div>", 'ko', 'Mo', 'Go'];
+        const sizes = [tooltip ? "<div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octets</span></div>" : "octets", 'ko', 'Mo', 'Go'];
 
         const i = Math.floor(Math.log(bytes) / Math.log(k));
 
@@ -131,6 +137,11 @@ docReady(function () {
 
     gettingCurrent.then(calculate, onError);
 
+    const signature = "{0}D'après l'extension {1}, l'envoi de courriel de {2} à {3} destinataire{4} entraîne l'émission indirecte " +
+    "de {5} CO{6}e. Cela correspond à la consommation de {7} de pétrole, au parcours de {8} en voiture ou de {9} en TGV," +
+    "à l'utilisation d'une ampoule de {10} W pendant {11}, ou encore à la respiration d'un humain pendant {12}.{13}" +
+    "Source : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).{14}"
+
     function addEquivalences(tab) {
         // Get the existing message.
         browser.compose.getComposeDetails(tab).then(details => {
@@ -140,7 +151,11 @@ docReady(function () {
                 details.body = null;
             
                 // Make direct modifications to the message text, and send it back to the editor.
-                body += "\n\nD'après l'extension Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/), l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + recipientsCount + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO₂e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".\nSources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).";
+                body += signature.format(
+                    "\n\n", "Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/)",
+                    formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
+                    formatGrammes(co2), "₂", formatGrammes(petrole), formatDistance(voiture),
+                    formatDistance(tgv), BULBW, formatTime(ampoule), formatTime(respiration), "\n", "");
 
                 details.plainTextBody = body;
                 browser.compose.setComposeDetails(tab, details);
@@ -148,9 +163,13 @@ docReady(function () {
                 // The message is being composed in HTML mode.
                 let body = details.body;
                 details.plainTextBody = null;
-                
+
                 // Make direct modifications to the message text, and send it back to the editor.
-                body += "<br><br><small>D'après l'extension <a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>, l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + (recipientsCount===0 ? 1 : recipientsCount) + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO<sub>2</sub>e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".<br>Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).</small>";
+                body += signature.format(
+                    "<br><br><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>",
+                    formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
+                    formatGrammes(co2), "<sub>2</sub>", formatGrammes(petrole), formatDistance(voiture), formatDistance(tgv), BULBW,
+                    formatTime(ampoule), formatTime(respiration), "<br>", "</small>");
             
                 details.body = body;
                 browser.compose.setComposeDetails(tab, details);
@@ -166,22 +185,26 @@ docReady(function () {
                 let body = details.plainTextBody;
                 details.body = null;
             
+                let indexStart = body.indexOf("\n\nD'après l'extension Estimez votre CO₂");
+                if (indexStart == -1) return;
+                let indexEnd = body.indexOf("Zhang et al. (2011).", indexStart + 1) + 20;
                 // Make direct modifications to the message text, and send it back to the editor.
-                str = "\n\nD'après l'extension Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/), l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + recipientsCount + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO₂e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".\nSources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).";
-                body = body.substring(0, body.length - str.length);
-                
-                details.plainTextBody = body;
+                let text = body.substring(indexStart, indexEnd);
+
+                details.plainTextBody = body.replace(text, '');
                 browser.compose.setComposeDetails(tab, details);
             } else {
                 // The message is being composed in HTML mode.
                 let body = details.body;
                 details.plainTextBody = null;
-                
+            
+                let indexStart = body.indexOf("<br><br><small>D'après l'extension");
+                if (indexStart == -1) return;
+                let indexEnd = body.indexOf("(2011).</small>", indexStart + 1) + 15;
                 // Make direct modifications to the message text, and send it back to the editor.
-                str = "<br><br><small>D'après l'extension <a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>, l'envoi de ce courriel de " + formatBytes(totalSize) + " à " + (recipientsCount===0 ? 1 : recipientsCount) + (recipientsCount===0 || recipientsCount===1 ? " destinataire" : " destinataires") + " entraîne l'émission indirecte de " + formatGrammes(co2) + " CO<sub>2</sub>e. Cela correspond à la consommation de " + formatGrammes(petrole) + " de pétrole, au parcours de " + formatDistance(voiture) + " en voiture ou de " + formatDistance(tgv) + " en TGV, à l'utilisation d'une ampoule de " + BULBW + " W pendant " + formatTime(ampoule) + ", ou encore à la respiration d'un humain pendant " + formatTime(respiration) + ".<br>Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).</small>";
-                body = body.substring(0, body.length - (str.length + 15));
+                let text = body.substring(indexStart, indexEnd);
 
-                details.body = body;
+                details.body = body.replace(text, '');
                 browser.compose.setComposeDetails(tab, details);
             }
         });
