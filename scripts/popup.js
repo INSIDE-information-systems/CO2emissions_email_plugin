@@ -1,12 +1,129 @@
+/**
+ * Lance une fonction quand le document est chargé
+ * @param {function} fn 
+ */
 function docReady(fn) {
     document.addEventListener("DOMContentLoaded", fn);
 }
 
+/**
+ * Ajoute la fonction format() (comme Python) dans JS
+ * @returns {String}
+ */
 String.prototype.format = function () {
     var a = this;
     for (var k in arguments) a = a.replace(new RegExp("\\{" + k + "\\}", 'g'), arguments[k]);
     return a
 }
+
+/**
+ * Affiche une erreur, utilisé dans les Promises
+ * @param error 
+ */
+function onError(error) {
+    console.log(`Error: ${error}`);
+}
+
+
+
+
+/**
+ * Renvoie la longueur en octets d'une chaine de caractères
+ * @param {String} str 
+ * @returns {Number}
+ */
+function lengthInUtf8Bytes(str) {
+    return (new TextEncoder().encode(str)).length;
+}
+
+/**
+ * Renvoie un nombre formaté (octets, ko, Mo ...)
+ * @param {Number} bytes 
+ * @param {bool} tooltip Afficher ou non une tooltip en HTML
+ * @param {Number} decimals Nombre de chiffres après la virgule
+ * @returns {String}
+ */
+function formatBytes(bytes, tooltip = true, decimals = 2) {
+    if (bytes === 0) return tooltip ? "0 <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : "0 octet";
+    if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + tooltip ? " <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : " octet";
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = [tooltip ? "<div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octets</span></div>" : "octets", 'ko', 'Mo', 'Go'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return (parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
+}
+
+/**
+ * Renvoie un nombre formaté (g, kg, t ...)
+ * @param {Number} size 
+ * @param {Number} decimals Nombre de chiffres après la virgule
+ * @returns {String}
+ */
+function formatGrammes(size, decimals = 1) {
+    if (0.1 > size >= 0.001) return parseFloat(size.toFixed(Math.abs(Math.floor(Math.log10(size))))).toString().replace(".", ",") + " g";
+    if (size < 2) return parseFloat(size.toFixed(decimals)).toString().replace(".", ",") + " g";
+
+    const k = 1000;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['g', 'kg', 't', 'Gg', 'Tg'];
+
+    const i = Math.floor(Math.log(size) / Math.log(k));
+
+    return (parseFloat((size / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
+}
+
+/**
+ * Renvoie un nombre formaté (m, km ...)
+ * @param {Number} distance 
+ * @param {Number} decimals Nombre de chiffres après la virgule
+ * @returns {String}
+ */
+function formatDistance(distance, decimals = 1) {
+    if (0.1 > distance >= 0.001) return parseFloat(distance.toFixed(Math.abs(Math.floor(Math.log10(distance))))).toString().replace(".", ",") + " m";
+    if (distance < 2) return parseFloat(distance.toFixed(decimals)).toString().replace(".", ",") + " m";
+
+    const k = 1000;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['m', 'km', 'Mm', 'Gm', 'Tm'];
+
+    const i = Math.floor(Math.log(distance) / Math.log(k));
+
+    return (parseFloat((distance / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
+}
+
+/**
+ * Renvoie un nombre formaté (min, h ...)
+ * @param {Number} time
+ * @param {Number} decimals Nombre de chiffres après la virgule
+ * @returns {String}
+ */
+function formatTime(time, decimals = 1) {
+    if (0.1 > time >= 0.001) return parseFloat(time.toFixed(Math.abs(Math.floor(Math.log10(time))))).toString().replace(".", ",") + " min";
+    if (time < 2) return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " min";
+
+    if (time < 1440) { // base 60
+        const k = 60;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['min', 'h'];
+
+        const i = Math.floor(Math.log(time) / Math.log(k));
+
+        return (parseFloat((time / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
+    }
+
+    if (time >= 1440) { // base 24
+        time = time / (60 * 24);
+        return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " j";
+    }
+}
+
+
+
+
+
 
 docReady(function () {
     const HEADER_SIZE = 800;
@@ -22,88 +139,21 @@ docReady(function () {
     const BREATHING = 1.131; // en g CO2/min
     const MO = 1048576;
 
-    let tab;
-
     let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration; // variables globales
 
-    function onError(error) {
-        console.log(`Error: ${error}`);
-    }
-
-    function lengthInUtf8Bytes(str) {
-        return (new TextEncoder().encode(str)).length;
-    }
-
-    function formatBytes(bytes, tooltip = true, decimals = 2) {
-        if (bytes === 0) return tooltip ? "0 <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : "0 octet";
-        if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + tooltip ? " <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : " octet";
-
-        const k = 1024;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = [tooltip ? "<div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octets</span></div>" : "octets", 'ko', 'Mo', 'Go'];
-
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-        return (parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
-    }
-
-    function formatGrammes(size, decimals = 1) {
-        if (0.1 > size >= 0.001) return parseFloat(size.toFixed(Math.abs(Math.floor(Math.log10(size))))).toString().replace(".", ",") + " g";
-        if (size < 2) return parseFloat(size.toFixed(decimals)).toString().replace(".", ",") + " g";
-
-        const k = 1000;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['g', 'kg', 't', 'Gg', 'Tg'];
-
-        const i = Math.floor(Math.log(size) / Math.log(k));
-
-        return (parseFloat((size / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
-    }
-
-    function formatDistance(distance, decimals = 1) {
-        if (0.1 > distance >= 0.001) return parseFloat(distance.toFixed(Math.abs(Math.floor(Math.log10(distance))))).toString().replace(".", ",") + " m";
-        if (distance < 2) return parseFloat(distance.toFixed(decimals)).toString().replace(".", ",") + " m";
-
-        const k = 1000;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['m', 'km', 'Mm', 'Gm', 'Tm'];
-
-        const i = Math.floor(Math.log(distance) / Math.log(k));
-
-        return (parseFloat((distance / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
-    }
-    
-    function formatTime(time, decimals = 1) {
-        if (0.1 > time >= 0.001) return parseFloat(time.toFixed(Math.abs(Math.floor(Math.log10(time))))).toString().replace(".", ",") + " min";
-        if (time < 2) return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " min";
-
-        if (time < 1440) { // base 60
-            const k = 60;
-            const dm = decimals < 0 ? 0 : decimals;
-            const sizes = ['min', 'h'];
-
-            const i = Math.floor(Math.log(time) / Math.log(k));
-
-            return (parseFloat((time / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
-        }
-
-        if (time >= 1440) { // base 24
-            time = time / (60 * 24);
-            return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " j";
-        }
-    }
-
+    // Lancement de la promesse pour obtenir les tabs
     let gettingCurrent = browser.tabs.query({currentWindow: true});
 
+    /**
+     * Calcule l'impact d'un mail
+     * @param {Object} tabInfo Information sur les onglets
+     */
     async function calculate(tabInfo) {
-        tab = tabInfo;
-
-        document.getElementById("addEqui").onclick = () => {addEquivalences(tabInfo[0].id)};
-        document.getElementById("removeEqui").onclick = () => {removeEquivalences(tabInfo[0].id)};
-
+        // Récupération des informations sur le mail
         var data = await messenger.compose.getComposeDetails(tabInfo[0].id);
         var attachments = await messenger.compose.listAttachments(tabInfo[0].id);
 
+        // Rangement de chaque information dans une variable et calcul des différentes tailles en octets
         let messageBodySize = lengthInUtf8Bytes(data.isPlainText ? data.plainTextBody : data.body);
         let to = data.to;
         let cc = data.cc;
@@ -112,12 +162,15 @@ docReady(function () {
         recipientsCount = to.length + cc.length + bcc.length;
         let headerSize = HEADER_SIZE + lengthInUtf8Bytes(to.join(",") + cc.join(",") + subject);
         let attachmentsSize = attachments.reduce((acc, val) => acc + val.size, 0);
+        totalSize = headerSize + messageBodySize + attachmentsSize;
 
+        // Affichage des différentes tailles calculées
         document.getElementById("header-size").innerHTML = formatBytes(headerSize);
         document.getElementById("body-size").innerHTML = formatBytes(messageBodySize)
         document.getElementById("attachments-size").innerHTML = formatBytes(attachmentsSize);
+        document.getElementById("size").innerHTML = formatBytes(totalSize);
 
-        totalSize = headerSize + messageBodySize + attachmentsSize;
+        // Calcul des différentes équivalences
         co2 = recipientsCount === 0 ? totalSize * (CO2 + CO2u) / MO : totalSize * (CO2 + recipientsCount * CO2u) / MO;
         petrole = co2 / OIL;
         voiture = co2 / CAR;
@@ -125,7 +178,7 @@ docReady(function () {
         ampoule = co2 / (BULBW * BULB);
         respiration = co2 / BREATHING;
 
-        document.getElementById("size").innerHTML = formatBytes(totalSize);
+        // Affichage des équivalences
         document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("oil").innerHTML = formatGrammes(petrole) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("car").innerHTML = formatDistance(voiture) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
@@ -133,8 +186,13 @@ docReady(function () {
         document.getElementById("bulbw").insertAdjacentHTML('beforeend', BULBW + " W");
         document.getElementById("bulb").innerHTML = formatTime(ampoule) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
         document.getElementById("breathing").innerHTML = formatTime(respiration) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+    
+        // Paramétrage des boutons pour ajouter / supprimer la signature
+        document.getElementById("addEqui").onclick = () => {addEquivalences(tabInfo[0].id)};
+        document.getElementById("removeEqui").onclick = () => {removeEquivalences(tabInfo[0].id)};
     }
 
+    // Lorsque la promesse est terminée, on lance le calcul
     gettingCurrent.then(calculate, onError);
 
     const signature = "{0}D'après l'extension {1}, l'envoi de courriel de {2} à {3} destinataire{4} entraîne l'émission indirecte " +
@@ -142,8 +200,12 @@ docReady(function () {
     "à l'utilisation d'une ampoule de {10} W pendant {11}, ou encore à la respiration d'un humain pendant {12}.{13}" +
     "Source : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).{14}"
 
+    /**
+     * Ajoute une signature au mail
+     * @param {Number} tab Identifiant de l'onglet du mail
+     */
     function addEquivalences(tab) {
-        // Get the existing message.
+        // Récupération des infos du mail
         browser.compose.getComposeDetails(tab).then(details => {
             if (details.isPlainText) {
                 // The message is being composed in plain text mode.
@@ -177,8 +239,12 @@ docReady(function () {
         });
     }
 
+    /**
+     * Supprime une signature au mail
+     * @param {Number} tab Identifiant de l'onglet du mail
+     */
     function removeEquivalences(tab){
-        // Get the existing message.
+        // Récupération des infos du mail
         browser.compose.getComposeDetails(tab).then(details => {
             if (details.isPlainText) {
                 // The message is being composed in plain text mode.
