@@ -226,7 +226,7 @@ async function addEquivalences(tab) {
  * Supprime une signature au mail
  * @param {Number} tab Identifiant de l'onglet du mail
  */
-function removeEquivalences(tab){
+async function removeEquivalences(tab){
     // Récupération des infos du mail
     let details = await browser.compose.getComposeDetails(tab)
     if (details.isPlainText) {
