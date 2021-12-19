@@ -190,32 +190,34 @@ async function addEquivalences(tab) {
     // Récupération des infos du mail
     let details = await browser.compose.getComposeDetails(tab);
 
-    if (details.isPlainText) {
-        // The message is being composed in plain text mode.
+    if (details.isPlainText) { // Si message en plain text
+        // Récupération texte du mail
         let body = details.plainTextBody;
         details.body = null;
     
-        // Make direct modifications to the message text, and send it back to the editor.
+        // Modification du texte
         body += signature.format(
             "\n\n", "Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/)",
             formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
             formatGrammes(co2), "₂", formatGrammes(petrole), formatDistance(voiture),
             formatDistance(tgv), BULBW, formatTime(ampoule), formatTime(respiration), "\n", "");
 
+        // Renvoi à l'éditeur
         details.plainTextBody = body;
         browser.compose.setComposeDetails(tab, details);
-    } else {
-        // The message is being composed in HTML mode.
+    } else { // Si message en HTML
+        // Récupération texte du mail
         let body = details.body;
         details.plainTextBody = null;
 
-        // Make direct modifications to the message text, and send it back to the editor.
+        // Modification du texte
         body += signature.format(
             "<br><br><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>",
             formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
             formatGrammes(co2), "<sub>2</sub>", formatGrammes(petrole), formatDistance(voiture), formatDistance(tgv), BULBW,
             formatTime(ampoule), formatTime(respiration), "<br>", "</small>");
-    
+            
+        // Renvoi à l'éditeur
         details.body = body;
         browser.compose.setComposeDetails(tab, details);
     }
@@ -229,30 +231,36 @@ async function addEquivalences(tab) {
 async function removeEquivalences(tab){
     // Récupération des infos du mail
     let details = await browser.compose.getComposeDetails(tab)
-    if (details.isPlainText) {
-        // The message is being composed in plain text mode.
+    if (details.isPlainText) { // Si message en plain text
+        // Récupération texte du mail
         let body = details.plainTextBody;
         details.body = null;
-    
+        
+        // Recherche du texte ajouté
         let indexStart = body.indexOf("\n\nD'après l'extension Estimez votre CO₂");
         if (indexStart == -1) return;
         let indexEnd = body.indexOf("Zhang et al. (2011).", indexStart + 1) + 20;
-        // Make direct modifications to the message text, and send it back to the editor.
-        let text = body.substring(indexStart, indexEnd);
 
+        // Modification du texte
+        let text = body.substring(indexStart, indexEnd);
+        
+        // Renvoi à l'éditeur
         details.plainTextBody = body.replace(text, '');
         browser.compose.setComposeDetails(tab, details);
-    } else {
-        // The message is being composed in HTML mode.
+    } else { // Si message en HTML
+        // Récupération texte du mail
         let body = details.body;
         details.plainTextBody = null;
-    
+        
+        // Recherche du texte ajouté
         let indexStart = body.indexOf("<br><br><small>D'après l'extension");
         if (indexStart == -1) return;
         let indexEnd = body.indexOf("(2011).</small>", indexStart + 1) + 15;
-        // Make direct modifications to the message text, and send it back to the editor.
+
+        // Modification du texte
         let text = body.substring(indexStart, indexEnd);
 
+        // Renvoi à l'éditeur
         details.body = body.replace(text, '');
         browser.compose.setComposeDetails(tab, details);
     }
