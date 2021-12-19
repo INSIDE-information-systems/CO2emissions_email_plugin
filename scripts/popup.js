@@ -191,13 +191,7 @@ function addEquivalences(tab) {
     browser.compose.getComposeDetails(tab).then(details => {
         if (details.isPlainText) {
             // The message is being composed in plain text mode.
-        /**
- * Lance une fonction quand le document est chargé
- * @param {function} fn 
- */
- function docReady(fn) {
-    document.addEventListener("DOMContentLoaded", fn);
-}    let body = details.plainTextBody;
+            let body = details.plainTextBody;
             details.body = null;
         
             // Make direct modifications to the message text, and send it back to the editor.
