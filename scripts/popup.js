@@ -265,8 +265,7 @@ function removeEquivalences(tab){
 // Lorsque le document est chargé
 document.addEventListener("DOMContentLoaded", function () {
     // Lancement de la promesse pour obtenir les tabs
-    let gettingCurrent = browser.tabs.query({currentWindow: true});
-
-    // Lorsque la promesse est terminée, on lance le calcul
-    gettingCurrent.then(calculate, onError);
+    browser.tabs.query({currentWindow: true})
+        .then(calculate)
+        .catch(onError);
 });
