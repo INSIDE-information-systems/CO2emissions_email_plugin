@@ -211,10 +211,10 @@ async function addEquivalences(tab) {
 
         // Make direct modifications to the message text, and send it back to the editor.
         body += signature.format(
-            "<br><br><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>",
+            "<p><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>",
             formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
             formatGrammes(co2), "<sub>2</sub>", formatGrammes(petrole), formatDistance(voiture), formatDistance(tgv), BULBW,
-            formatTime(ampoule), formatTime(respiration), "<br>", "</small>");
+            formatTime(ampoule), formatTime(respiration), "<br>", "</small></p>");
     
         details.body = body;
         browser.compose.setComposeDetails(tab, details);
@@ -236,7 +236,7 @@ async function removeEquivalences(tab){
     
         let indexStart = body.indexOf("\n\nD'après l'extension Estimez votre CO₂");
         if (indexStart == -1) return;
-        let indexEnd = body.indexOf("Zhang et al. (2011).", indexStart + 1) + 20;
+        let indexEnd = body.indexOf("Zhang et al. (2011).", indexStart) + 20;
         // Make direct modifications to the message text, and send it back to the editor.
         let text = body.substring(indexStart, indexEnd);
 
@@ -247,9 +247,9 @@ async function removeEquivalences(tab){
         let body = details.body;
         details.plainTextBody = null;
     
-        let indexStart = body.indexOf("<br><br><small>D'après l'extension");
+        let indexStart = body.indexOf("<p><small>D'après l'extension");
         if (indexStart == -1) return;
-        let indexEnd = body.indexOf("(2011).</small>", indexStart + 1) + 15;
+        let indexEnd = body.indexOf("(2011).</small></p>", indexStart) + 19;
         // Make direct modifications to the message text, and send it back to the editor.
         let text = body.substring(indexStart, indexEnd);
 
