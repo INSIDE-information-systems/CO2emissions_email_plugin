@@ -186,39 +186,39 @@ const signature = "{0}D'après l'extension {1}, l'envoi de courriel de {2} à {3
  * Ajoute une signature au mail
  * @param {Number} tab Identifiant de l'onglet du mail
  */
-function addEquivalences(tab) {
+async function addEquivalences(tab) {
     // Récupération des infos du mail
-    browser.compose.getComposeDetails(tab).then(details => {
-        if (details.isPlainText) {
-            // The message is being composed in plain text mode.
-            let body = details.plainTextBody;
-            details.body = null;
-        
-            // Make direct modifications to the message text, and send it back to the editor.
-            body += signature.format(
-                "\n\n", "Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/)",
-                formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
-                formatGrammes(co2), "₂", formatGrammes(petrole), formatDistance(voiture),
-                formatDistance(tgv), BULBW, formatTime(ampoule), formatTime(respiration), "\n", "");
+    let details = await browser.compose.getComposeDetails(tab);
 
-            details.plainTextBody = body;
-            browser.compose.setComposeDetails(tab, details);
-        } else {
-            // The message is being composed in HTML mode.
-            let body = details.body;
-            details.plainTextBody = null;
+    if (details.isPlainText) {
+        // The message is being composed in plain text mode.
+        let body = details.plainTextBody;
+        details.body = null;
+    
+        // Make direct modifications to the message text, and send it back to the editor.
+        body += signature.format(
+            "\n\n", "Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/)",
+            formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
+            formatGrammes(co2), "₂", formatGrammes(petrole), formatDistance(voiture),
+            formatDistance(tgv), BULBW, formatTime(ampoule), formatTime(respiration), "\n", "");
 
-            // Make direct modifications to the message text, and send it back to the editor.
-            body += signature.format(
-                "<br><br><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>",
-                formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
-                formatGrammes(co2), "<sub>2</sub>", formatGrammes(petrole), formatDistance(voiture), formatDistance(tgv), BULBW,
-                formatTime(ampoule), formatTime(respiration), "<br>", "</small>");
-        
-            details.body = body;
-            browser.compose.setComposeDetails(tab, details);
-        }
-    });
+        details.plainTextBody = body;
+        browser.compose.setComposeDetails(tab, details);
+    } else {
+        // The message is being composed in HTML mode.
+        let body = details.body;
+        details.plainTextBody = null;
+
+        // Make direct modifications to the message text, and send it back to the editor.
+        body += signature.format(
+            "<br><br><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>",
+            formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
+            formatGrammes(co2), "<sub>2</sub>", formatGrammes(petrole), formatDistance(voiture), formatDistance(tgv), BULBW,
+            formatTime(ampoule), formatTime(respiration), "<br>", "</small>");
+    
+        details.body = body;
+        browser.compose.setComposeDetails(tab, details);
+    }
 }
 
 
@@ -228,35 +228,34 @@ function addEquivalences(tab) {
  */
 function removeEquivalences(tab){
     // Récupération des infos du mail
-    browser.compose.getComposeDetails(tab).then(details => {
-        if (details.isPlainText) {
-            // The message is being composed in plain text mode.
-            let body = details.plainTextBody;
-            details.body = null;
-        
-            let indexStart = body.indexOf("\n\nD'après l'extension Estimez votre CO₂");
-            if (indexStart == -1) return;
-            let indexEnd = body.indexOf("Zhang et al. (2011).", indexStart + 1) + 20;
-            // Make direct modifications to the message text, and send it back to the editor.
-            let text = body.substring(indexStart, indexEnd);
+    let details = await browser.compose.getComposeDetails(tab)
+    if (details.isPlainText) {
+        // The message is being composed in plain text mode.
+        let body = details.plainTextBody;
+        details.body = null;
+    
+        let indexStart = body.indexOf("\n\nD'après l'extension Estimez votre CO₂");
+        if (indexStart == -1) return;
+        let indexEnd = body.indexOf("Zhang et al. (2011).", indexStart + 1) + 20;
+        // Make direct modifications to the message text, and send it back to the editor.
+        let text = body.substring(indexStart, indexEnd);
 
-            details.plainTextBody = body.replace(text, '');
-            browser.compose.setComposeDetails(tab, details);
-        } else {
-            // The message is being composed in HTML mode.
-            let body = details.body;
-            details.plainTextBody = null;
-        
-            let indexStart = body.indexOf("<br><br><small>D'après l'extension");
-            if (indexStart == -1) return;
-            let indexEnd = body.indexOf("(2011).</small>", indexStart + 1) + 15;
-            // Make direct modifications to the message text, and send it back to the editor.
-            let text = body.substring(indexStart, indexEnd);
+        details.plainTextBody = body.replace(text, '');
+        browser.compose.setComposeDetails(tab, details);
+    } else {
+        // The message is being composed in HTML mode.
+        let body = details.body;
+        details.plainTextBody = null;
+    
+        let indexStart = body.indexOf("<br><br><small>D'après l'extension");
+        if (indexStart == -1) return;
+        let indexEnd = body.indexOf("(2011).</small>", indexStart + 1) + 15;
+        // Make direct modifications to the message text, and send it back to the editor.
+        let text = body.substring(indexStart, indexEnd);
 
-            details.body = body.replace(text, '');
-            browser.compose.setComposeDetails(tab, details);
-        }
-    });
+        details.body = body.replace(text, '');
+        browser.compose.setComposeDetails(tab, details);
+    }
 }
 
 
