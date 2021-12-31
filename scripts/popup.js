@@ -178,9 +178,9 @@ let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration
 
 
 const signature = "{0}D'après l'extension {1}, l'envoi de courriel de {2} à {3} destinataire{4} entraîne l'émission indirecte " +
-"de {5} CO{6}e. Cela correspond à la consommation de {7} de pétrole, au parcours de {8} en voiture ou de {9} en TGV," +
+"de {5} CO{6}e. Cela correspond à la consommation de {7} de pétrole, au parcours de {8} en voiture ou de {9} en TGV, " +
 "à l'utilisation d'une ampoule de {10} W pendant {11}, ou encore à la respiration d'un humain pendant {12}.{13}" +
-"Source : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).{14}"
+"Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).{14}"
 
 /**
  * Ajoute une signature au mail
