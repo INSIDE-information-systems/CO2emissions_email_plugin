@@ -2,7 +2,7 @@
  * Ajoute la fonction format() (comme Python) dans JS
  * @returns {String}
  */
-String.prototype.format = function () {
+String.prototype.format = function() {
     var a = this;
     for (var k in arguments) a = a.replace(new RegExp("\\{" + k + "\\}", 'g'), arguments[k]);
     return a
@@ -129,10 +129,10 @@ const MO = 1048576;
 let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration; // variables globales
 
 /**
-     * Calcule l'impact d'un mail
-     * @param {Object} tabInfo Information sur les onglets
-     */
- async function calculate(tabInfo) {
+ * Calcule l'impact d'un mail
+ * @param {Object} tabInfo Information sur les onglets
+ */
+async function calculate(tabInfo) {
     // Récupération des informations sur le mail
     var data = await messenger.compose.getComposeDetails(tabInfo[0].id);
     var attachments = await messenger.compose.listAttachments(tabInfo[0].id);
@@ -172,15 +172,16 @@ let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration
     document.getElementById("breathing").innerHTML = formatTime(respiration) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
 
     // Paramétrage des boutons pour ajouter / supprimer la signature
-    document.getElementById("addEqui").onclick = () => {addEquivalences(tabInfo[0].id)};
-    document.getElementById("removeEqui").onclick = () => {removeEquivalences(tabInfo[0].id)};
+    document.getElementById("addEqui").onclick = () => { addEquivalences(tabInfo[0].id) };
+    document.getElementById("removeEqui").onclick = () => { removeEquivalences(tabInfo[0].id) };
+    document.getElementById("openRecommendations").onclick = () => { openRecommendations() };
 }
 
 
 const signature = "{0}D'après l'extension {1}, l'envoi de courriel de {2} à {3} destinataire{4} entraîne l'émission indirecte " +
-"de {5} CO{6}e. Cela correspond à la consommation de {7} de pétrole, au parcours de {8} en voiture ou de {9} en TGV, " +
-"à l'utilisation d'une ampoule de {10} W pendant {11}, ou encore à la respiration d'un humain pendant {12}.{13}" +
-"Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).{14}"
+    "de {5} CO{6}e. Cela correspond à la consommation de {7} de pétrole, au parcours de {8} en voiture ou de {9} en TGV, " +
+    "à l'utilisation d'une ampoule de {10} W pendant {11}, ou encore à la respiration d'un humain pendant {12}.{13}" +
+    "Sources : base carbone® de l'ADEME (2021), ADEME (2011), Zhang et al. (2011).{14}"
 
 /**
  * Ajoute une signature au mail
@@ -194,7 +195,7 @@ async function addEquivalences(tab) {
         // Récupération texte du mail
         let body = details.plainTextBody;
         details.body = null;
-    
+
         // Modification du texte
         body += signature.format(
             "\n\n", "Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/)",
@@ -228,14 +229,14 @@ async function addEquivalences(tab) {
  * Supprime une signature au mail
  * @param {Number} tab Identifiant de l'onglet du mail
  */
-async function removeEquivalences(tab){
+async function removeEquivalences(tab) {
     // Récupération des infos du mail
     let details = await browser.compose.getComposeDetails(tab)
     if (details.isPlainText) { // Si message en plain text
         // Récupération texte du mail
         let body = details.plainTextBody;
         details.body = null;
-        
+
         // Recherche du texte ajouté
         let indexStart = body.indexOf("\n\nD'après l'extension Estimez votre CO₂");
         if (indexStart == -1) return;
@@ -244,7 +245,7 @@ async function removeEquivalences(tab){
 
         // Modification du texte
         let text = body.substring(indexStart, indexEnd);
-        
+
         // Renvoi à l'éditeur
         details.plainTextBody = body.replace(text, '');
         browser.compose.setComposeDetails(tab, details);
@@ -267,13 +268,22 @@ async function removeEquivalences(tab){
     }
 }
 
+/**
+ * Ouvre un onglet redirigeant vers des préconisations pour réduire son impact informatique
+ */
+function openRecommendations() {
+    browser.windows.create({
+        url: "https://librairie.ademe.fr/cadic/2351/guide-pratique-face-cachee-numerique.pdf?modal=false"
+    });
+}
+
 
 
 
 // Lorsque le document est chargé
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     // Lancement de la promesse pour obtenir les tabs
-    browser.tabs.query({currentWindow: true})
+    browser.tabs.query({ currentWindow: true })
         .then(calculate)
         .catch(onError);
 });

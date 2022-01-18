@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <title>Estimation de l'impact environnemental de l'envoi de ce courriel</title>
@@ -7,14 +8,14 @@
     <link rel="stylesheet" type="text/css" media="screen" href="style/tooltip.css">
     <script src="scripts/popup.js"></script>
 </head>
+
 <body>
-<div class="popup-title">
-    Estimation de l'impact environnemental<br>
-    global de ce courriel
-</div>
-<div class='tooltip tooltip-left' id="infoButton">
-    <img src="images/info-icon.png" alt="Plus d'informations..." title="Plus d'informations..." height="15px" />
-    <span class='tooltiptext tooltiptext-left' style="width: 350px;">
+    <div class="popup-title">
+        Estimation de l'impact environnemental<br> global de ce courriel
+    </div>
+    <div class='tooltip tooltip-left' id="infoButton">
+        <img src="images/info-icon.png" alt="Plus d'informations..." title="Plus d'informations..." height="15px" />
+        <span class='tooltiptext tooltiptext-left' style="width: 350px;">
         <small>
             Sont pris en compte : la fabrication des équipements électriques et électroniques (EEE), l'envoi et le stockage, la transmission, le traitement, la réception, l'utilisation, et la fin de vie des EEE.<br><br>
             Pour plus d'informations, voir les sources :
@@ -25,73 +26,80 @@
             </p>
         </small>
     </span>
-</div>
-<div class="popup-page">
-    <table>
-        <tr class="border_top">
-            <td><img src="images/user-icon_gray.png" alt="User icon" title="User" height="20px" /></td>
-            <td class="gray"> Taille de l'en-tête (approximative)</td>
-            <td class="gray" id="header-size">Calcul...</td>
-        </tr>
-        <tr>
-            <td><img src="images/text-icon_gray.png" alt="Text icon" title="Text" height="20px" /></td>
-            <td class="gray">Taille du corps de texte</td>
-            <td class="gray" id="body-size">Calcul...</td>
-        </tr>
-        <tr>
-            <td><img src="images/attachment-icon_gray.png" alt="Attachment icon" title="Attachment" height="20px" /></td>
-            <td class="gray">Taille des pièces jointes</td>
-            <td class="gray" id="attachments-size">Calcul...</td>
-        </tr>
-        <tr>
-            <td><img src="images/email-icon.png" alt="Email icon" title="Email" height="20px" /></td>
-            <td>Taille totale</td>
-            <td id="size">Calcul...</td>
-        </tr>
-        <tr class="border_top">
-            <td colspan="3" class="table-subtitle">Équivalences</td>
-        </tr>
-        <tr>
-            <td><img src="images/co2-icon.png" alt="CO₂ icon" title="CO₂" height="20px" /></td>
-            <td>Émission de CO<sub>2</sub>e</td>
-            <td id="co2">Calcul...</td>
-        </tr>
-        <tr>
-            <td><img src="images/petroleum-icon.png" alt="Petroleum icon" title="Petroleum" height="20px" /></td>
-            <td>Consommation de pétrole</td>
-            <td id="oil">Calcul...</td>
-        </tr>
-        <tr>
-            <td><img src="images/car-icon.png" alt="Car icon" title="Car" height="20px" /></td>
-            <td>Distance parcourue en voiture</td>
-            <td id="car">Calcul...</td>
-        </tr>
-        <tr>
-            <td><img src="images/tgv-icon.png" alt="TGV icon" title="TGV" height="20px" /></td>
-            <td>Distance parcourue en TGV</td>
-            <td id="tgv">Calcul...</td>
-        </tr>
-        <tr>
-            <td><img src="images/bulb-icon.png" alt="Lightbulb icon" title="Lightbulb" height="20px" /></td>
-            <td id="bulbw">Temps d'utilisation d'une ampoule de </td>
-            <td id="bulb">Calcul...</td>
-        </tr>
-        <tr>
-            <td><img src="images/lungs-icon.png" alt="Lungs icon" title="Lungs" height="20px" /></td>
-            <td>Durée de respiration</td>
-            <td id="breathing">Calcul...</td>
-        </tr>
-    </table>
-</div>
+    </div>
+    <div class="popup-page">
+        <table>
+            <tr class="border_top">
+                <td><img src="images/user-icon_gray.png" alt="User icon" title="User" height="20px" /></td>
+                <td class="gray"> Taille de l'en-tête (approximative)</td>
+                <td class="gray" id="header-size">Calcul...</td>
+            </tr>
+            <tr>
+                <td><img src="images/text-icon_gray.png" alt="Text icon" title="Text" height="20px" /></td>
+                <td class="gray">Taille du corps de texte</td>
+                <td class="gray" id="body-size">Calcul...</td>
+            </tr>
+            <tr>
+                <td><img src="images/attachment-icon_gray.png" alt="Attachment icon" title="Attachment" height="20px" /></td>
+                <td class="gray">Taille des pièces jointes</td>
+                <td class="gray" id="attachments-size">Calcul...</td>
+            </tr>
+            <tr>
+                <td><img src="images/email-icon.png" alt="Email icon" title="Email" height="20px" /></td>
+                <td>Taille totale</td>
+                <td id="size">Calcul...</td>
+            </tr>
+            <tr class="border_top">
+                <td colspan="3" class="table-subtitle">Équivalences</td>
+            </tr>
+            <tr>
+                <td><img src="images/co2-icon.png" alt="CO₂ icon" title="CO₂" height="20px" /></td>
+                <td>Émission de CO<sub>2</sub>e</td>
+                <td id="co2">Calcul...</td>
+            </tr>
+            <tr>
+                <td><img src="images/petroleum-icon.png" alt="Petroleum icon" title="Petroleum" height="20px" /></td>
+                <td>Consommation de pétrole</td>
+                <td id="oil">Calcul...</td>
+            </tr>
+            <tr>
+                <td><img src="images/car-icon.png" alt="Car icon" title="Car" height="20px" /></td>
+                <td>Distance parcourue en voiture</td>
+                <td id="car">Calcul...</td>
+            </tr>
+            <tr>
+                <td><img src="images/tgv-icon.png" alt="TGV icon" title="TGV" height="20px" /></td>
+                <td>Distance parcourue en TGV</td>
+                <td id="tgv">Calcul...</td>
+            </tr>
+            <tr>
+                <td><img src="images/bulb-icon.png" alt="Lightbulb icon" title="Lightbulb" height="20px" /></td>
+                <td id="bulbw">Temps d'utilisation d'une ampoule de </td>
+                <td id="bulb">Calcul...</td>
+            </tr>
+            <tr>
+                <td><img src="images/lungs-icon.png" alt="Lungs icon" title="Lungs" height="20px" /></td>
+                <td>Durée de respiration</td>
+                <td id="breathing">Calcul...</td>
+            </tr>
+        </table>
+    </div>
 
-<div>
-    <table>
-        <tr>
-            <td><button type="button" class="bouton" id="addEqui">Ajouter au courriel !</button></td>
-            <td><button type="button" class="bouton" id="removeEqui">Retirer du courriel !</button></td>
-        </tr>
-    </table>
-</div>
+    <div>
+        <table>
+            <tr>
+                <td><button type="button" class="bouton" id="addEqui">Ajouter au courriel !</button></td>
+                <td><button type="button" class="bouton" id="removeEqui">Retirer du courriel !</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="text-center">
+        <button type="button" class="bouton" id="openRecommendations">Quelques préconisations pour réduire son impact</button>
+    </div>
 
 </body>
+
 </html>
