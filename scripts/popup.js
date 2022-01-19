@@ -175,6 +175,18 @@ async function calculate(tabInfo) {
     document.getElementById("addEqui").onclick = () => { addEquivalences(tabInfo[0].id) };
     document.getElementById("removeEqui").onclick = () => { removeEquivalences(tabInfo[0].id) };
     document.getElementById("openRecommendations").onclick = () => { openRecommendations() };
+
+    // Affichage avertissement en cas de pièce jointe équivalente à 1 Mo
+    var needsAttachmentWarning = recipientsCount === 0 ? (attachmentsSize / MO >= 1 ? true : false) : (attachmentsSize * recipientsCount / MO >= 1 ? true : false); // si pièce jointe grosse et/ou envoyée à trop de destinataires
+    if (needsAttachmentWarning) {
+        document.getElementById("attachmentWarning").innerHTML = '<img src="images/warning-icon-red.png" alt="Warning icon" title="Warning" height="15px" /><span class="tooltiptext tooltiptext-left" style="width: 200px; margin-top: -14px;"><small>Pensez aux clés USB ou aux <a href="https://alt.framasoft.org/fr/framadrop">applications d\'envoi de fichiers</a> !</small></span>';
+    }
+
+    // Affichage avertissement en cas d'un grand nombre de destinataires
+    var needsRecipientsWarning = recipientsCount >= 10 ? true : false; // si nombre de destinataires important
+    if (needsRecipientsWarning) {
+        document.getElementById("recipientsWarning").innerHTML = '<img src="images/warning-icon-red.png" alt="Warning icon" title="Warning" height="15px" /><span class="tooltiptext tooltiptext-left" style="width: 200px; margin-top: -14px;"><small>Est-il nécessaire d\'envoyer ce courriel à autant d\'adresses ?</small></span>';
+    }
 }
 
 
