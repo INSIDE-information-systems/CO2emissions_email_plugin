@@ -13,6 +13,11 @@
     <div class="popup-title">
         Estimation de l'impact environnemental<br> global de ce courriel
     </div>
+    <div id="preferencesButton">
+        <a href="preferences/preferences.html" id="preferencesLink">
+            <img src="images/settings-icon.png" alt="Préférences" title="Préférences" height="15px" />
+        </a>
+    </div>
     <div class='tooltip tooltip-left' id="infoButton">
         <img src="images/info-icon.png" alt="Plus d'informations..." title="Plus d'informations..." height="15px" />
         <span class='tooltiptext tooltiptext-left' style="width: 350px;">
@@ -20,9 +25,9 @@
             Sont pris en compte : la fabrication des équipements électriques et électroniques (EEE), l'envoi et le stockage, la transmission, le traitement, la réception, l'utilisation, et la fin de vie des EEE.<br><br>
             Pour plus d'informations, voir les sources :
             <p style="text-align: left;">
-                • Base carbone® (ADEME, 2021) (<a href="https://www.bilans-ges.ademe.fr/fr/basecarbone/donnees-consulter">lien</a></a>)<br style="margin-bottom: 8px;">
-                • <i>Analyse comparée des impacts environnementaux de la communication par voie électronique</i> (ADEME, 2011) (<a href="https://ademe.typepad.fr/files/acv_ntic_synthese_courrier_electronique.pdf">lien 1</a> et <a href="https://presse.ademe.fr/files/acv_ntic_synthese_resultats.pdf">lien 2</a>)</a><br style="margin-bottom: 8px;">
-                • <i>Quantify impacted scope of human expired air under different head postures and varying exhalation rates</i> (Zhang et al., 2011) (<a href="https://doi.org/10.1016/j.buildenv.2011.03.014">lien</a></a>)
+                • Base carbone® (ADEME, 2022) (<a href="https://www.bilans-ges.ademe.fr/fr/basecarbone/donnees-consulter">lien</a>)<br style="margin-bottom: 8px;">
+                • <i>Analyse comparée des impacts environnementaux de la communication par voie électronique</i> (ADEME, 2011) (<a href="https://ademe.typepad.fr/files/acv_ntic_synthese_courrier_electronique.pdf">lien 1</a> et <a href="https://presse.ademe.fr/files/acv_ntic_synthese_resultats.pdf">lien 2</a>)<br style="margin-bottom: 8px;">
+                • <i>Quantify impacted scope of human expired air under different head postures and varying exhalation rates</i> (Zhang et al., 2011) (<a href="https://doi.org/10.1016/j.buildenv.2011.03.014">lien</a>)
             </p>
         </small>
     </span>
@@ -30,26 +35,26 @@
     <div class="popup-page">
         <table>
             <tr class="border_top">
-                <td><img src="images/user-icon_gray.png" alt="User icon" title="User" height="20px" /></td>
+                <td><img src="images/user-icon_gray.png" alt="User icon" title="User" height="16px" /></td>
                 <td class="gray"> Taille de l'en-tête (approximative)
                     <div id="recipientsWarning" class="tooltip tooltip-left" style="margin-left: 4px;"></div>
                 </td>
                 <td class="gray" id="header-size">Calcul...</td>
             </tr>
             <tr>
-                <td><img src="images/text-icon_gray.png" alt="Text icon" title="Text" height="20px" /></td>
+                <td><img src="images/text-icon_gray.png" alt="Text icon" title="Text" height="16px" /></td>
                 <td class="gray">Taille du corps de texte</td>
                 <td class="gray" id="body-size">Calcul...</td>
             </tr>
             <tr>
-                <td><img src="images/attachment-icon_gray.png" alt="Attachment icon" title="Attachment" height="20px" /></td>
+                <td><img src="images/attachment-icon_gray.png" alt="Attachment icon" title="Attachment" height="16px" /></td>
                 <td class="gray">Taille des pièces jointes
                     <div id="attachmentWarning" class="tooltip tooltip-left" style="margin-left: 4px;"></div>
                 </td>
                 <td class="gray" id="attachments-size">Calcul...</td>
             </tr>
             <tr>
-                <td><img src="images/email-icon.png" alt="Email icon" title="Email" height="20px" /></td>
+                <td><img src="images/email-icon.png" alt="Email icon" title="Email" height="16px" /></td>
                 <td>Taille totale</td>
                 <td id="size">Calcul...</td>
             </tr>
@@ -57,32 +62,32 @@
                 <td colspan="3" class="table-subtitle">Équivalences</td>
             </tr>
             <tr>
-                <td><img src="images/co2-icon.png" alt="CO₂ icon" title="CO₂" height="20px" /></td>
+                <td><img src="images/co2-icon.png" alt="CO₂ icon" title="CO₂" height="16px" /></td>
                 <td>Émission de CO<sub>2</sub>e</td>
                 <td id="co2">Calcul...</td>
             </tr>
             <tr>
-                <td><img src="images/petroleum-icon.png" alt="Petroleum icon" title="Petroleum" height="20px" /></td>
+                <td><img src="images/petroleum-icon.png" alt="Petroleum icon" title="Petroleum" height="16px" /></td>
                 <td>Consommation de pétrole</td>
                 <td id="oil">Calcul...</td>
             </tr>
             <tr>
-                <td><img src="images/car-icon.png" alt="Car icon" title="Car" height="20px" /></td>
+                <td><img src="images/car-icon.png" alt="Car icon" title="Car" height="16px" /></td>
                 <td>Distance parcourue en voiture</td>
                 <td id="car">Calcul...</td>
             </tr>
             <tr>
-                <td><img src="images/tgv-icon.png" alt="TGV icon" title="TGV" height="20px" /></td>
+                <td><img src="images/tgv-icon.png" alt="TGV icon" title="TGV" height="16px" /></td>
                 <td>Distance parcourue en TGV</td>
                 <td id="tgv">Calcul...</td>
             </tr>
             <tr>
-                <td><img src="images/bulb-icon.png" alt="Lightbulb icon" title="Lightbulb" height="20px" /></td>
+                <td><img src="images/bulb-icon.png" alt="Lightbulb icon" title="Lightbulb" height="16px" /></td>
                 <td id="bulbw">Temps d'utilisation d'une ampoule de </td>
                 <td id="bulb">Calcul...</td>
             </tr>
             <tr>
-                <td><img src="images/lungs-icon.png" alt="Lungs icon" title="Lungs" height="20px" /></td>
+                <td><img src="images/lungs-icon.png" alt="Lungs icon" title="Lungs" height="16px" /></td>
                 <td>Durée de respiration</td>
                 <td id="breathing">Calcul...</td>
             </tr>

@@ -51,5 +51,5 @@ function openRecommendations() {
 
 // Lorsque le document est chargé
 document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(regularReminder, 5000); // attend 8 secondes avant d'exécuter regularReminder()
+    setTimeout(regularReminder, 5000); // attend 5 secondes avant d'exécuter regularReminder()
 });

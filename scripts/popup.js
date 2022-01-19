@@ -114,16 +114,6 @@ function formatTime(time, decimals = 1) {
 
 
 const HEADER_SIZE = 800;
-// Pour 1 Mo
-const CO2 = 13; // en g/Mo
-const CO2u = 6; // en g/Mo
-
-const OIL = 3.34; // en g CO2e/g de pétrole
-const CAR = 0.192; // en g CO2e/m
-const TGV = 1.73e-3; // en g CO2e/m
-const BULB = 0.0599 / 60; // en g CO2e/(W.min) (électricité)
-const BULBW = 40; // en W
-const BREATHING = 1.131; // en g CO2/min
 const MO = 1048576;
 
 let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration; // variables globales
@@ -133,6 +123,17 @@ let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration
  * @param {Object} tabInfo Information sur les onglets
  */
 async function calculate(tabInfo) {
+    // Récupération des valeurs des préférences si définies ; valeurs par défaut sinon
+    var preferencesValues = await browser.storage.sync.get(["CO2", "CO2u", "OIL", "CAR", "TGV", "BULB", "BULBW", "BREATHING"]);
+    var CO2 = preferencesValues.CO2 ? parseFloat(preferencesValues.CO2) : 13; // en g/Mo
+    var CO2u = preferencesValues.CO2u ? parseFloat(preferencesValues.CO2u) : 6; // en g/Mo
+    var OIL = preferencesValues.OIL ? parseFloat(preferencesValues.OIL) : 3.34; // en g CO2e/g de pétrole
+    var CAR = preferencesValues.CAR ? parseFloat(preferencesValues.CAR) : 0.192; // en g CO2e/m
+    var TGV = preferencesValues.TGV ? parseFloat(preferencesValues.TGV) : 1.73e-3; // en g CO2e/m
+    var BULB = preferencesValues.BULB ? parseFloat(preferencesValues.BULB) : 0.0599 / 60; // en g CO2e/(W.min) (électricité)
+    var BULBW = preferencesValues.BULBW ? parseFloat(preferencesValues.BULBW) : 40; // en W
+    var BREATHING = preferencesValues.BREATHING ? parseFloat(preferencesValues.BREATHING) : 1.131; // en g CO2/min
+
     // Récupération des informations sur le mail
     var data = await messenger.compose.getComposeDetails(tabInfo[0].id);
     var attachments = await messenger.compose.listAttachments(tabInfo[0].id);
@@ -187,6 +188,9 @@ async function calculate(tabInfo) {
     if (needsRecipientsWarning) {
         document.getElementById("recipientsWarning").innerHTML = '<img src="images/warning-icon-red.png" alt="Warning icon" title="Warning" height="15px" /><span class="tooltiptext tooltiptext-left" style="width: 200px; margin-top: -14px;"><small>Est-il nécessaire d\'envoyer ce courriel à autant d\'adresses ?</small></span>';
     }
+
+    // Bouton des préférences
+    document.getElementById("preferencesLink").onclick = () => { openPreferences() };
 }
 
 
@@ -286,6 +290,15 @@ async function removeEquivalences(tab) {
 function openRecommendations() {
     browser.windows.create({
         url: "https://librairie.ademe.fr/cadic/2351/guide-pratique-face-cachee-numerique.pdf?modal=false"
+    });
+}
+
+/**
+ * Ouvre l'onglet des préférences
+ */
+function openPreferences() {
+    browser.windows.create({
+        url: "preferences/preferences.html"
     });
 }
 

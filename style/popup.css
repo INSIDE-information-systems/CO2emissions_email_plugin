@@ -3,6 +3,12 @@
     font-weight: bold;
 }
 
+#preferencesButton {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
 #infoButton {
     position: absolute;
     right: 10px;
@@ -40,6 +46,7 @@ table {
 
 body {
     font-size: 11pt;
+    font-family: "Source Sans Pro", "Verdana", sans-serif;
 }
 
 .bouton {
