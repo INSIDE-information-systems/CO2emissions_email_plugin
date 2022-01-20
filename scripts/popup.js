@@ -288,8 +288,12 @@ async function removeEquivalences(tab) {
  * Ouvre un onglet redirigeant vers des préconisations pour réduire son impact informatique
  */
 function openRecommendations() {
-    browser.windows.create({
+    browser.tabs.create({
         url: "https://librairie.ademe.fr/cadic/2351/guide-pratique-face-cachee-numerique.pdf?modal=false"
+    }).then(tab => {
+        browser.windows.update(tab.windowId, {
+            focused: true
+        });
     });
 }
 
@@ -297,8 +301,12 @@ function openRecommendations() {
  * Ouvre l'onglet des préférences
  */
 function openPreferences() {
-    browser.windows.create({
+    browser.tabs.create({
         url: "preferences/preferences.html"
+    }).then(tab => {
+        browser.windows.update(tab.windowId, {
+            focused: true
+        });
     });
 }
 
