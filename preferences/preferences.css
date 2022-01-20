@@ -1,11 +1,19 @@
+/* Body */
+
 body {
     font-size: 11pt;
     font-family: "Source Sans Pro", "Verdana", sans-serif;
 }
 
+
+/* Titres */
+
 h1 {
     text-align: center;
 }
+
+
+/* Tableaux */
 
 table {
     text-align: center;
@@ -36,6 +44,9 @@ tr td:nth-child(3) {
     width: 105px;
 }
 
+
+/* Inputs */
+
 .w3-input {
     padding: 8px 0px;
     display: block;
@@ -52,6 +63,9 @@ tr td:nth-child(3) {
     color: #000!important;
     background-color: #f5f5f5!important
 }
+
+
+/* Boutons */
 
 div.saveButton {
     padding-top: 20px;

@@ -1,37 +1,44 @@
-.popup-title {
+/* Body */
+
+body {
+    font-size: 11pt;
+    font-family: "Source Sans Pro", "Verdana", sans-serif;
+}
+
+
+/* Titres */
+
+h1 {
     text-align: center;
     font-weight: bold;
+    font-size: 12pt;
 }
 
-#preferencesButton {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-}
-
-#infoButton {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-
-.table-subtitle {
-    text-align: center !important;
+h2 {
+    text-align: center;
     font-weight: bold;
-    padding-top: 5px;
+    font-size: 11pt;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
-tr :last-child {
-    text-align: right;
+
+/* Styles globaux */
+
+a {
+    color: #00f9f9;
 }
 
-.border_top td {
-    border-top: 1px solid #333333;
+.gray {
+    color: rgb(80, 80, 80);
 }
 
-td {
-    padding: 2px 6px;
+.text-center {
+    text-align: center;
 }
+
+
+/* Tableaux */
 
 table {
     border-collapse: collapse;
@@ -40,14 +47,26 @@ table {
     margin-right: auto;
 }
 
-.gray {
-    color: rgb(80, 80, 80);
+tr :last-child {
+    text-align: right;
 }
 
-body {
-    font-size: 11pt;
-    font-family: "Source Sans Pro", "Verdana", sans-serif;
+td {
+    padding: 2px 6px;
 }
+
+.border_top td {
+    border-top: 1px solid #333333;
+}
+
+#emailSizeTable,
+#equivalencesTable {
+    width: 100%;
+    margin-top: 0px;
+}
+
+
+/* Boutons */
 
 .bouton {
     font-weight: bold;
@@ -63,10 +82,20 @@ body {
     color: white;
 }
 
-a {
-    color: #00f9f9;
+
+/* Bouton préférences */
+
+#preferencesButton {
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 
-.text-center {
-    text-align: center;
+
+/* Bouton infos */
+
+#infoButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

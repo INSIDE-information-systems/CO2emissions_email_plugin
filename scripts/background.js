@@ -6,7 +6,7 @@ function onError(error) {
     console.log(`Error: ${error}`);
 }
 
-const reminders = [
+const reminders = [ // Liste de recommandations
     "N'oubliez pas de supprimer régulièrement vos courriels, notamment ceux contenant des pièces jointes !",
     "Pensez à utiliser des clés USB ou des outils de dépôt de gros fichiers au lieu de les transmettre par courriel !",
     "Évitez de remplacer vos équipements numériques sur un coup de tête ou suite à une offre promotionnelle",
