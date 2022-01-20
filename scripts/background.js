@@ -1,3 +1,11 @@
+/**
+ * Affiche une erreur, utilisé dans les Promises
+ * @param error 
+ */
+function onError(error) {
+    console.log(`Error: ${error}`);
+}
+
 const reminders = [
     "N'oubliez pas de supprimer régulièrement vos courriels, notamment ceux contenant des pièces jointes !",
     "Pensez à utiliser des clés USB ou des outils de dépôt de gros fichiers au lieu de les transmettre par courriel !",
@@ -18,22 +26,31 @@ const reminders = [
  */
 function regularReminder() {
     var today = new Date();
-    if (today.getDate() == 7 || today.getDate() == 21) { // rappel deux fois par mois
-        title = "Estimez votre CO₂ — Rappel amical bimensuel";
+    if (today.getDate() == 7 || today.getDate() == 20) { // rappel deux fois par mois
+        let promise = browser.storage.sync.get("friendlyReminderDate"); // pour voir si la notification a déjà été envoyée aujourd'hui
+        promise.then((promise) => {
+            if (today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() !== promise.friendlyReminderDate) { // si la date n'existe pas déjà, c'est-à-dire que l'utilisateur ne s'est déjà connecté aujourd'hui
+                browser.storage.sync.set({
+                    friendlyReminderDate: today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate()
+                });
 
-        var reminderChoice = Math.floor(Math.random() * reminders.length); // entier au hasard entre 0 et le nombre de reminders - 1
-        content = reminders[reminderChoice];
+                title = "Estimez votre CO₂ — Rappel amical bimensuel"; // titre de la notification
 
-        var notificationId = "friendlyReminder";
-        browser.notifications.create(notificationId, {
-            "type": "basic",
-            "title": title,
-            "message": content
-        });
+                var reminderChoice = Math.floor(Math.random() * reminders.length); // entier au hasard entre 0 et le nombre de reminders - 1
+                content = reminders[reminderChoice]; // recommandation au hasard
 
-        browser.notifications.onClicked.addListener(function(notificationId) {
-            openRecommendations();
-        });
+                var notificationId = "friendlyReminder";
+                browser.notifications.create(notificationId, { // création de la notification
+                    "type": "basic",
+                    "title": title,
+                    "message": content
+                });
+
+                browser.notifications.onClicked.addListener(function(notificationId) { // rendre la notification cliquable pour ouvrir les recommandations
+                    openRecommendations();
+                });
+            }
+        }, onError);
     }
 }
 
