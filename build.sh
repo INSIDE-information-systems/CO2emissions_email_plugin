@@ -4,4 +4,4 @@ NAME="estimez_votre_co2-$VERSION-tb.xpi"
 
 mkdir -p $DIST
 rm -f $DIST/$NAME
-zip -r $DIST/$NAME images/ scripts/ style/ manifest.json popup.html
+zip -r $DIST/$NAME images/ preferences/ scripts/ style/ manifest.json popup.html
