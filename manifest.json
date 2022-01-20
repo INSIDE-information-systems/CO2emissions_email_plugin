@@ -1,23 +1,37 @@
 {
-    "applications": {
-      "gecko": {
-        "id": "estimate-your-CO2@afb.fr",
-        "strict_min_version": "59.0"
-      }
-    },
     "manifest_version": 2,
-    "name": "Estimate Your CO2",
-    "version": "0.10",
-    "author": "Mathéo MSA",
-    "icons": {
-      "32": "./skin/afb-logo.png"
+    "name": "Estimez votre CO₂",
+    "short_name": "Mail CO₂",
+    "description": "Estimez votre CO₂ quand vous rédigez un courriel",
+    "version": "2.6",
+    "author": "Maxime Chourré & Alexandre Couvez",
+    "homepage_url": "https://github.com/Harfeur/CO2emissions_email_plugin",
+    "applications": {
+        "gecko": {
+            "id": "estimate-your-CO2@harfeur.fr",
+            "strict_min_version": "78.0"
+        }
     },
-    "legacy": {
-      "options": {
-        "page": "chrome://estimate-your-CO2/content/preferences.xul",
-        "open_in_tab": false
-      }
+    "icons": {
+        "48": "images/estimate_your_co2_logo_trans_48.png",
+        "96": "images/estimate_your_co2_logo_trans_96.png",
+        "256": "images/estimate_your_co2_logo_trans_256.png",
+        "512": "images/estimate_your_co2_logo_trans_512.png"
+    },
+    "permissions": [
+        "storage",
+        "compose",
+        "notifications"
+    ],
+    "compose_action": {
+        "default_title": "Estimation CO₂",
+        "default_icon": "images/leaf-icon.png",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["scripts/background.js"]
+    },
+    "options_ui": {
+        "page": "preferences/preferences.html"
     }
-    
-  }
-  
+}

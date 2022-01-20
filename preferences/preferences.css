@@ -1,0 +1,87 @@
+/* Body */
+
+body {
+    font-size: 11pt;
+    font-family: "Source Sans Pro", "Verdana", sans-serif;
+}
+
+
+/* Titres */
+
+h1 {
+    text-align: center;
+}
+
+
+/* Tableaux */
+
+table {
+    text-align: center;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+thead {
+    font-weight: bold;
+}
+
+td,
+th {
+    padding: 4px;
+}
+
+tr td:nth-child(1) {
+    text-align: right;
+}
+
+tr td:nth-child(2) {
+    width: 130px;
+}
+
+tr td:nth-child(3) {
+    text-align: left;
+}
+
+
+/* Inputs */
+
+.w3-input {
+    padding: 8px 0px;
+    display: block;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    width: 100%;
+    text-align: center;
+}
+
+.w3-light-grey,
+.w3-hover-light-grey:hover,
+.w3-light-gray,
+.w3-hover-light-gray:hover {
+    color: #000!important;
+    background-color: #f5f5f5!important
+}
+
+
+/* Boutons */
+
+div.saveButton {
+    padding-top: 20px;
+}
+
+button.saveButton {
+    padding: 5px 10px;
+    margin: 0px 20px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+}
+
+button.saveButton:hover {
+    color: #000!important;
+    background-color: #ccc!important
+}
+
+button.saveButton:active {
+    transform: scale(0.95);
+}
