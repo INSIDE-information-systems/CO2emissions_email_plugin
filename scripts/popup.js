@@ -124,7 +124,7 @@ let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration
  */
 async function calculate(tabInfo) {
     // Récupération des valeurs des préférences si définies ; valeurs par défaut sinon
-    var preferencesValues = await browser.storage.sync.get(["CO2", "CO2u", "OIL", "CAR", "TGV", "BULB", "BULBW", "BREATHING"]);
+    var preferencesValues = await browser.storage.local.get(["CO2", "CO2u", "OIL", "CAR", "TGV", "BULB", "BULBW", "BREATHING"]);
     var CO2 = preferencesValues.CO2 ? parseFloat(preferencesValues.CO2) : 13; // en g/Mo
     var CO2u = preferencesValues.CO2u ? parseFloat(preferencesValues.CO2u) : 6; // en g/Mo
     var OIL = preferencesValues.OIL ? parseFloat(preferencesValues.OIL) : 3.34; // en g CO2e/g de pétrole

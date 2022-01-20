@@ -1,7 +1,7 @@
 // Valeurs
 function saveOptionsValues(e) {
     e.preventDefault();
-    browser.storage.sync.set({
+    browser.storage.local.set({
         CO2: document.querySelector("#CO2").value,
         CO2u: document.querySelector("#CO2u").value,
         OIL: document.querySelector("#OIL").value,
@@ -30,7 +30,7 @@ function restoreOptionsValues() {
         console.log(`Error: ${error}`);
     }
 
-    let getting = browser.storage.sync.get(["CO2", "CO2u", "OIL", "CAR", "TGV", "BULB", "BULBW", "BREATHING"]);
+    let getting = browser.storage.local.get(["CO2", "CO2u", "OIL", "CAR", "TGV", "BULB", "BULBW", "BREATHING"]);
     getting.then(setCurrentChoice, onError);
 }
 
