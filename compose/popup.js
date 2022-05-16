@@ -1,4 +1,4 @@
-import {formatBytes, formatDistance, formatGrammes, formatTime, lengthInUtf8Bytes, onError} from "../global/functions.js";
+import { formatBytes, formatDistance, formatGrammes, formatTime, lengthInUtf8Bytes, onError } from "../global/functions.js";
 
 /**
  * Ajoute la fonction format() (comme Python) dans JS
@@ -186,7 +186,7 @@ async function removeEquivalences(tab) {
  */
 function openRecommendations() {
     browser.tabs.create({
-        url: "https://librairie.ademe.fr/cadic/2351/guide-pratique-face-cachee-numerique.pdf?modal=false"
+        url: "https://librairie.ademe.fr/cadic/4932/guide-pratique-face-cachee-numerique.pdf?modal=false"
     }).then(tab => {
         browser.windows.update(tab.windowId, {
             focused: true
