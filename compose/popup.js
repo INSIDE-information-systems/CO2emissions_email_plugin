@@ -1,3 +1,5 @@
+import {formatBytes, formatDistance, formatGrammes, formatTime, lengthInUtf8Bytes, onError} from "../global/functions.js";
+
 /**
  * Ajoute la fonction format() (comme Python) dans JS
  * @returns {String}
@@ -7,111 +9,6 @@ String.prototype.format = function() {
     for (var k in arguments) a = a.replace(new RegExp("\\{" + k + "\\}", 'g'), arguments[k]);
     return a
 }
-
-/**
- * Affiche une erreur, utilisé dans les Promises
- * @param error 
- */
-function onError(error) {
-    console.log(`Error: ${error}`);
-}
-
-
-
-
-/**
- * Renvoie la longueur en octets d'une chaine de caractères
- * @param {String} str 
- * @returns {Number}
- */
-function lengthInUtf8Bytes(str) {
-    return (new TextEncoder().encode(str)).length;
-}
-
-/**
- * Renvoie un nombre formaté (octets, ko, Mo ...)
- * @param {Number} bytes 
- * @param {bool} tooltip Afficher ou non une tooltip en HTML
- * @param {Number} decimals Nombre de chiffres après la virgule
- * @returns {String}
- */
-function formatBytes(bytes, tooltip = true, decimals = 2) {
-    if (bytes === 0) return tooltip ? "0 <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : "0 octet";
-    if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + tooltip ? " <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : " octet";
-
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = [tooltip ? "<div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octets</span></div>" : "octets", 'ko', 'Mo', 'Go'];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return (parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
-}
-
-/**
- * Renvoie un nombre formaté (g, kg, t ...)
- * @param {Number} size 
- * @param {Number} decimals Nombre de chiffres après la virgule
- * @returns {String}
- */
-function formatGrammes(size, decimals = 1) {
-    if (0.1 > size >= 0.001) return parseFloat(size.toFixed(Math.abs(Math.floor(Math.log10(size))))).toString().replace(".", ",") + " g";
-    if (size < 2) return parseFloat(size.toFixed(decimals)).toString().replace(".", ",") + " g";
-
-    const k = 1000;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['g', 'kg', 't', 'Gg', 'Tg'];
-
-    const i = Math.floor(Math.log(size) / Math.log(k));
-
-    return (parseFloat((size / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
-}
-
-/**
- * Renvoie un nombre formaté (m, km ...)
- * @param {Number} distance 
- * @param {Number} decimals Nombre de chiffres après la virgule
- * @returns {String}
- */
-function formatDistance(distance, decimals = 1) {
-    if (0.1 > distance >= 0.001) return parseFloat(distance.toFixed(Math.abs(Math.floor(Math.log10(distance))))).toString().replace(".", ",") + " m";
-    if (distance < 2) return parseFloat(distance.toFixed(decimals)).toString().replace(".", ",") + " m";
-
-    const k = 1000;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['m', 'km', 'Mm', 'Gm', 'Tm'];
-
-    const i = Math.floor(Math.log(distance) / Math.log(k));
-
-    return (parseFloat((distance / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
-}
-
-/**
- * Renvoie un nombre formaté (min, h ...)
- * @param {Number} time
- * @param {Number} decimals Nombre de chiffres après la virgule
- * @returns {String}
- */
-function formatTime(time, decimals = 1) {
-    if (0.1 > time >= 0.001) return parseFloat(time.toFixed(Math.abs(Math.floor(Math.log10(time))))).toString().replace(".", ",") + " min";
-    if (time < 2) return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " min";
-
-    if (time < 1440) { // base 60
-        const k = 60;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['min', 'h'];
-
-        const i = Math.floor(Math.log(time) / Math.log(k));
-
-        return (parseFloat((time / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]).replace(".", ",");
-    }
-
-    if (time >= 1440) { // base 24
-        time = time / (60 * 24);
-        return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " j";
-    }
-}
-
 
 const HEADER_SIZE = 800;
 const MO = 1048576;
@@ -178,15 +75,15 @@ async function calculate(tabInfo) {
     document.getElementById("openRecommendations").onclick = () => { openRecommendations() };
 
     // Affichage avertissement en cas de pièce jointe équivalente à 1 Mo
-    var needsAttachmentWarning = recipientsCount === 0 ? (attachmentsSize / MO >= 1 ? true : false) : (attachmentsSize * recipientsCount / MO >= 1 ? true : false); // si pièce jointe grosse et/ou envoyée à trop de destinataires
+    var needsAttachmentWarning = recipientsCount === 0 ? (attachmentsSize / MO >= 1) : (attachmentsSize * recipientsCount / MO >= 1); // si pièce jointe grosse et/ou envoyée à trop de destinataires
     if (needsAttachmentWarning) {
-        document.getElementById("attachmentWarning").innerHTML = '<img src="images/warning-icon-red.png" alt="Warning icon" title="Warning" height="14px" /><span class="tooltiptext tooltiptext-left" style="width: 130px; margin-top: -25px;"><small>Pensez aux clés USB ou aux <a href="https://alt.framasoft.org/fr/framadrop">applications d\'envoi de fichiers</a> !</small></span>';
+        document.getElementById("attachmentWarning").innerHTML = '<img src="../images/warning-icon-red.png" alt="Warning icon" title="Warning" height="14px" /><span class="tooltiptext tooltiptext-left" style="width: 130px; margin-top: -25px;"><small>Pensez aux clés USB ou aux <a href="https://alt.framasoft.org/fr/framadrop">applications d\'envoi de fichiers</a> !</small></span>';
     }
 
     // Affichage avertissement en cas d'un grand nombre de destinataires
-    var needsRecipientsWarning = recipientsCount >= 10 ? true : false; // si nombre de destinataires important
+    var needsRecipientsWarning = recipientsCount >= 10; // si nombre de destinataires important
     if (needsRecipientsWarning) {
-        document.getElementById("recipientsWarning").innerHTML = '<img src="images/warning-icon-red.png" alt="Warning icon" title="Warning" height="14px" /><span class="tooltiptext tooltiptext-left" style="width: 190px; margin-top: -14px;"><small>Est-il nécessaire d\'envoyer ce courriel à autant d\'adresses ?</small></span>';
+        document.getElementById("recipientsWarning").innerHTML = '<img src="../images/warning-icon-red.png" alt="Warning icon" title="Warning" height="14px" /><span class="tooltiptext tooltiptext-left" style="width: 190px; margin-top: -14px;"><small>Est-il nécessaire d\'envoyer ce courriel à autant d\'adresses ?</small></span>';
     }
 
     // Bouton des préférences
@@ -215,7 +112,7 @@ async function addEquivalences(tab) {
         // Modification du texte
         body += signature.format(
             "\n\n", "Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/)",
-            formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
+            formatBytes(totalSize, false), recipientsCount === 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
             formatGrammes(co2), "₂", formatGrammes(petrole), formatDistance(voiture),
             formatDistance(tgv), BULBW, formatTime(ampoule), formatTime(respiration), "\n", "");
 
@@ -230,7 +127,7 @@ async function addEquivalences(tab) {
         // Modification du texte
         body += signature.format(
             "<p><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>",
-            formatBytes(totalSize, false), recipientsCount == 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
+            formatBytes(totalSize, false), recipientsCount === 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
             formatGrammes(co2), "<sub>2</sub>", formatGrammes(petrole), formatDistance(voiture), formatDistance(tgv), BULBW,
             formatTime(ampoule), formatTime(respiration), "<br>", "</small></p>");
 
@@ -255,7 +152,7 @@ async function removeEquivalences(tab) {
 
         // Recherche du texte ajouté
         let indexStart = body.indexOf("\n\nD'après l'extension Estimez votre CO₂");
-        if (indexStart == -1) return;
+        if (indexStart === -1) return;
 
         let indexEnd = body.indexOf("Zhang et al. (2011).", indexStart) + 20;
 
@@ -272,7 +169,7 @@ async function removeEquivalences(tab) {
 
         // Recherche du texte ajouté
         let indexStart = body.indexOf("<p><small>D'après l'extension");
-        if (indexStart == -1) return;
+        if (indexStart === -1) return;
         let indexEnd = body.indexOf("(2011).</small></p>", indexStart) + 19;
 
         // Modification du texte

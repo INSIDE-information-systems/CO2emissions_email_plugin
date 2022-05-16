@@ -26,7 +26,7 @@ const reminders = [ // Liste de recommandations
  */
 function regularReminder() {
     var today = new Date();
-    if (today.getDate() == 7 || today.getDate() == 21) { // rappel deux fois par mois
+    if (today.getDate() === 7 || today.getDate() === 21) { // rappel deux fois par mois
         let promise = browser.storage.local.get("friendlyReminderDate"); // pour voir si la notification a déjà été envoyée aujourd'hui
         promise.then((promise) => {
             if (today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() !== promise.friendlyReminderDate) { // si la date n'existe pas déjà, c'est-à-dire que l'utilisateur ne s'est déjà connecté aujourd'hui
@@ -46,7 +46,7 @@ function regularReminder() {
                     "message": content
                 });
 
-                browser.notifications.onClicked.addListener(function(notificationId) { // rendre la notification cliquable pour ouvrir les recommandations
+                browser.notifications.onClicked.addListener(function() { // rendre la notification cliquable pour ouvrir les recommandations
                     openRecommendations();
                 });
             }

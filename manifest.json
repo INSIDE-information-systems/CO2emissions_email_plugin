@@ -26,10 +26,10 @@
     "compose_action": {
         "default_title": "Estimation CO₂",
         "default_icon": "images/leaf-icon.png",
-        "default_popup": "popup.html"
+        "default_popup": "compose/popup.html"
     },
     "background": {
-        "scripts": ["scripts/background.js"]
+        "scripts": ["global/background.js"]
     },
     "options_ui": {
         "page": "preferences/preferences.html"
