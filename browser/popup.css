@@ -64,3 +64,10 @@ fieldset {
 fieldset legend {
     font-weight: bold;
 }
+
+
+/* select */
+
+#address {
+    width: 150px;
+}
