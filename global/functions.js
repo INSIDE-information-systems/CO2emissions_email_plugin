@@ -98,3 +98,5 @@ export function formatTime(time, decimals = 1) {
 export function onError(error) {
     console.log(`Error: ${error}`);
 }
+
+export const MO = 1048576;

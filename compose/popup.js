@@ -1,4 +1,12 @@
-import { formatBytes, formatDistance, formatGrammes, formatTime, lengthInUtf8Bytes, onError } from "../global/functions.js";
+import {
+    formatBytes,
+    formatDistance,
+    formatGrammes,
+    formatTime,
+    lengthInUtf8Bytes,
+    MO,
+    onError
+} from "../global/functions.js";
 
 /**
  * Ajoute la fonction format() (comme Python) dans JS
@@ -11,7 +19,6 @@ String.prototype.format = function() {
 }
 
 const HEADER_SIZE = 800;
-const MO = 1048576;
 
 let recipientsCount, totalSize, co2, petrole, voiture, tgv, ampoule, respiration, BULBW; // variables globales
 

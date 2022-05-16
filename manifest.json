@@ -21,12 +21,19 @@
     "permissions": [
         "storage",
         "compose",
-        "notifications"
+        "notifications",
+        "accountsRead",
+        "messagesRead"
     ],
     "compose_action": {
         "default_title": "Estimation CO₂",
         "default_icon": "images/leaf-icon.png",
         "default_popup": "compose/popup.html"
+    },
+    "browser_action": {
+        "default_title": "Tableau de bord",
+        "default_icon" : "images/co2-icon.png",
+        "default_popup": "browser/popup.html"
     },
     "background": {
         "scripts": ["global/background.js"]
