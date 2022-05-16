@@ -1,4 +1,4 @@
-import { formatDistance, formatGrammes, formatTime, MO } from "../global/functions.js";
+import {formatDistance, formatGrammes, formatTime, MO} from "../global/functions.js";
 
 async function* listMessages(folder) {
     let page = await messenger.messages.list(folder);
@@ -15,7 +15,7 @@ async function* listMessages(folder) {
 }
 
 
-let data = { accounts: [] };
+let data = {accounts: []};
 let CO2, CO2u, OIL, CAR, TGV, BULB, BULBW, BREATHING;
 
 
@@ -65,9 +65,13 @@ function display() {
 
     document.getElementById("data_title").innerText = `${periode_title} sur ${mails_title}`;
 
-    let co2 = 0;
+    // Obtention de l'adresse sélectionnée
+    const address = document.getElementById("address").value;
+    let co2 = 0.0;
+    console.log(data);
     data.accounts.forEach(account => {
-        co2 += account.co2[mails][periode];
+        if (address === "all" || address === account.name)
+            co2 += account.co2[mails][periode];
     });
 
     const petrole = co2 / OIL;
@@ -83,12 +87,6 @@ function display() {
     document.getElementById("tgv").innerHTML = formatDistance(tgv);
     document.getElementById("bulb").innerHTML = formatTime(ampoule);
     document.getElementById("breathing").innerHTML = formatTime(respiration);
-
-    const inputs = document.getElementsByTagName("input")
-    for (const input of inputs) {
-        input.removeAttribute("disabled");
-        input.addEventListener("change", display);
-    }
 }
 
 async function calculate() {
@@ -182,9 +180,28 @@ async function calculate() {
         });
     }
     display();
+
+    const inputs = document.getElementsByTagName("input")
+    for (const input of inputs) {
+        input.removeAttribute("disabled");
+        input.addEventListener("change", display);
+    }
+
+    const select = document.getElementById("address");
+    for (const account of accounts) {
+        if (account.type !== "none") {
+            const opt = document.createElement('option');
+            opt.value = account.name;
+            opt.innerText = account.name;
+            select.appendChild(opt);
+        }
+
+    }
+    select.removeAttribute("disabled");
+    select.addEventListener("change", display)
 }
 
 // Lorsque le document est chargé
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     calculate();
 });
