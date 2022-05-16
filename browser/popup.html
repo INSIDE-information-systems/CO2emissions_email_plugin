@@ -2,105 +2,105 @@
 <html lang="fr">
 
 <head>
-  <meta charset="utf-8">
-  <title>Tableau de bord - Estimez votre CO2</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="popup.css">
-  <link rel="stylesheet" type="text/css" media="screen" href="../global/tooltip.css">
-  <script src="popup.js" type="module"></script>
+    <meta charset="utf-8">
+    <title>Tableau de bord - Estimez votre CO2</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="popup.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../global/tooltip.css">
+    <script src="popup.js" type="module"></script>
 </head>
 
 <body>
 
-<form>
-  <fieldset>
-    <legend>Période de calcul:</legend>
+    <form>
+        <div style="display: flex;">
+            <fieldset>
+                <legend>Période de calcul</legend>
 
-    <div>
-      <input disabled type="radio" id="week" name="periode" value="week"
-             checked>
-      <label for="week">7 derniers jours</label>
-    </div>
+                <div>
+                    <input disabled type="radio" id="week" name="periode" value="week" checked>
+                    <label for="week">7 derniers jours</label>
+                </div>
 
-    <div>
-      <input disabled type="radio" id="month" name="periode" value="month">
-      <label for="month">30 derniers jours</label>
-    </div>
+                <div>
+                    <input disabled type="radio" id="month" name="periode" value="month">
+                    <label for="month">30 derniers jours</label>
+                </div>
 
-    <div>
-      <input disabled type="radio" id="year" name="periode" value="year">
-      <label for="year">Année en cours</label>
-    </div>
+                <div>
+                    <input disabled type="radio" id="year" name="periode" value="year">
+                    <label for="year">Année en cours</label>
+                </div>
 
-    <div>
-      <input disabled type="radio" id="forever" name="periode" value="forever">
-      <label for="forever">Depuis toujours</label>
-    </div>
+                <div>
+                    <input disabled type="radio" id="forever" name="periode" value="forever">
+                    <label for="forever">Depuis toujours</label>
+                </div>
 
-<!--    <div>-->
-<!--      <input disabled type="radio" id="custom" name="periode" value="custom">-->
-<!--      <label for="custom">Personnalisé</label>-->
-<!--    </div>-->
-  </fieldset>
+                <!--    <div>-->
+                <!--      <input disabled type="radio" id="custom" name="periode" value="custom">-->
+                <!--      <label for="custom">Personnalisé</label>-->
+                <!--    </div>-->
+            </fieldset>
 
-  <fieldset>
-    <legend>Mails à analyser:</legend>
+            <fieldset>
+                <legend>Mails à analyser</legend>
 
-    <div>
-      <input disabled type="radio" id="sent" name="mails" value="sent"
-             checked>
-      <label for="sent">Mails envoyés</label>
-    </div>
+                <div>
+                    <input disabled type="radio" id="sent" name="mails" value="sent" checked>
+                    <label for="sent">Mails envoyés</label>
+                </div>
 
-    <div>
-      <input disabled type="radio" id="received" name="mails" value="received">
-      <label for="received">Mails reçus</label>
-    </div>
+                <div>
+                    <input disabled type="radio" id="received" name="mails" value="received">
+                    <label for="received">Mails reçus</label>
+                </div>
 
-    <div>
-      <input disabled type="radio" id="all" name="mails" value="all">
-      <label for="all">Les deux</label>
-    </div>
-  </fieldset>
+                <div>
+                    <input disabled type="radio" id="all" name="mails" value="all">
+                    <label for="all">Les deux</label>
+                </div>
+            </fieldset>
+        </div>
 
-  <div id="data">
-    <h2 id="data_title"></h2>
-    <div id="sec-equivalences">
-      <h3>Équivalences</h3>
-      <table id="equivalencesTable">
-        <tr>
-          <td><img src="../images/co2-icon.png" alt="CO₂ icon" title="CO₂" height="16px" /></td>
-          <td>Émission de CO<sub>2</sub>e</td>
-          <td id="co2">Calcul...</td>
-        </tr>
-        <tr>
-          <td><img src="../images/petroleum-icon.png" alt="Petroleum icon" title="Petroleum" height="16px" /></td>
-          <td>Consommation de pétrole</td>
-          <td id="oil">Calcul...</td>
-        </tr>
-        <tr>
-          <td><img src="../images/car-icon.png" alt="Car icon" title="Car" height="16px" /></td>
-          <td>Distance parcourue en voiture</td>
-          <td id="car">Calcul...</td>
-        </tr>
-        <tr>
-          <td><img src="../images/tgv-icon.png" alt="TGV icon" title="TGV" height="16px" /></td>
-          <td>Distance parcourue par une personne en TGV</td>
-          <td id="tgv">Calcul...</td>
-        </tr>
-        <tr>
-          <td><img src="../images/bulb-icon.png" alt="Lightbulb icon" title="Lightbulb" height="16px" /></td>
-          <td id="bulbw">Temps d'utilisation d'une ampoule de </td>
-          <td id="bulb">Calcul...</td>
-        </tr>
-        <tr>
-          <td><img src="../images/lungs-icon.png" alt="Lungs icon" title="Lungs" height="16px" /></td>
-          <td>Durée de respiration</td>
-          <td id="breathing">Calcul...</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</form>
+        <div id="data">
+            <h1 id="data_title"></h1>
+            <div id="sec-equivalences">
+                <h2>Équivalences</h2>
+                <table id="equivalencesTable">
+                    <tr>
+                        <td><img src="../images/co2-icon.png" alt="CO₂ icon" title="CO₂" height="16px" /></td>
+                        <td>Émission de CO<sub>2</sub>e</td>
+                        <td id="co2">Calcul...</td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/petroleum-icon.png" alt="Petroleum icon" title="Petroleum" height="16px" /></td>
+                        <td>Consommation de pétrole</td>
+                        <td id="oil">Calcul...</td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/car-icon.png" alt="Car icon" title="Car" height="16px" /></td>
+                        <td>Distance parcourue en voiture</td>
+                        <td id="car">Calcul...</td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/tgv-icon.png" alt="TGV icon" title="TGV" height="16px" /></td>
+                        <td>Distance parcourue par une personne en TGV</td>
+                        <td id="tgv">Calcul...</td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/bulb-icon.png" alt="Lightbulb icon" title="Lightbulb" height="16px" /></td>
+                        <td id="bulbw">Temps d'utilisation d'une ampoule de </td>
+                        <td id="bulb">Calcul...</td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/lungs-icon.png" alt="Lungs icon" title="Lungs" height="16px" /></td>
+                        <td>Durée de respiration</td>
+                        <td id="breathing">Calcul...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
 
 </body>
 
