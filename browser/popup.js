@@ -1,4 +1,4 @@
-import { formatDistance, formatGrammes, formatTime, MO } from "../global/functions.js";
+import { formatBytes, formatDistance, formatGrammes, formatTime, MO } from "../global/functions.js";
 
 async function* listMessages(folder) {
     let page = await messenger.messages.list(folder);
@@ -68,10 +68,12 @@ function display() {
     // Obtention de l'adresse sélectionnée
     const address = document.getElementById("address").value;
     let co2 = 0.0;
+    let size = 0.0;
     console.log(data);
     data.accounts.forEach(account => {
         if (address === "all" || address === account.name)
             co2 += account.co2[mails][periode];
+        size += account.size[mails][periode];
     });
 
     const petrole = co2 / OIL;
@@ -81,6 +83,7 @@ function display() {
     const respiration = co2 / BREATHING;
 
 
+    document.getElementById("size").innerHTML = formatBytes(size);
     document.getElementById("co2").innerHTML = formatGrammes(co2);
     document.getElementById("oil").innerHTML = formatGrammes(petrole);
     document.getElementById("car").innerHTML = formatDistance(voiture);
@@ -126,7 +129,21 @@ async function calculate() {
                 year: 0,
                 forever: 0
             }
-        }
+        };
+        let size = {
+            sent: {
+                week: 0,
+                month: 0,
+                year: 0,
+                forever: 0
+            },
+            received: {
+                week: 0,
+                month: 0,
+                year: 0,
+                forever: 0
+            }
+        };
         for (const folder of account.folders) {
             const messages = listMessages(folder);
             if (folder.type === "sent") {
@@ -136,16 +153,19 @@ async function calculate() {
                     co2value = recipientsCount === 0 ? message.size * (CO2 + CO2u) / MO : message.size * (CO2 + recipientsCount * CO2u) / MO;
 
                     if (diff <= 604800000) { // 7 jours
-                        co2.sent.week += co2value
-                        co2.sent.month += co2value;
+                        co2.sent.week += co2value;
+                        size.sent.week += message.size;
                     } else if (diff <= 2592000000) { // 30 jours
                         co2.sent.month += co2value;
+                        size.sent.month += message.size;
                     }
                     if (diff <= firstJanuary) { // Année en cours
                         co2.sent.year += co2value;
+                        size.sent.year += message.size;
                     }
 
                     co2.sent.forever += co2value;
+                    size.sent.forever += message.size;
                 }
             } else {
                 for await (const message of messages) {
@@ -155,15 +175,18 @@ async function calculate() {
 
                     if (diff <= 604800000) { // 7 jours
                         co2.received.week += co2value;
-                        co2.received.month += co2value;
+                        size.received.week += message.size;
                     } else if (diff <= 2592000000) { // 30 jours
                         co2.received.month += co2value;
+                        size.received.month += message.size;
                     }
                     if (diff <= firstJanuary) { // Année en cours
                         co2.received.year += co2value;
+                        size.received.year += message.size;
                     }
 
                     co2.received.forever += co2value;
+                    size.received.forever += message.size;
                 }
             }
         }
@@ -174,14 +197,21 @@ async function calculate() {
             year: co2.sent.year + co2.received.year,
             forever: co2.sent.forever + co2.received.forever
         }
+        size.all = {
+            week: size.sent.week + size.received.week,
+            month: size.sent.month + size.received.month,
+            year: size.sent.year + size.received.year,
+            forever: size.sent.forever + size.received.forever
+        }
         data.accounts.push({
             name: account.name,
-            co2: co2
+            co2: co2,
+            size: size
         });
     }
     display();
 
-    const inputs = document.getElementsByTagName("input")
+    const inputs = document.getElementsByTagName("input");
     for (const input of inputs) {
         input.removeAttribute("disabled");
         input.addEventListener("change", display);
