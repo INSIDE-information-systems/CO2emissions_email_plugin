@@ -154,7 +154,9 @@ async function calculate() {
 
                     if (diff <= 604800000) { // 7 jours
                         co2.sent.week += co2value;
+                        co2.sent.month += co2value;
                         size.sent.week += message.size;
+                        size.sent.month += message.size;
                     } else if (diff <= 2592000000) { // 30 jours
                         co2.sent.month += co2value;
                         size.sent.month += message.size;
@@ -175,7 +177,9 @@ async function calculate() {
 
                     if (diff <= 604800000) { // 7 jours
                         co2.received.week += co2value;
+                        co2.received.month += co2value;
                         size.received.week += message.size;
+                        size.received.month += message.size;
                     } else if (diff <= 2592000000) { // 30 jours
                         co2.received.month += co2value;
                         size.received.month += message.size;
