@@ -1,4 +1,4 @@
-import {formatDistance, formatGrammes, formatTime, MO} from "../global/functions.js";
+import { formatDistance, formatGrammes, formatTime, MO } from "../global/functions.js";
 
 async function* listMessages(folder) {
     let page = await messenger.messages.list(folder);
@@ -15,7 +15,7 @@ async function* listMessages(folder) {
 }
 
 
-let data = {accounts: []};
+let data = { accounts: [] };
 let CO2, CO2u, OIL, CAR, TGV, BULB, BULBW, BREATHING;
 
 
@@ -197,11 +197,13 @@ async function calculate() {
         }
 
     }
+    document.getElementById("loading").hidden = true;
+    document.getElementById("loader").hidden = true;
     select.removeAttribute("disabled");
     select.addEventListener("change", display)
 }
 
 // Lorsque le document est chargé
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     calculate();
 });
