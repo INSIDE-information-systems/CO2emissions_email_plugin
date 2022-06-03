@@ -1,0 +1,22 @@
+{
+  "extensionName": {
+    "message": "Estimez votre CO₂",
+    "description": "Nom de l'extension."
+  },
+  "extensionShortName": {
+    "message": "Mail CO₂",
+    "description": "Nom raccourci de l'extension."
+  },
+  "extensionDescription": {
+    "message": "Estimez votre CO₂ quand vous rédigez un courriel",
+    "description": "Description de l'extension."
+  },
+  "composeActionTitle": {
+    "message": "Estimation CO₂",
+    "description": "Titre du bouton pour ouvrir la popup dans la fenêtre de rédaction d'un courriel."
+  },
+  "browserActionTitle": {
+    "message": "Tableau de bord",
+    "description": "Titre du bouton pour ouvrir la popup dans la fenêtre principale."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "extensionName": {
+    "message": "Estimate your CO₂",
+    "description": "Name of the extension."
+  },
+  "extensionShortName": {
+    "message": "Email CO₂",
+    "description": "Short name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Estimate your CO₂ when you write an email",
+    "description": "Description of the extension."
+  },
+  "composeActionTitle": {
+    "message": "CO₂ estimation",
+    "description": "Title of the button to open the popup in compose menu."
+  },
+  "browserActionTitle": {
+    "message": "Dashboard",
+    "description": "Title of the button to open the popup in browser menu."
+  }
+}

@@ -1,9 +1,10 @@
 {
     "manifest_version": 2,
-    "name": "Estimez votre CO₂",
-    "short_name": "Mail CO₂",
-    "description": "Estimez votre CO₂ quand vous rédigez un courriel",
+    "name": "__MSG_extensionName__",
+    "short_name": "__MSG_extensionShortName__",
+    "description": "__MSG_extensionDescription__",
     "version": "2.6",
+    "default_locale": "fr",
     "author": "Maxime Chourré & Alexandre Couvez",
     "homepage_url": "https://github.com/Harfeur/CO2emissions_email_plugin",
     "applications": {
@@ -26,12 +27,12 @@
         "messagesRead"
     ],
     "compose_action": {
-        "default_title": "Estimation CO₂",
+        "default_title": "__MSG_composeActionTitle__",
         "default_icon": "images/leaf-icon.png",
         "default_popup": "compose/popup.html"
     },
     "browser_action": {
-        "default_title": "Tableau de bord",
+        "default_title": "__MSG_browserActionTitle__",
         "default_icon" : "images/co2-icon.png",
         "default_popup": "browser/popup.html"
     },
