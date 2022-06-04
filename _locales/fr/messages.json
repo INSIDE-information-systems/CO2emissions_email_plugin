@@ -48,32 +48,6 @@
     "composePopupSizesTotal": {
         "message": "Taille totale"
     },
-    "composePopupEquivalences": {
-        "message": "Équivalences"
-    },
-    "composePopupEquivalencesCo2": {
-        "message": "Émission de $CO2$e",
-        "placeholders": {
-            "CO2": {
-                "content": "CO<sub>2</sub>"
-            }
-        }
-    },
-    "composePopupEquivalencesPetroleum": {
-        "message": "Consommation de pétrole"
-    },
-    "composePopupEquivalencesCar": {
-        "message": "Distance parcourue en voiture"
-    },
-    "composePopupEquivalencesTgv": {
-        "message": "Distance parcourue par une personne en TGV"
-    },
-    "composePopupEquivalencesBulb": {
-        "message": "Temps d'utilisation d'une ampoule de"
-    },
-    "composePopupEquivalencesBreathing": {
-        "message": "Durée de respiration"
-    },
     "composePopupAdd": {
         "message": "Ajouter au courriel !"
     },
@@ -89,6 +63,89 @@
     "browserActionTitle": {
         "message": "Tableau de bord",
         "description": "Titre du bouton pour ouvrir la popup dans la fenêtre principale."
+    },
+    "browserPopupTitle": {
+        "message": "Tableau de bord - Estimez votre CO₂"
+    },
+    "browserPopupPeriod": {
+        "message": "Période de calcul"
+    },
+    "browserPopupPeriodWeek": {
+        "message": "7 derniers jours"
+    },
+    "browserPopupPeriodMonth": {
+        "message": "30 derniers jours"
+    },
+    "browserPopupPeriodYear": {
+        "message": "Année en cours"
+    },
+    "browserPopupPeriodForever": {
+        "message": "Depuis toujours"
+    },
+    "browserPopupPeriodTitleWeek": {
+        "message": "Analyse des 7 derniers jours"
+    },
+    "browserPopupPeriodTitleMonth": {
+        "message": "Analyse des 30 derniers jours"
+    },
+    "browserPopupPeriodTitleYear": {
+        "message": "Analyse de l'année actuelle"
+    },
+    "browserPopupPeriodTitleForever": {
+        "message": "Analyse depuis toujours"
+    },
+    "browserPopupEmails": {
+        "message": "Courriels à analyser"
+    },
+    "browserPopupEmailsSent": {
+        "message": "Envoyés"
+    },
+    "browserPopupEmailsReceived": {
+        "message": "Reçus"
+    },
+    "browserPopupEmailsBoth": {
+        "message": "Les deux"
+    },
+    "browserPopupEmailsTitleSent": {
+        "message": "les courriels envoyés"
+    },
+    "browserPopupEmailsTitleReceived": {
+        "message": "les courriels reçus"
+    },
+    "browserPopupEmailsTitleBoth": {
+        "message": "tous les courriels"
+    },
+    "browserPopupEmailsOf": {
+        "message": "sur"
+    },
+    "browserPopupAddresses": {
+        "message": "Toutes les adresses"
+    },
+    "equivalences": {
+        "message": "Équivalences"
+    },
+    "equivalencesCo2": {
+        "message": "Émission de $CO2$e",
+        "placeholders": {
+            "CO2": {
+                "content": "CO<sub>2</sub>"
+            }
+        }
+    },
+    "equivalencesPetroleum": {
+        "message": "Consommation de pétrole"
+    },
+    "equivalencesCar": {
+        "message": "Distance parcourue en voiture"
+    },
+    "equivalencesTgv": {
+        "message": "Distance parcourue par une personne en TGV"
+    },
+    "equivalencesBulb": {
+        "message": "Temps d'utilisation d'une ampoule de"
+    },
+    "equivalencesBreathing": {
+        "message": "Durée de respiration"
     },
     "link": {
         "message": "lien"

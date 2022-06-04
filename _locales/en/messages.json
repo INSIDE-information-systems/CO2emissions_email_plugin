@@ -48,32 +48,6 @@
     "composePopupSizesTotal": {
         "message": "Total size"
     },
-    "composePopupEquivalences": {
-        "message": "Equivalences"
-    },
-    "composePopupEquivalencesCo2": {
-        "message": "Emission of $CO2$e",
-        "placeholders": {
-            "CO2": {
-                "content": "CO<sub>2</sub>"
-            }
-        }
-    },
-    "composePopupEquivalencesPetroleum": {
-        "message": "Consumption of oil"
-    },
-    "composePopupEquivalencesCar": {
-        "message": "Distance travelled by car"
-    },
-    "composePopupEquivalencesTgv": {
-        "message": "Distance travelled by a person by TGV"
-    },
-    "composePopupEquivalencesBulb": {
-        "message": "Time of use of a light bulb of"
-    },
-    "composePopupEquivalencesBreathing": {
-        "message": "Breathing duration"
-    },
     "composePopupAdd": {
         "message": "Add to the email!"
     },
@@ -89,6 +63,89 @@
     "browserActionTitle": {
         "message": "Dashboard",
         "description": "Title of the button to open the popup in browser menu."
+    },
+    "browserPopupTitle": {
+        "message": "Dashboard - Estimate your CO₂"
+    },
+    "browserPopupPeriod": {
+        "message": "Calculation period"
+    },
+    "browserPopupPeriodWeek": {
+        "message": "Last 7 days"
+    },
+    "browserPopupPeriodMonth": {
+        "message": "Last 30 days"
+    },
+    "browserPopupPeriodYear": {
+        "message": "Current year"
+    },
+    "browserPopupPeriodForever": {
+        "message": "Since the start"
+    },
+    "browserPopupPeriodTitleWeek": {
+        "message": "Analysis over the last 7 days"
+    },
+    "browserPopupPeriodTitleMonth": {
+        "message": "Analysis over the last 30 days"
+    },
+    "browserPopupPeriodTitleYear": {
+        "message": "Analysis over the current year"
+    },
+    "browserPopupPeriodTitleForever": {
+        "message": "Analysis since the start"
+    },
+    "browserPopupEmails": {
+        "message": "Emails to be analysed"
+    },
+    "browserPopupEmailsSent": {
+        "message": "Sent"
+    },
+    "browserPopupEmailsReceived": {
+        "message": "Received"
+    },
+    "browserPopupEmailsBoth": {
+        "message": "Both"
+    },
+    "browserPopupEmailsTitleSent": {
+        "message": "the sent emails"
+    },
+    "browserPopupEmailsTitleReceived": {
+        "message": "the received emails"
+    },
+    "browserPopupEmailsTitleBoth": {
+        "message": "all emails"
+    },
+    "browserPopupEmailsOf": {
+        "message": "of"
+    },
+    "browserPopupAddresses": {
+        "message": "All email addresses"
+    },
+    "equivalences": {
+        "message": "Equivalences"
+    },
+    "equivalencesCo2": {
+        "message": "Emission of $CO2$e",
+        "placeholders": {
+            "CO2": {
+                "content": "CO<sub>2</sub>"
+            }
+        }
+    },
+    "equivalencesPetroleum": {
+        "message": "Consumption of oil"
+    },
+    "equivalencesCar": {
+        "message": "Distance travelled by car"
+    },
+    "equivalencesTgv": {
+        "message": "Distance travelled by a person by TGV"
+    },
+    "equivalencesBulb": {
+        "message": "Time of use of a light bulb of"
+    },
+    "equivalencesBreathing": {
+        "message": "Breathing duration"
     },
     "link": {
         "message": "link"

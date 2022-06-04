@@ -32,16 +32,16 @@ function display() {
     let periode_title;
     switch (periode) {
         case "week":
-            periode_title = "Analyse des 7 derniers jours";
+            periode_title = browser.i18n.getMessage("browserPopupPeriodTitleWeek");
             break;
         case "month":
-            periode_title = "Analyse des 30 derniers jours";
+            periode_title = browser.i18n.getMessage("browserPopupPeriodTitleMonth");
             break;
         case "year":
-            periode_title = "Analyse de l'année en cours";
+            periode_title = browser.i18n.getMessage("browserPopupPeriodTitleYear");
             break;
         case "forever":
-            periode_title = "Analyse depuis toujours";
+            periode_title = browser.i18n.getMessage("browserPopupPeriodTitleForever");
             break;
     }
 
@@ -55,17 +55,17 @@ function display() {
     let mails_title;
     switch (mails) {
         case "sent":
-            mails_title = "les mails envoyés";
+            mails_title = browser.i18n.getMessage("browserPopupEmailsTitleSent");
             break;
         case "received":
-            mails_title = "les mails reçus";
+            mails_title = browser.i18n.getMessage("browserPopupEmailsTitleReceived");
             break;
         case "all":
-            mails_title = "tous les mails";
+            mails_title = browser.i18n.getMessage("browserPopupEmailsTitleBoth");
             break;
     }
 
-    document.getElementById("data_title").innerText = `${periode_title} sur ${mails_title}`;
+    document.getElementById("data_title").innerText = `${periode_title} ` + browser.i18n.getMessage("browserPopupEmailsOf") + ` ${mails_title}`;
 
     // Obtention de l'adresse sélectionnée
     const address = document.getElementById("address").value;
@@ -110,7 +110,7 @@ async function calculate() {
     TGV = preferencesValues.TGV ? parseFloat(preferencesValues.TGV) : 1.73e-3; // en g CO2e/m
     BULB = preferencesValues.BULB ? parseFloat(preferencesValues.BULB) : 0.0599 / 60; // en g CO2e/(W.min) (électricité)
     BULBW = preferencesValues.BULBW ? parseFloat(preferencesValues.BULBW) : 40; // en W
-    document.getElementById("bulbw").insertAdjacentHTML('beforeend', BULBW + " W");
+    document.getElementById("bulbw").insertAdjacentHTML('beforeend', " " + BULBW + " W");
     BREATHING = preferencesValues.BREATHING ? parseFloat(preferencesValues.BREATHING) : 1.131; // en g CO2/min
 
     YEAR = 365.25 * 24 * 3600 * 1000; // ms
