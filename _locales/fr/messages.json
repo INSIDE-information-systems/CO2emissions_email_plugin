@@ -15,6 +15,9 @@
     "message": "Estimation CO₂",
     "description": "Titre du bouton pour ouvrir la popup dans la fenêtre de rédaction d'un courriel."
   },
+  "composePopupTitle": {
+    "message": "Estimation de l'impact environnemental global de ce courriel"
+  },
   "browserActionTitle": {
     "message": "Tableau de bord",
     "description": "Titre du bouton pour ouvrir la popup dans la fenêtre principale."

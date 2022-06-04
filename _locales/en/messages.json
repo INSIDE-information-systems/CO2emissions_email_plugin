@@ -15,6 +15,9 @@
     "message": "CO₂ estimation",
     "description": "Title of the button to open the popup in compose menu."
   },
+  "composePopupTitle": {
+    "message": "Estimation of the global envrionmental impact of this email"
+  },
   "browserActionTitle": {
     "message": "Dashboard",
     "description": "Title of the button to open the popup in browser menu."
