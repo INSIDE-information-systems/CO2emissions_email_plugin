@@ -92,7 +92,7 @@ export function formatTime(time, decimals = 1) {
 
     if (time >= 1440) { // base 24
         time = time / (60 * 24);
-        return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " j";
+        return parseFloat(time.toFixed(decimals)).toString().replace(".", ",") + " " + browser.i18n.getMessage("dayShort");
     }
 }
 

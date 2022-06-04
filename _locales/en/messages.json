@@ -11,10 +11,13 @@
         "message": "Estimate your CO₂ when you write an email",
         "description": "Description of the extension."
     },
+
+
     "composeActionTitle": {
         "message": "CO₂ estimation",
         "description": "Title of the button to open the popup in compose menu."
     },
+
     "composePopupTitle": {
         "message": "Estimation of the environmental impact of the sending of this email"
     },
@@ -60,10 +63,13 @@
     "composeSignature": {
         "message": "{0}According to the extension {1}, sending this email of {2} to {3} recipient{4} results in the indirect emission of {5} CO{6}e. This corresponds to the consumption of {7} of petroleum, the travel of {8} by car or {9} by TGV, the use of a light bulb of {10} W during {11}, or the breathing of a human being during {12}.{13}Sources: ADEME's base carbone® (2017 à 2020), ADEME (2011), Zhang et al. (2011).{14}"
     },
+
+
     "browserActionTitle": {
         "message": "Dashboard",
         "description": "Title of the button to open the popup in browser menu."
     },
+
     "browserPopupTitle": {
         "message": "Dashboard - Estimate your CO₂"
     },
@@ -121,6 +127,40 @@
     "browserPopupAddresses": {
         "message": "All email addresses"
     },
+
+
+    "preferencesTitle": {
+        "message": "Preferences - Estimate your CO₂"
+    },
+    "preferences": {
+        "message": "Preferences"
+    },
+    "preferencesValues": {
+        "message": "Reference values"
+    },
+    "preferencesValuesIntro": {
+        "message": "Below are the values used to estimate the equivalences."
+    },
+    "preferencesValuesCo2Fixed": {
+        "message": "fixed part"
+    },
+    "preferencesValuesCo2Variable": {
+        "message": "variable part"
+    },
+    "preferencesValuesPetroleum": {
+        "message": "of petroleum"
+    },
+    "preferencesValuesStorage": {
+        "message": "Email storage"
+    },
+    "preferencesValuesElectricity": {
+        "message": "Server electricity"
+    },
+
+
+    "equivalence": {
+        "message": "Equivalence"
+    },
     "equivalences": {
         "message": "Equivalences"
     },
@@ -146,6 +186,24 @@
     },
     "equivalencesBreathing": {
         "message": "Breathing duration"
+    },
+    "value": {
+        "message": "Value"
+    },
+    "unit": {
+        "message": "Unit"
+    },
+    "defaultValue": {
+        "message": "Default value"
+    },
+    "reference": {
+        "message": "Reference"
+    },
+    "save": {
+        "message": "Save"
+    },
+    "reset": {
+        "message": "Reset to default"
     },
     "link": {
         "message": "link"
@@ -173,5 +231,26 @@
     },
     "byte": {
         "message": "byte"
+    },
+    "dayShort": {
+        "message": "d"
+    },
+    "petroleum": {
+        "message": "Petroleum"
+    },
+    "car": {
+        "message": "Car"
+    },
+    "tgv": {
+        "message": "TGV"
+    },
+    "bulb": {
+        "message": "Bulb"
+    },
+    "bulbw": {
+        "message": "Bulb (power)"
+    },
+    "breathing": {
+        "message": "Breathing"
     }
 }
