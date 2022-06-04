@@ -1,25 +1,120 @@
 {
-  "extensionName": {
-    "message": "Estimate your CO₂",
-    "description": "Name of the extension."
-  },
-  "extensionShortName": {
-    "message": "Email CO₂",
-    "description": "Short name of the extension."
-  },
-  "extensionDescription": {
-    "message": "Estimate your CO₂ when you write an email",
-    "description": "Description of the extension."
-  },
-  "composeActionTitle": {
-    "message": "CO₂ estimation",
-    "description": "Title of the button to open the popup in compose menu."
-  },
-  "composePopupTitle": {
-    "message": "Estimation of the global envrionmental impact of this email"
-  },
-  "browserActionTitle": {
-    "message": "Dashboard",
-    "description": "Title of the button to open the popup in browser menu."
-  }
+    "extensionName": {
+        "message": "Estimate your CO₂",
+        "description": "Name of the extension."
+    },
+    "extensionShortName": {
+        "message": "Email CO₂",
+        "description": "Short name of the extension."
+    },
+    "extensionDescription": {
+        "message": "Estimate your CO₂ when you write an email",
+        "description": "Description of the extension."
+    },
+    "composeActionTitle": {
+        "message": "CO₂ estimation",
+        "description": "Title of the button to open the popup in compose menu."
+    },
+    "composePopupTitle": {
+        "message": "Estimation of the environmental impact of the sending of this email"
+    },
+    "composePopupHeader": {
+        "message": "Estimation of the global environmental impact of this email"
+    },
+    "composePopupExplanationIntro1": {
+        "message": "The following are taken into account: manufacturing electrical and electronic equipment (EEE), sending and storing, transmitting, treating, receiving, using, and the end-of-life of EEE."
+    },
+    "composePopupExplanationIntro2": {
+        "message": "For more information, please see the references:"
+    },
+    "composePopupSizesHeader": {
+        "message": "Size of the header (approximate)"
+    },
+    "composePopupSizesRecipientsWarning": {
+        "message": "Is it necessary to send this email to that many addresses?"
+    },
+    "composePopupSizesBody": {
+        "message": "Size of the body"
+    },
+    "composePopupSizesAttachment": {
+        "message": "Size of the attachments"
+    },
+    "composePopupSizesAttachmentWarning": {
+        "message": "Think about USB sticks or"
+    },
+    "composePopupSizesAttachmentWarningLink": {
+        "message": "file transfer applications"
+    },
+    "composePopupSizesTotal": {
+        "message": "Total size"
+    },
+    "composePopupEquivalences": {
+        "message": "Equivalences"
+    },
+    "composePopupEquivalencesCo2": {
+        "message": "Emission of $CO2$e",
+        "placeholders": {
+            "CO2": {
+                "content": "CO<sub>2</sub>"
+            }
+        }
+    },
+    "composePopupEquivalencesPetroleum": {
+        "message": "Consumption of oil"
+    },
+    "composePopupEquivalencesCar": {
+        "message": "Distance travelled by car"
+    },
+    "composePopupEquivalencesTgv": {
+        "message": "Distance travelled by a person by TGV"
+    },
+    "composePopupEquivalencesBulb": {
+        "message": "Time of use of a light bulb of"
+    },
+    "composePopupEquivalencesBreathing": {
+        "message": "Breathing duration"
+    },
+    "composePopupAdd": {
+        "message": "Add to the email!"
+    },
+    "composePopupRemove": {
+        "message": "Remove from the email!"
+    },
+    "composePopupRecommendations": {
+        "message": "Some recommendations to reduce one's impact"
+    },
+    "composeSignature": {
+        "message": "{0}According to the extension {1}, sending this email of {2} to {3} recipient{4} results in the indirect emission of {5} CO{6}e. This corresponds to the consumption of {7} of petroleum, the travel of {8} by car or {9} by TGV, the use of a light bulb of {10} W during {11}, or the breathing of a human being during {12}.{13}Sources: ADEME's base carbone® (2017 à 2020), ADEME (2011), Zhang et al. (2011).{14}"
+    },
+    "browserActionTitle": {
+        "message": "Dashboard",
+        "description": "Title of the button to open the popup in browser menu."
+    },
+    "link": {
+        "message": "link"
+    },
+    "and": {
+        "message": "and"
+    },
+    "calculation": {
+        "message": "Calculation..."
+    },
+    "recipientShort": {
+        "message": "rec."
+    },
+    "recipient": {
+        "message": "recipient"
+    },
+    "punctuationSpace": {
+        "message": ""
+    },
+    "to": {
+        "message": "to"
+    },
+    "byteShort": {
+        "message": "B"
+    },
+    "byte": {
+        "message": "byte"
+    }
 }

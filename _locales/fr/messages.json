@@ -1,25 +1,120 @@
 {
-  "extensionName": {
-    "message": "Estimez votre CO₂",
-    "description": "Nom de l'extension."
-  },
-  "extensionShortName": {
-    "message": "Mail CO₂",
-    "description": "Nom raccourci de l'extension."
-  },
-  "extensionDescription": {
-    "message": "Estimez votre CO₂ quand vous rédigez un courriel",
-    "description": "Description de l'extension."
-  },
-  "composeActionTitle": {
-    "message": "Estimation CO₂",
-    "description": "Titre du bouton pour ouvrir la popup dans la fenêtre de rédaction d'un courriel."
-  },
-  "composePopupTitle": {
-    "message": "Estimation de l'impact environnemental global de ce courriel"
-  },
-  "browserActionTitle": {
-    "message": "Tableau de bord",
-    "description": "Titre du bouton pour ouvrir la popup dans la fenêtre principale."
-  }
+    "extensionName": {
+        "message": "Estimez votre CO₂",
+        "description": "Nom de l'extension."
+    },
+    "extensionShortName": {
+        "message": "Mail CO₂",
+        "description": "Nom raccourci de l'extension."
+    },
+    "extensionDescription": {
+        "message": "Estimez votre CO₂ quand vous rédigez un courriel",
+        "description": "Description de l'extension."
+    },
+    "composeActionTitle": {
+        "message": "Estimation CO₂",
+        "description": "Titre du bouton pour ouvrir la popup dans la fenêtre de rédaction d'un courriel."
+    },
+    "composePopupTitle": {
+        "message": "Estimation de l'impact environnemental de l'envoi de ce courriel"
+    },
+    "composePopupHeader": {
+        "message": "Estimation de l'impact environnemental global de ce courriel"
+    },
+    "composePopupExplanationIntro1": {
+        "message": "Sont pris en compte : la fabrication des équipements électriques et électroniques (EEE), l'envoi et le stockage, la transmission, le traitement, la réception, l'utilisation, et la fin de vie des EEE."
+    },
+    "composePopupExplanationIntro2": {
+        "message": "Pour plus d'informations, voir les sources :"
+    },
+    "composePopupSizesHeader": {
+        "message": "Taille de l'en-tête (approximative)"
+    },
+    "composePopupSizesRecipientsWarning": {
+        "message": "Est-il nécessaire d’envoyer ce courriel à autant d’adresses ?"
+    },
+    "composePopupSizesBody": {
+        "message": "Taille du corps de texte"
+    },
+    "composePopupSizesAttachment": {
+        "message": "Taille des pièces jointes"
+    },
+    "composePopupSizesAttachmentWarning": {
+        "message": "Pensez aux clés USB ou aux"
+    },
+    "composePopupSizesAttachmentWarningLink": {
+        "message": "applications d’envoi de fichiers"
+    },
+    "composePopupSizesTotal": {
+        "message": "Taille totale"
+    },
+    "composePopupEquivalences": {
+        "message": "Équivalences"
+    },
+    "composePopupEquivalencesCo2": {
+        "message": "Émission de $CO2$e",
+        "placeholders": {
+            "CO2": {
+                "content": "CO<sub>2</sub>"
+            }
+        }
+    },
+    "composePopupEquivalencesPetroleum": {
+        "message": "Consommation de pétrole"
+    },
+    "composePopupEquivalencesCar": {
+        "message": "Distance parcourue en voiture"
+    },
+    "composePopupEquivalencesTgv": {
+        "message": "Distance parcourue par une personne en TGV"
+    },
+    "composePopupEquivalencesBulb": {
+        "message": "Temps d'utilisation d'une ampoule de"
+    },
+    "composePopupEquivalencesBreathing": {
+        "message": "Durée de respiration"
+    },
+    "composePopupAdd": {
+        "message": "Ajouter au courriel !"
+    },
+    "composePopupRemove": {
+        "message": "Retirer du courriel !"
+    },
+    "composePopupRecommendations": {
+        "message": "Quelques préconisations pour réduire son impact"
+    },
+    "composeSignature": {
+        "message": "{0}D'après l'extension {1}, l'envoi de courriel de {2} à {3} destinataire{4} entraîne l'émission indirecte de {5} CO{6}e. Cela correspond à la consommation de {7} de pétrole, au parcours de {8} en voiture ou de {9} en TGV, à l'utilisation d'une ampoule de {10} W pendant {11}, ou encore à la respiration d'un humain pendant {12}.{13}Sources : base carbone® de l'ADEME (2017 à 2020), ADEME (2011), Zhang et al. (2011).{14}"
+    },
+    "browserActionTitle": {
+        "message": "Tableau de bord",
+        "description": "Titre du bouton pour ouvrir la popup dans la fenêtre principale."
+    },
+    "link": {
+        "message": "lien"
+    },
+    "and": {
+        "message": "et"
+    },
+    "calculation": {
+        "message": "Calcul..."
+    },
+    "recipientShort": {
+        "message": "dest."
+    },
+    "recipient": {
+        "message": "destinataire"
+    },
+    "punctuationSpace": {
+        "message": " "
+    },
+    "to": {
+        "message": "à"
+    },
+    "byteShort": {
+        "message": "o"
+    },
+    "byte": {
+        "message": "octet"
+    }
 }

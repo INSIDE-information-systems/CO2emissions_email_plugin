@@ -68,13 +68,13 @@ async function calculate(tabInfo) {
     respiration = co2 / BREATHING;
 
     // Affichage des équivalences
-    document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-    document.getElementById("oil").innerHTML = formatGrammes(petrole) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-    document.getElementById("car").innerHTML = formatDistance(voiture) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-    document.getElementById("tgv").innerHTML = formatDistance(tgv) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-    document.getElementById("bulbw").insertAdjacentHTML('beforeend', BULBW + " W");
-    document.getElementById("bulb").innerHTML = formatTime(ampoule) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
-    document.getElementById("breathing").innerHTML = formatTime(respiration) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>dest.<span class='tooltiptext tooltiptext-left'>destinataire</span></div>" : "");
+    document.getElementById("co2").innerHTML = formatGrammes(co2) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>" + browser.i18n.getMessage("recipientShort") + "<span class='tooltiptext tooltiptext-left'>" + browser.i18n.getMessage("recipient") + "</span></div>" : "");
+    document.getElementById("oil").innerHTML = formatGrammes(petrole) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>" + browser.i18n.getMessage("recipientShort") + "<span class='tooltiptext tooltiptext-left'>" + browser.i18n.getMessage("recipient") + "</span></div>" : "");
+    document.getElementById("car").innerHTML = formatDistance(voiture) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>" + browser.i18n.getMessage("recipientShort") + "<span class='tooltiptext tooltiptext-left'>" + browser.i18n.getMessage("recipient") + "</span></div>" : "");
+    document.getElementById("tgv").innerHTML = formatDistance(tgv) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>" + browser.i18n.getMessage("recipientShort") + "<span class='tooltiptext tooltiptext-left'>" + browser.i18n.getMessage("recipient") + "</span></div>" : "");
+    document.getElementById("bulbw").insertAdjacentHTML('beforeend', " " + BULBW + " W");
+    document.getElementById("bulb").innerHTML = formatTime(ampoule) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>" + browser.i18n.getMessage("recipientShort") + "<span class='tooltiptext tooltiptext-left'>" + browser.i18n.getMessage("recipient") + "</span></div>" : "");
+    document.getElementById("breathing").innerHTML = formatTime(respiration) + (recipientsCount === 0 ? "/<div class='tooltip tooltip-left'>" + browser.i18n.getMessage("recipientShort") + "<span class='tooltiptext tooltiptext-left'>" + browser.i18n.getMessage("recipient") + "</span></div>" : "");
 
     // Paramétrage des boutons pour ajouter / supprimer la signature
     document.getElementById("addEqui").onclick = () => { addEquivalences(tabInfo[0].id) };
@@ -84,13 +84,13 @@ async function calculate(tabInfo) {
     // Affichage avertissement en cas de pièce jointe équivalente à 1 Mo
     var needsAttachmentWarning = recipientsCount === 0 ? (attachmentsSize / MO >= 1) : (attachmentsSize * recipientsCount / MO >= 1); // si pièce jointe grosse et/ou envoyée à trop de destinataires
     if (needsAttachmentWarning) {
-        document.getElementById("attachmentWarning").innerHTML = '<img src="../images/warning-icon-red.png" alt="Warning icon" title="Warning" height="14px" /><span class="tooltiptext tooltiptext-left" style="width: 130px; margin-top: -25px;"><small>Pensez aux clés USB ou aux <a href="https://alt.framasoft.org/fr/framadrop">applications d\'envoi de fichiers</a> !</small></span>';
+        document.getElementById("attachmentWarning").innerHTML = '<img src="../images/warning-icon-red.png" alt="Warning icon" title="Warning" height="14px" /><span class="tooltiptext tooltiptext-left" style="width: 130px; margin-top: -25px;"><small>' + browser.i18n.getMessage("composePopupSizesAttachmentWarning") + '<a href="https://alt.framasoft.org/fr/framadrop">' + browser.i18n.getMessage("composePopupSizesAttachmentWarningLink") + '</a>' + browser.i18n.getMessage("punctuationSpace") + '!</small></span>';
     }
 
     // Affichage avertissement en cas d'un grand nombre de destinataires
     var needsRecipientsWarning = recipientsCount >= 10; // si nombre de destinataires important
     if (needsRecipientsWarning) {
-        document.getElementById("recipientsWarning").innerHTML = '<img src="../images/warning-icon-red.png" alt="Warning icon" title="Warning" height="14px" /><span class="tooltiptext tooltiptext-left" style="width: 190px; margin-top: -14px;"><small>Est-il nécessaire d\'envoyer ce courriel à autant d\'adresses ?</small></span>';
+        document.getElementById("recipientsWarning").innerHTML = '<img src="../images/warning-icon-red.png" alt="Warning icon" title="Warning" height="14px" /><span class="tooltiptext tooltiptext-left" style="width: 190px; margin-top: -14px;"><small>' + browser.i18n.getMessage("composePopupSizesRecipientsWarning") + '</small></span>';
     }
 
     // Bouton des préférences
@@ -98,10 +98,7 @@ async function calculate(tabInfo) {
 }
 
 
-const signature = "{0}D'après l'extension {1}, l'envoi de courriel de {2} à {3} destinataire{4} entraîne l'émission indirecte " +
-    "de {5} CO{6}e. Cela correspond à la consommation de {7} de pétrole, au parcours de {8} en voiture ou de {9} en TGV, " +
-    "à l'utilisation d'une ampoule de {10} W pendant {11}, ou encore à la respiration d'un humain pendant {12}.{13}" +
-    "Sources : base carbone® de l'ADEME (2017 à 2020), ADEME (2011), Zhang et al. (2011).{14}"
+const signature = browser.i18n.getMessage("composeSignature");
 
 /**
  * Ajoute une signature au mail
@@ -118,7 +115,7 @@ async function addEquivalences(tab) {
 
         // Modification du texte
         body += signature.format(
-            "\n\n", "Estimez votre CO₂ (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/)",
+            "\n\n", browser.i18n.getMessage("extensionName") + " (https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/)",
             formatBytes(totalSize, false), recipientsCount === 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
             formatGrammes(co2), "₂", formatGrammes(petrole), formatDistance(voiture),
             formatDistance(tgv), BULBW, formatTime(ampoule), formatTime(respiration), "\n", "");
@@ -133,7 +130,7 @@ async function addEquivalences(tab) {
 
         // Modification du texte
         body += signature.format(
-            "<p><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">Estimez votre CO<sub>2</sub></a>",
+            "<p><small>", "<a href=\"https://addons.thunderbird.net/fr/thunderbird/addon/estimez-votre-co2/\">" + browser.i18n.getMessage("extensionName") + "</a>",
             formatBytes(totalSize, false), recipientsCount === 0 ? 1 : recipientsCount, recipientsCount <= 1 ? "" : "s",
             formatGrammes(co2), "<sub>2</sub>", formatGrammes(petrole), formatDistance(voiture), formatDistance(tgv), BULBW,
             formatTime(ampoule), formatTime(respiration), "<br>", "</small></p>");
@@ -158,10 +155,10 @@ async function removeEquivalences(tab) {
         details.body = null;
 
         // Recherche du texte ajouté
-        let indexStart = body.indexOf("\n\nD'après l'extension Estimez votre CO₂");
+        let indexStart = body.indexOf("\n\n" + browser.i18n.getMessage("composeSignature").substring(3, browser.i18n.getMessage("composeSignature").indexOf("extension") + 9));
         if (indexStart === -1) return;
 
-        let indexEnd = body.indexOf("Zhang et al. (2011).", indexStart) + 20;
+        let indexEnd = body.indexOf("(2011).", indexStart) + 7;
 
         // Modification du texte
         let text = body.substring(indexStart, indexEnd);
@@ -175,7 +172,7 @@ async function removeEquivalences(tab) {
         details.plainTextBody = null;
 
         // Recherche du texte ajouté
-        let indexStart = body.indexOf("<p><small>D'après l'extension");
+        let indexStart = body.indexOf("<p><small>" + browser.i18n.getMessage("composeSignature").substring(3, browser.i18n.getMessage("composeSignature").indexOf("extension") + 9));
         if (indexStart === -1) return;
         let indexEnd = body.indexOf("(2011).</small></p>", indexStart) + 19;
 

@@ -15,12 +15,14 @@ export function lengthInUtf8Bytes(str) {
  * @returns {String}
  */
 export function formatBytes(bytes, tooltip = true, decimals = 2) {
-    if (bytes === 0) return tooltip ? "0 <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : "0 octet";
+    if (bytes === 0) return tooltip ? "0 <div class='tooltip tooltip-left'>" + browser.i18n.getMessage("byteShort") + "<span class='tooltiptext tooltiptext-left'>" + browser.i18n.getMessage("byte") + "</span></div>" : "0" + browser.i18n.getMessage("byte");
     if (bytes < 2) return parseFloat(bytes.toFixed(decimals)).toString().replace(".", ",") + tooltip ? " <div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octet</span></div>" : " octet";
 
     const k = 1024;
     const dm = decimals < 0 ? 0 : decimals;
-    const sizes = [tooltip ? "<div class='tooltip tooltip-left'>o<span class='tooltiptext tooltiptext-left'>octets</span></div>" : "octets", 'ko', 'Mo', 'Go'];
+    const sizes = [tooltip ? "<div class='tooltip tooltip-left'>" + browser.i18n.getMessage("byteShort") + "<span class='tooltiptext tooltiptext-left'>" + browser.i18n.getMessage("byte") + "s</span></div>" : browser.i18n.getMessage("byte") + "s", 'k' +
+        browser.i18n.getMessage("byteShort"), 'M' + browser.i18n.getMessage("byteShort"), 'G' + browser.i18n.getMessage("byteShort")
+    ];
 
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
