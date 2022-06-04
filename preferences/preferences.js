@@ -5,7 +5,7 @@ function saveOptionsValues(e) {
         CO2: document.querySelector("#CO2").value,
         CO2u: document.querySelector("#CO2u").value,
         KWH_STOCK: document.querySelector("#KWH_STOCK").value,
-        KWH_STOCK: ELECTRICALMIXES[document.querySelector("#ELEC_STOCK").value],
+        ELEC_STOCK: { country: document.querySelector("#ELEC_STOCK").value, elec: ELECTRICALMIXES[document.querySelector("#ELEC_STOCK").value] },
         OIL: document.querySelector("#OIL").value,
         CAR: document.querySelector("#CAR").value,
         TGV: document.querySelector("#TGV").value,
@@ -21,7 +21,7 @@ function restoreOptionsValues() {
         document.querySelector("#CO2").value = result.CO2 || document.getElementById("defaultCO2").innerHTML;
         document.querySelector("#CO2u").value = result.CO2u || document.getElementById("defaultCO2u").innerHTML;
         document.querySelector("#KWH_STOCK").value = result.KWH_STOCK || document.getElementById("defaultKWH_STOCK").innerHTML;
-        document.querySelector("#ELEC_STOCK").value = result.ELEC_STOCK || document.getElementById("defaultELEC_STOCK").innerHTML;
+        document.querySelector("#ELEC_STOCK").value = result.ELEC_STOCK.country || document.getElementById("defaultELEC_STOCK").innerHTML;
         document.querySelector("#OIL").value = result.OIL || document.getElementById("defaultOIL").innerHTML;
         document.querySelector("#CAR").value = result.CAR || document.getElementById("defaultCAR").innerHTML;
         document.querySelector("#TGV").value = result.TGV || document.getElementById("defaultTGV").innerHTML;
