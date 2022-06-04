@@ -20,6 +20,7 @@ table {
     table-layout: fixed;
     margin-left: auto;
     margin-right: auto;
+    border-spacing: 0;
 }
 
 thead {
@@ -28,7 +29,7 @@ thead {
 
 td,
 th {
-    padding: 4px;
+    padding: 10px;
 }
 
 tr td:nth-child(1) {
@@ -41,6 +42,10 @@ tr td:nth-child(2) {
 
 tr td:nth-child(3) {
     text-align: left;
+}
+
+.border-top {
+    border-top: 2px solid black;
 }
 
 

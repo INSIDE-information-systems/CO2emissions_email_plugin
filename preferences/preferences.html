@@ -39,13 +39,6 @@
                     <td><a href="https://presse.ademe.fr/files/acv_ntic_synthese_resultats.pdf" target="_blank">ADEME, 2011</a></td>
                 </tr>
                 <tr>
-                    <td><label for="KWH_STOCK">Stockage d'un mail</label></td>
-                    <td><input type="number" step="any" id="KWH_STOCK" class="w3-input w3-light-grey"></td>
-                    <td>kWh / Go / an</td>
-                    <td id="defaultKWH_STOCK">2.35089166756806</td>
-                    <td>/</td>
-                </tr>
-                <tr>
                     <td><label for="OIL">Pétrole</label></td>
                     <td><input type="number" step="any" id="OIL" class="w3-input w3-light-grey"></td>
                     <td>g CO<sub>2</sub>e / g de pétrole</td>
@@ -86,6 +79,20 @@
                     <td>g CO<sub>2</sub> / min</td>
                     <td id="defaultBREATHING">1.131</td>
                     <td><a href="https://doi.org/10.1016/j.buildenv.2011.03.014" target="_blank">Zhang et al., 2011</a></td>
+                </tr>
+                <tr>
+                    <td class="border-top"><label for="KWH_STOCK">Stockage d'un courriel</label></td>
+                    <td class="border-top"><input type="number" step="any" id="KWH_STOCK" class="w3-input w3-light-grey"></td>
+                    <td class="border-top">kWh / Go / an</td>
+                    <td id="defaultKWH_STOCK" class="border-top">2.35089166756806</td>
+                    <td class="border-top"><a href="https://www.aceee.org/files/proceedings/2012/data/papers/0193-000409.pdf" target="_blank">ACEEE, 2012</a></td>
+                </tr>
+                <tr>
+                    <td><label for="ELEC_STOCK">Électricité des serveurs</label></td>
+                    <td><select name="ELEC_STOCK" id="ELEC_STOCK" class="w3-input w3-light-grey"></td>
+                    <td id="ELEC_STOCK_unit">/</td>
+                    <td id="defaultELEC_STOCK">France</td>
+                    <td><a href="https://bilans-ges.ademe.fr/fr/basecarbone/donnees-consulter/liste-element/categorie/68" target="_blank">ADEME, 2017</a></td>
                 </tr>
             </tbody>
         </table>

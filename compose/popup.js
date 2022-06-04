@@ -203,7 +203,7 @@ function openRecommendations() {
  */
 function openPreferences() {
     browser.tabs.create({
-        url: "preferences/preferences.html"
+        url: "../preferences/preferences.html"
     }).then(tab => {
         browser.windows.update(tab.windowId, {
             focused: true

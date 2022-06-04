@@ -16,7 +16,7 @@ async function* listMessages(folder) {
 
 
 let data = { accounts: [] };
-let CO2, CO2u, OIL, CAR, TGV, BULB, BULBW, BREATHING, KWH_STOCK, YEAR, CO2_BYTE_MS;
+let CO2, CO2u, OIL, CAR, TGV, BULB, BULBW, BREATHING, KWH_STOCK, YEAR, CO2_BYTE_MS, ELEC_STOCK;
 
 /**
  * Change les valeurs affichées en fonction de la sélection du formulaire
@@ -100,10 +100,11 @@ function display() {
  * @returns {Promise<void>}
  */
 async function calculate() {
-    let preferencesValues = await browser.storage.local.get(["CO2", "CO2u", "KWH_STOCK", "OIL", "CAR", "TGV", "BULB", "BULBW", "BREATHING"]);
+    let preferencesValues = await browser.storage.local.get(["CO2", "CO2u", "KWH_STOCK", "ELEC_STOCK", "OIL", "CAR", "TGV", "BULB", "BULBW", "BREATHING"]);
     CO2 = preferencesValues.CO2 ? parseFloat(preferencesValues.CO2) : 13; // en g/Mo
     CO2u = preferencesValues.CO2u ? parseFloat(preferencesValues.CO2u) : 6; // en g/Mo
     KWH_STOCK = preferencesValues.KWH_STOCK ? parseFloat(preferencesValues.KWH_STOCK) : 2.35089166756806; // en kWh/Go/an
+    ELEC_STOCK = preferencesValues.ELEC_STOCK ? parseFloat(preferencesValues.ELEC_STOCK) : 0.0599; // en g CO2e/Wh
     OIL = preferencesValues.OIL ? parseFloat(preferencesValues.OIL) : 3.34; // en g CO2e/g de pétrole
     CAR = preferencesValues.CAR ? parseFloat(preferencesValues.CAR) : 0.192; // en g CO2e/m
     TGV = preferencesValues.TGV ? parseFloat(preferencesValues.TGV) : 1.73e-3; // en g CO2e/m
@@ -112,8 +113,8 @@ async function calculate() {
     document.getElementById("bulbw").insertAdjacentHTML('beforeend', BULBW + " W");
     BREATHING = preferencesValues.BREATHING ? parseFloat(preferencesValues.BREATHING) : 1.131; // en g CO2/min
 
-    YEAR = 365.25*24*3600*1000; // ms
-    CO2_BYTE_MS = (KWH_STOCK/2**30/YEAR * 1000) * BULB*60; //gCO2e/octet/ms
+    YEAR = 365.25 * 24 * 3600 * 1000; // ms
+    CO2_BYTE_MS = (KWH_STOCK / 2 ** 30 / YEAR * 1000) * ELEC_STOCK; // g CO2e/octet/ms
 
     const accounts = await messenger.accounts.list();
 
