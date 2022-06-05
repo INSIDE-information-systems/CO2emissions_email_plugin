@@ -69,25 +69,28 @@ function display() {
 
     // Obtention de l'adresse sélectionnée
     const address = document.getElementById("address").value;
-    let co2 = 0.0;
+    let co2_stockage = 0.0;
+    let co2_sending = 0.0;
     let size = 0.0;
-    console.log(data);
     data.accounts.forEach(account => {
         if (address === "all" || address === account.name) {
-            co2 += account.co2[mails][periode];
+            co2_stockage += account.co2_stockage[mails][periode];
+            co2_sending += account.co2_sending[mails][periode];
             size += account.size[mails][periode];
         }
     });
 
-    const petrole = co2 / OIL;
-    const voiture = co2 / CAR;
-    const tgv = co2 / TGV;
-    const ampoule = co2 / (BULBW * BULB);
-    const respiration = co2 / BREATHING;
-
+    const petrole = co2_stockage + co2_sending / OIL;
+    const voiture = co2_stockage + co2_sending / CAR;
+    const tgv = co2_stockage + co2_sending / TGV;
+    const ampoule = co2_stockage + co2_sending / (BULBW * BULB);
+    const respiration = co2_stockage + co2_sending / BREATHING;
 
     document.getElementById("size").innerHTML = formatBytes(size);
-    document.getElementById("co2").innerHTML = formatGrammes(co2);
+    document.getElementById("co2_sending").innerHTML = formatGrammes(co2_sending);
+    document.getElementById("co2_stockage").innerHTML = formatGrammes(co2_stockage);
+
+    document.getElementById("co2").innerHTML = formatGrammes(co2_stockage + co2_sending);
     document.getElementById("oil").innerHTML = formatGrammes(petrole);
     document.getElementById("car").innerHTML = formatDistance(voiture);
     document.getElementById("tgv").innerHTML = formatDistance(tgv);
@@ -124,10 +127,24 @@ async function calculate() {
     now = now.getTime();
     firstJanuary = now - firstJanuary.getTime();
 
-    let diff, recipientsCount, co2value;
+    let diff, recipientsCount, co2value_sending, co2value_stockage;
 
     for (const account of accounts) {
-        let co2 = {
+        let co2_sending = {
+            sent: {
+                week: 0,
+                month: 0,
+                year: 0,
+                forever: 0
+            },
+            received: {
+                week: 0,
+                month: 0,
+                year: 0,
+                forever: 0
+            }
+        };
+        let co2_stockage = {
             sent: {
                 week: 0,
                 month: 0,
@@ -161,59 +178,70 @@ async function calculate() {
                 for await (const message of messages) {
                     diff = now - message.date;
                     recipientsCount = message.recipients.length + message.ccList.length + message.bccList.length;
-                    co2value = message.size * diff * CO2_BYTE_MS; // g CO2e
-                    co2value += recipientsCount === 0 ? message.size * (CO2 + CO2u) / MO : message.size * (CO2 + recipientsCount * CO2u) / MO;
+                    co2value_stockage = message.size * diff * CO2_BYTE_MS; // g CO2e
+                    co2value_sending = recipientsCount === 0 ? message.size * (CO2 + CO2u) / MO : message.size * (CO2 + recipientsCount * CO2u) / MO;
 
                     if (diff <= 604800000) { // 7 jours
-                        co2.sent.week += co2value;
-                        co2.sent.month += co2value;
+                        co2_sending.sent.week += co2value_sending;
+                        co2_sending.sent.month += co2value_sending;
+                        co2_stockage.sent.week += co2value_stockage;
+                        co2_stockage.sent.month += co2value_stockage;
                         size.sent.week += message.size;
                         size.sent.month += message.size;
                     } else if (diff <= 2592000000) { // 30 jours
-                        co2.sent.month += co2value;
+                        co2_sending.sent.month += co2value_sending;
+                        co2_stockage.sent.month += co2value_stockage;
                         size.sent.month += message.size;
                     }
                     if (diff <= firstJanuary) { // Année en cours
-                        co2.sent.year += co2value;
+                        co2_sending.sent.year += co2value_sending;
+                        co2_stockage.sent.year += co2value_stockage;
                         size.sent.year += message.size;
                     }
 
-                    co2.sent.forever += co2value;
+                    co2_sending.sent.forever += co2value_sending;
+                    co2_stockage.sent.forever += co2value_stockage;
                     size.sent.forever += message.size;
                 }
             } else {
                 for await (const message of messages) {
                     diff = now - message.date;
-                    //recipientsCount = message.recipients.length + message.ccList.length + message.bccList.length;
-                    co2value = message.size * diff * CO2_BYTE_MS;
-                    //co2value = recipientsCount === 0 ? message.size * (CO2 + CO2u) / MO : message.size * (CO2 + recipientsCount * CO2u) / MO;
+                    co2value_stockage = message.size * diff * CO2_BYTE_MS; // g CO2e
 
                     if (diff <= 604800000) { // 7 jours
-                        co2.received.week += co2value;
-                        co2.received.month += co2value;
+                        co2_stockage.received.week += co2value_stockage;
+                        co2_stockage.received.month += co2value_stockage;
                         size.received.week += message.size;
                         size.received.month += message.size;
                     } else if (diff <= 2592000000) { // 30 jours
-                        co2.received.month += co2value;
+                        co2_stockage.received.month += co2value_stockage;
                         size.received.month += message.size;
                     }
                     if (diff <= firstJanuary) { // Année en cours
-                        co2.received.year += co2value;
+                        co2_stockage.received.year += co2value_stockage;
                         size.received.year += message.size;
                     }
 
-                    co2.received.forever += co2value;
+                    co2_stockage.received.forever += co2value_stockage;
                     size.received.forever += message.size;
                 }
             }
         }
 
-        co2.all = {
-            week: co2.sent.week + co2.received.week,
-            month: co2.sent.month + co2.received.month,
-            year: co2.sent.year + co2.received.year,
-            forever: co2.sent.forever + co2.received.forever
+        co2_stockage.all = {
+            week: co2_stockage.sent.week + co2_stockage.received.week,
+            month: co2_stockage.sent.month + co2_stockage.received.month,
+            year: co2_stockage.sent.year + co2_stockage.received.year,
+            forever: co2_stockage.sent.forever + co2_stockage.received.forever
         }
+
+        co2_sending.all = {
+            week: co2_sending.sent.week + co2_sending.received.week,
+            month: co2_sending.sent.month + co2_sending.received.month,
+            year: co2_sending.sent.year + co2_sending.received.year,
+            forever: co2_sending.sent.forever + co2_sending.received.forever
+        }
+
         size.all = {
             week: size.sent.week + size.received.week,
             month: size.sent.month + size.received.month,
@@ -222,7 +250,8 @@ async function calculate() {
         }
         data.accounts.push({
             name: account.name,
-            co2: co2,
+            co2_sending: co2_sending,
+            co2_stockage: co2_stockage,
             size: size
         });
     }

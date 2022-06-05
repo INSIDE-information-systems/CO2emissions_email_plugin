@@ -127,6 +127,12 @@
     "browserPopupAddresses": {
         "message": "All email addresses"
     },
+    "browserPopupCo2Sending": {
+        "message": "Sending emissions"
+    },
+    "browserPopupCo2Stockage": {
+        "message": "Stockage emissions"
+    },
 
 
     "preferencesTitle": {
