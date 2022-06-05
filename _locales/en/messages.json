@@ -128,10 +128,10 @@
         "message": "All email addresses"
     },
     "browserPopupCo2Sending": {
-        "message": "Sending emissions"
+        "message": "Sending-related emissions"
     },
-    "browserPopupCo2Stockage": {
-        "message": "Stockage emissions"
+    "browserPopupCo2Storage": {
+        "message": "Storage-related emissions"
     },
 
 

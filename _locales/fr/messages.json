@@ -128,10 +128,10 @@
         "message": "Toutes les adresses"
     },
     "browserPopupCo2Sending": {
-        "message": "Emissions dûes à l'envoi"
+        "message": "Émissions dues à l'envoi"
     },
-    "browserPopupCo2Stockage": {
-        "message": "Emissions dûes au stockage"
+    "browserPopupCo2Storage": {
+        "message": "Émissions dues au stockage"
     },
 
 
