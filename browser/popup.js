@@ -104,7 +104,7 @@ async function calculate() {
     CO2 = preferencesValues.CO2 ? parseFloat(preferencesValues.CO2) : 13; // en g/Mo
     CO2u = preferencesValues.CO2u ? parseFloat(preferencesValues.CO2u) : 6; // en g/Mo
     KWH_STOCK = preferencesValues.KWH_STOCK ? parseFloat(preferencesValues.KWH_STOCK) : 2.35089166756806; // en kWh/Go/an
-    ELEC_STOCK = preferencesValues.ELEC_STOCK.elec ? parseFloat(preferencesValues.ELEC_STOCK.elec) : 0.0599; // en g CO2e/Wh
+    ELEC_STOCK = preferencesValues.ELEC_STOCK ? parseFloat(preferencesValues.ELEC_STOCK.elec) : 0.0599; // en g CO2e/Wh
     OIL = preferencesValues.OIL ? parseFloat(preferencesValues.OIL) : 3.34; // en g CO2e/g de pétrole
     CAR = preferencesValues.CAR ? parseFloat(preferencesValues.CAR) : 0.192; // en g CO2e/m
     TGV = preferencesValues.TGV ? parseFloat(preferencesValues.TGV) : 1.73e-3; // en g CO2e/m
