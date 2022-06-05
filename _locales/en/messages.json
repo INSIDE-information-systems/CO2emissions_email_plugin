@@ -252,5 +252,45 @@
     },
     "breathing": {
         "message": "Breathing"
+    },
+
+    "reminder1": {
+        "message": "Remember to regularly delete your emails, especially those containing attachments."
+    },
+    "reminder2": {
+        "message": "Consider using thumb drives or large file drop tools instead of emailing them."
+    },
+    "reminder3": {
+        "message": "Avoid replacing your digital equipment on a whim or following a promotional offer."
+    },
+    "reminder4": {
+        "message": "Prioritize repair over replacement in the event of a breakdown."
+    },
+    "reminder5": {
+        "message": "Favor the gift or the exchange to the replacement."
+    },
+    "reminder6": {
+        "message": "Remember to turn off the devices if you are not using them instead of putting them on standby."
+    },
+    "reminder7": {
+        "message": "Limit the number of recipients when sending emails."
+    },
+    "reminder8": {
+        "message": "Print only what is needed and when needed."
+    },
+    "reminder9": {
+        "message": "Do not keep your old electronic devices; take them to a reseller."
+    },
+    "reminder10": {
+        "message": "Unsubscribe from mailing lists that no longer interest you."
+    },
+    "reminder11": {
+        "message": "Only keep online and on your equipment what is useful to you."
+    },
+    "reminder12": {
+        "message": "Optimize the size of the files you transmit by using compressed and low definition files."
+    },
+    "reminderTitle": {
+        "message": "Estimate your CO₂ — Bi-monthly Friendly Reminder"
     }
 }

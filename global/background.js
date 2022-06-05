@@ -6,20 +6,10 @@ function onError(error) {
     console.log(`Error: ${error}`);
 }
 
-const reminders = [ // Liste de recommandations
-    "N'oubliez pas de supprimer régulièrement vos courriels, notamment ceux contenant des pièces jointes.",
-    "Pensez à utiliser des clés USB ou des outils de dépôt de gros fichiers au lieu de les transmettre par courriel.",
-    "Évitez de remplacer vos équipements numériques sur un coup de tête ou suite à une offre promotionnelle.",
-    "Privilégiez la réparation au remplacement en cas de panne.",
-    "Privilégiez le don ou l'échange au remplacement.",
-    "Pensez à éteindre les appareils si vous ne les utilisez pas au lieu de les mettre en veille.",
-    "Limitez le nombre de destinataires lors de l'envoi de courriels.",
-    "Imprimez seulement ce qui est utile et lorsque c'est nécessaire.",
-    "Ne conservez pas vos anciens appareils électroniques ; rapportez-les chez un revendeur.",
-    "Désinscrivez-vous des listes de diffusion qui ne vous intéressent plus.",
-    "Ne conservez en ligne et sur vos équipements que ce qui vous est utile.",
-    "Optimisez la taille des fichiers que vous transmettez en s'aidant des fichiers compressés et en basse définition."
-];
+let reminders = []; // Liste de recommandations
+for (let i = 1; i <= 12; i++) {
+    reminders.push(browser.i18n.getMessage(`reminder${i}`));
+}
 
 /**
  * Envoie une notification de préconisation
@@ -34,7 +24,7 @@ function regularReminder() {
                     friendlyReminderDate: today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate()
                 });
 
-                title = "Estimez votre CO₂ — Rappel amical bimensuel"; // titre de la notification
+                title = browser.i18n.getMessage("reminderTitle"); // titre de la notification
 
                 var reminderChoice = Math.floor(Math.random() * reminders.length); // entier au hasard entre 0 et le nombre de reminders - 1
                 content = reminders[reminderChoice]; // recommandation au hasard

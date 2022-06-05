@@ -252,5 +252,45 @@
     },
     "breathing": {
         "message": "Respiration"
+    },
+
+    "reminder1": {
+        "message": "N'oubliez pas de supprimer régulièrement vos courriels, notamment ceux contenant des pièces jointes."
+    },
+    "reminder2": {
+        "message": "Pensez à utiliser des clés USB ou des outils de dépôt de gros fichiers au lieu de les transmettre par courriel."
+    },
+    "reminder3": {
+        "message": "Évitez de remplacer vos équipements numériques sur un coup de tête ou suite à une offre promotionnelle."
+    },
+    "reminder4": {
+        "message": "Privilégiez la réparation au remplacement en cas de panne."
+    },
+    "reminder5": {
+        "message": "Privilégiez le don ou l'échange au remplacement."
+    },
+    "reminder6": {
+        "message": "Pensez à éteindre les appareils si vous ne les utilisez pas au lieu de les mettre en veille."
+    },
+    "reminder7": {
+        "message": "Limitez le nombre de destinataires lors de l'envoi de courriels."
+    },
+    "reminder8": {
+        "message": "Imprimez seulement ce qui est utile et lorsque c'est nécessaire."
+    },
+    "reminder9": {
+        "message": "Ne conservez pas vos anciens appareils électroniques ; rapportez-les chez un revendeur."
+    },
+    "reminder10": {
+        "message": "Désinscrivez-vous des listes de diffusion qui ne vous intéressent plus."
+    },
+    "reminder11": {
+        "message": "Ne conservez en ligne et sur vos équipements que ce qui vous est utile."
+    },
+    "reminder12": {
+        "message": "Optimisez la taille des fichiers que vous transmettez en s'aidant des fichiers compressés et en basse définition."
+    },
+    "reminderTitle": {
+        "message": "Estimez votre CO₂ — Rappel amical bimensuel"
     }
 }
