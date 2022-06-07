@@ -129,6 +129,24 @@ async function calculate() {
 
     let diff, recipientsCount, co2value_sending, co2value_stockage;
 
+    // On compte le nombre de mails
+    let totalCount = 0;
+    for (const account of accounts) {
+        let folders = account.folders;
+        while (folders.length !== 0) {
+            const folder = folders.shift(); // Supprime le premier dossier de la liste et le renvoie
+            const infos = await messenger.folders.getFolderInfo(folder);
+            totalCount += infos.totalMessageCount;
+            // On regarde si le dossier contient des sous dossiers
+            if (folder.subFolders) folders = folders.concat(folder.subFolders);
+        }
+    }
+
+    // Initialisation de la barre de progression
+    let count = 0;
+    document.getElementById("percentComplete").setAttribute("max", totalCount);
+    document.getElementById("progressText").innerText = `0 / ${totalCount}`;
+
     for (const account of accounts) {
         let co2_sending = {
             sent: {
@@ -172,10 +190,20 @@ async function calculate() {
                 forever: 0
             }
         };
-        for (const folder of account.folders) {
+        let folders = account.folders;
+        while (folders.length !== 0) {
+            const folder = folders.shift();
+            if (folder.subFolders) folders = folders.concat(folder.subFolders);
+
             const messages = listMessages(folder);
             if (folder.type === "sent") {
                 for await (const message of messages) {
+                    count += 1;
+                    if (count % 100 === 0) {
+                        document.getElementById("percentComplete").setAttribute("value", count);
+                        document.getElementById("progressText").innerText = `${count} / ${totalCount}`;
+                    }
+
                     diff = now - message.date;
                     recipientsCount = message.recipients.length + message.ccList.length + message.bccList.length;
                     co2value_stockage = message.size * diff * CO2_BYTE_MS; // g CO2e
@@ -205,6 +233,12 @@ async function calculate() {
                 }
             } else {
                 for await (const message of messages) {
+                    count += 1;
+                    if (count % 100 === 0) {
+                        document.getElementById("percentComplete").setAttribute("value", count);
+                        document.getElementById("progressText").innerText = `${count} / ${totalCount}`;
+                    }
+
                     diff = now - message.date;
                     co2value_stockage = message.size * diff * CO2_BYTE_MS; // g CO2e
 
@@ -226,6 +260,10 @@ async function calculate() {
                     size.received.forever += message.size;
                 }
             }
+            // Mise à jour de la barre de progression
+            document.getElementById("percentComplete").setAttribute("value", count);
+            document.getElementById("progressText").innerText = `${count} / ${totalCount}`;
+
         }
 
         co2_storage.all = {

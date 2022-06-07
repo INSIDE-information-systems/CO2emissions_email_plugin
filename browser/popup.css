@@ -78,6 +78,9 @@ fieldset legend {
 #loading {
     text-align: center;
     font-weight: bold;
+}
+
+#loading p {
     color: red;
 }
 

@@ -13,8 +13,13 @@
 <body>
 
     <form>
-        <p id="loading" data-locale="calculation"></p>
-        <div id="loader"></div>
+        <div id="loading">
+            <p data-locale="calculation"></p>
+            <progress id="percentComplete"></progress>
+            <span id="progressText"></span>
+            <div id="loader"></div>
+        </div>
+
         <div style="display: flex;">
             <fieldset>
                 <legend data-locale="browserPopupPeriod"></legend>
