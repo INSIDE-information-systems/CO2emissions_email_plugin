@@ -132,6 +132,7 @@ async function calculate() {
     // On compte le nombre de mails
     let totalCount = 0;
     for (const account of accounts) {
+        if (account.type !== "imap") continue;
         let folders = account.folders;
         while (folders.length !== 0) {
             const folder = folders.shift(); // Supprime le premier dossier de la liste et le renvoie
@@ -148,6 +149,7 @@ async function calculate() {
     document.getElementById("progressText").innerText = `0 / ${totalCount}`;
 
     for (const account of accounts) {
+        if (account.type !== "imap") continue;
         let co2_sending = {
             sent: {
                 week: 0,
@@ -303,7 +305,7 @@ async function calculate() {
 
     const select = document.getElementById("address");
     for (const account of accounts) {
-        if (account.type !== "none") {
+        if (account.type === "imap") {
             const opt = document.createElement('option');
             opt.value = account.name;
             opt.innerText = account.name;
