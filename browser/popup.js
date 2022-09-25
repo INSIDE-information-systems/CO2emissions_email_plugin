@@ -133,7 +133,7 @@ async function calculate() {
     let totalCount = 0;
     for (const account of accounts) {
         if (account.type !== "imap") continue;
-        let folders = account.folders;
+        let folders = await messenger.folders.getSubFolders(account);
         while (folders.length !== 0) {
             const folder = folders.shift(); // Supprime le premier dossier de la liste et le renvoie
             const infos = await messenger.folders.getFolderInfo(folder);
@@ -192,7 +192,7 @@ async function calculate() {
                 forever: 0
             }
         };
-        let folders = account.folders;
+        let folders = await messenger.folders.getSubFolders(account);
         while (folders.length !== 0) {
             const folder = folders.shift();
             if (folder.subFolders) folders = folders.concat(folder.subFolders);
