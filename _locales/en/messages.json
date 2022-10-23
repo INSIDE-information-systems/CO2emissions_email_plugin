@@ -86,7 +86,7 @@
         "message": "Current year"
     },
     "browserPopupPeriodForever": {
-        "message": "Since the start"
+        "message": "From the start"
     },
     "browserPopupPeriodTitleWeek": {
         "message": "Analysis over the last 7 days"
@@ -267,22 +267,22 @@
         "message": "Consider using memory sticks or file transfer tools instead of emailing them."
     },
     "reminder3": {
-        "message": "Avoid replacing your numerical equipment on a whim or following a promotional offer."
+        "message": "Avoid replacing your digital equipment on a whim or following a promotional offer."
     },
     "reminder4": {
-        "message": "Prioritize repair over replacement in the event of a breakdown."
+        "message": "Prioritise repair over replacement in the event of a breakdown."
     },
     "reminder5": {
         "message": "Favour giving or exchanging rather than replacing equipment."
     },
     "reminder6": {
-        "message": "Remember to turn off your devices if you are not using them instead of putting them on standby."
+        "message": "Remember to turn off your appliances if you are not using them instead of putting them on standby."
     },
     "reminder7": {
         "message": "Limit the number of recipients when sending emails."
     },
     "reminder8": {
-        "message": "Only print what is needed and when needed."
+        "message": "Only print what is needed and when necessary."
     },
     "reminder9": {
         "message": "Do not keep your old electronic devices; take them to a reseller."
