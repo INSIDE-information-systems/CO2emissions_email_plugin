@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Générer liste déroulante des pays pour les mix électriques */
     ELECTRICALMIXES = { // kg CO2e/kWh - https://bilans-ges.ademe.fr/fr/basecarbone/donnees-consulter/liste-element/categorie/68
-        "France": 0.0599,
+        "France": 0.0569,
         "Afrique du Sud": 0.927,
         "Albanie": 2.15e-3,
         "Algérie": 0.548,

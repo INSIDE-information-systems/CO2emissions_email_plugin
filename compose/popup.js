@@ -34,7 +34,7 @@ async function calculate(tabInfo) {
     var OIL = preferencesValues.OIL ? parseFloat(preferencesValues.OIL) : 3.34; // en g CO2e/g de pétrole
     var CAR = preferencesValues.CAR ? parseFloat(preferencesValues.CAR) : 0.192; // en g CO2e/m
     var TGV = preferencesValues.TGV ? parseFloat(preferencesValues.TGV) : 1.73e-3; // en g CO2e/m
-    var BULB = preferencesValues.BULB ? parseFloat(preferencesValues.BULB) : 0.0599 / 60; // en g CO2e/(W.min) (électricité)
+    var BULB = preferencesValues.BULB ? parseFloat(preferencesValues.BULB) : 0.0569 / 60; // en g CO2e/(W.min) (électricité)
     BULBW = preferencesValues.BULBW ? parseFloat(preferencesValues.BULBW) : 40; // en W
     var BREATHING = preferencesValues.BREATHING ? parseFloat(preferencesValues.BREATHING) : 1.131; // en g CO2/min
 
