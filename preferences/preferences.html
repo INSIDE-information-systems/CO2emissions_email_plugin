@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title data-locale="preferencesTitle"></title>
+    <link rel="stylesheet" type="text/css" media="screen" href="preferences.css">
+    <script src="../global/localise.js"></script>
+</head>
+
+<body>
+    <h1 data-locale="preferences"></h1>
+    <h2 data-locale="preferencesValues"></h2>
+    <p data-locale="preferencesValuesIntro"></p>
+    <form id="valuesForm">
+        <table>
+            <thead>
+                <tr>
+                    <th data-locale="equivalence"></th>
+                    <th data-locale="value"></th>
+                    <th data-locale="unit"></th>
+                    <th data-locale="defaultValue"></th>
+                    <th data-locale="reference"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label for="CO2">CO<sub>2</sub>e (<span data-locale="preferencesValuesCo2Fixed"></span>)</label></td>
+                    <td><input type="number" step="any" id="CO2" class="w3-input w3-light-grey"></td>
+                    <td>g CO<sub>2</sub>e / M<span data-locale="byteShort"></span></td>
+                    <td id="defaultCO2">13</td>
+                    <td><a href="https://presse.ademe.fr/files/acv_ntic_synthese_resultats.pdf" target="_blank">ADEME, 2011</a></td>
+                </tr>
+                <tr>
+                    <td><label for="CO2u">CO<sub>2</sub>e (<span data-locale="preferencesValuesCo2Variable"></span>)</label></td>
+                    <td><input type="number" step="any" id="CO2u" class="w3-input w3-light-grey"></td>
+                    <td>g CO<sub>2</sub>e / M<span data-locale="byteShort"></span></td>
+                    <td id="defaultCO2u">6</td>
+                    <td><a href="https://presse.ademe.fr/files/acv_ntic_synthese_resultats.pdf" target="_blank">ADEME, 2011</a></td>
+                </tr>
+                <tr>
+                    <td><label for="OIL" data-locale="petroleum"></label></td>
+                    <td><input type="number" step="any" id="OIL" class="w3-input w3-light-grey"></td>
+                    <td>g CO<sub>2</sub>e / g <span data-locale="preferencesValuesPetroleum"></span></td>
+                    <td id="defaultOIL">3.34</td>
+                    <td><a href="https://base-empreinte.ademe.fr/donnees/jeu-donnees" target="_blank">ADEME, 2017</a></td>
+                </tr>
+                <tr>
+                    <td><label for="CAR" data-locale="car"></label></td>
+                    <td><input type="number" step="any" id="CAR" class="w3-input w3-light-grey"></td>
+                    <td>g CO<sub>2</sub>e / m</td>
+                    <td id="defaultCAR">0.1901</td>
+                    <td><a href="https://base-empreinte.ademe.fr/donnees/jeu-donnees" target="_blank">ADEME, 2018</a></td>
+                </tr>
+                <tr>
+                    <td><label for="TGV" data-locale="tgv"></label></td>
+                    <td><input type="number" step="any" id="TGV" class="w3-input w3-light-grey"></td>
+                    <td>g CO<sub>2</sub>e / m</td>
+                    <td id="defaultTGV">2.30e-3</td>
+                    <td><a href="https://base-empreinte.ademe.fr/donnees/jeu-donnees" target="_blank">ADEME, 2022</a></td>
+                </tr>
+                <tr>
+                    <td><label for="BULB" data-locale="bulb"></label></td>
+                    <td><input type="number" step="any" id="BULB" class="w3-input w3-light-grey"></td>
+                    <td>g CO<sub>2</sub>e / (W.min)</td>
+                    <td id="defaultBULB">0.000866667</td>
+                    <td><a href="https://base-empreinte.ademe.fr/donnees/jeu-donnees" target="_blank">ADEME, 2022</a></td>
+                </tr>
+                <tr>
+                    <td><label for="BULBW" data-locale="bulbw"></label></td>
+                    <td><input type="number" step="1" id="BULBW" class="w3-input w3-light-grey"></td>
+                    <td>W</td>
+                    <td id="defaultBULBW">40</td>
+                    <td>/</td>
+                </tr>
+                <tr>
+                    <td><label for="BREATHING" data-locale="breathing"></label></td>
+                    <td><input type="number" step="any" id="BREATHING" class="w3-input w3-light-grey"></td>
+                    <td>g CO<sub>2</sub> / min</td>
+                    <td id="defaultBREATHING">1.131</td>
+                    <td><a href="https://doi.org/10.1016/j.buildenv.2011.03.014" target="_blank">Zhang et al., 2011</a></td>
+                </tr>
+                <tr>
+                    <td class="border-top"><label for="KWH_STOCK" data-locale="preferencesValuesStorage"></label></td>
+                    <td class="border-top"><input type="number" step="any" id="KWH_STOCK" class="w3-input w3-light-grey"></td>
+                    <td class="border-top">kWh / G<span data-locale="byteShort"></span> / an</td>
+                    <td id="defaultKWH_STOCK" class="border-top">0.130333033</td>
+                    <td class="border-top"><a href="https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks" target="_blank">EIA, 2023</a></td>
+                </tr>
+                <tr>
+                    <td><label for="ELEC_STOCK" data-locale="preferencesValuesElectricity"></label></td>
+                    <td><select name="ELEC_STOCK" id="ELEC_STOCK" class="w3-input w3-light-grey"></td>
+                    <td id="ELEC_STOCK_unit">/</td>
+                    <td id="defaultELEC_STOCK">France</td>
+                    <td><a href="https://base-empreinte.ademe.fr/donnees/jeu-donnees8" target="_blank">ADEME, 2017 ou 2022</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="saveButton">
+            <button type="submit" class="saveButton" data-locale="save"></button>
+            <button id="defaultButton" class="saveButton" data-locale="reset"></button>
+        </div>
+    </form>
+
+    <script src="preferences.js"></script>
+
+</body>
+
+</html>
